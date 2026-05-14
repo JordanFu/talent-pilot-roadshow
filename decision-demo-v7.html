@@ -1,0 +1,3343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talent-Pilot 路演演示系统</title>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdmirror.com/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://static0.xesimg.com/alading-resources/css/css2.css?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <script src="https://cdn.jsdmirror.com/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <style>
+      :root {
+        --primary: #5B52E8;
+        --primary-dark: #3F38C4;
+        --primary-light: #7B74F0;
+        --primary-bg: #EEF0FF;
+        --accent: #0CBF9A;
+        --accent-bg: #E6FAF6;
+        --accent-warm: #E8504A;
+        --accent-warm-bg: #FEECEB;
+        --accent-yellow: #D4920A;
+        --accent-yellow-bg: #FEF6E4;
+        --bg-page: #F4F5F9;
+        --bg-white: #FFFFFF;
+        --bg-card: #FFFFFF;
+        --bg-card2: #F8F9FC;
+        --text-main: #1A2035;
+        --text-sub: #3D4A63;
+        --text-muted: #7D8AA0;
+        --border: #E2E6F0;
+        --border-strong: #C8CFDF;
+        --shadow-sm: 0 1px 4px rgba(60, 72, 100, 0.07);
+        --shadow-md: 0 4px 20px rgba(60, 72, 100, 0.10);
+        --shadow-lg: 0 12px 40px rgba(60, 72, 100, 0.14);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Noto Sans SC", Tahoma, Arial, "Heiti SC", sans-serif;
+        background: var(--bg-page);
+        color: var(--text-main);
+        overflow-x: hidden;
+      }
+
+      #canvas-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.35;
+      }
+
+      /* ===== 导航 ===== */
+      .nav-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+        padding: 0 2rem;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .nav-logo-icon {
+        width: 36px;
+        height: 36px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        box-shadow: 0 3px 10px rgba(91, 82, 232, 0.3);
+      }
+
+      .nav-logo-text {
+        font-size: 1.1rem;
+        font-weight: 700;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 4px;
+      }
+
+      .nav-link {
+        padding: 6px 14px;
+        border-radius: 8px;
+        font-size: 0.82rem;
+        color: var(--text-muted);
+        cursor: pointer;
+        transition: all 0.2s;
+        border: 1px solid transparent;
+      }
+
+      .nav-link:hover {
+        color: var(--primary);
+        background: var(--primary-bg);
+      }
+
+      .nav-link.active {
+        color: var(--primary);
+        background: var(--primary-bg);
+        border-color: rgba(91, 82, 232, 0.2);
+        font-weight: 600;
+      }
+
+      .nav-badge {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: white;
+        font-size: 0.7rem;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-weight: 600;
+        box-shadow: 0 2px 8px rgba(91, 82, 232, 0.3);
+      }
+
+      /* ===== 主容器 ===== */
+      .main-wrap {
+        position: relative;
+        z-index: 1;
+        padding-top: 64px;
+      }
+
+      /* ===== Hero ===== */
+      .hero {
+        min-height: 52vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 3.5rem 2rem;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(160deg, #F0F1FF 0%, #F4F8FF 40%, #F0FDF9 100%);
+      }
+
+      .hero-glow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 700px;
+        height: 700px;
+        background: radial-gradient(circle, rgba(91, 82, 232, 0.08) 0%, transparent 70%);
+        pointer-events: none;
+      }
+
+      .hero-deco-1 {
+        position: absolute;
+        top: 10%;
+        right: 8%;
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        background: rgba(91, 82, 232, 0.05);
+        border: 2px dashed rgba(91, 82, 232, 0.12);
+      }
+
+      .hero-deco-2 {
+        position: absolute;
+        bottom: 12%;
+        left: 6%;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: rgba(12, 191, 154, 0.06);
+        border: 2px dashed rgba(12, 191, 154, 0.15);
+      }
+
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: white;
+        border: 1px solid rgba(91, 82, 232, 0.2);
+        border-radius: 30px;
+        padding: 6px 18px;
+        font-size: 0.82rem;
+        color: var(--primary);
+        margin-bottom: 1.8rem;
+        box-shadow: 0 2px 12px rgba(91, 82, 232, 0.1);
+      }
+
+      .hero-title {
+        font-family: "Noto Serif SC", serif;
+        font-size: clamp(2.4rem, 5vw, 3.8rem);
+        font-weight: 700;
+        line-height: 1.25;
+        color: var(--text-main);
+        margin-bottom: 1.2rem;
+      }
+
+      .hero-title span {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-subtitle {
+        font-size: 1.05rem;
+        color: var(--text-sub);
+        max-width: 560px;
+        margin: 0 auto 1rem;
+        line-height: 1.85;
+      }
+
+      /* ===== 场景导航 ===== */
+      .scene-nav {
+        display: flex;
+        gap: 10px;
+        padding: 1.5rem 2rem 0;
+        margin: 0 auto;
+        max-width: 1200px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+
+      .scene-nav::-webkit-scrollbar {
+        height: 3px;
+      }
+
+      .scene-nav::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      .scene-nav::-webkit-scrollbar-thumb {
+        background: var(--primary-light);
+        border-radius: 2px;
+      }
+
+      .scene-tab {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 18px;
+        border-radius: 12px;
+        background: white;
+        border: 1px solid var(--border);
+        cursor: pointer;
+        transition: all 0.25s;
+        font-size: 0.85rem;
+        color: var(--text-sub);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .scene-tab:hover {
+        background: var(--primary-bg);
+        color: var(--primary);
+        border-color: rgba(91, 82, 232, 0.3);
+      }
+
+      .scene-tab.active {
+        background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        border-color: var(--primary);
+        color: white;
+        font-weight: 600;
+        box-shadow: 0 4px 14px rgba(91, 82, 232, 0.28);
+      }
+
+      .scene-tab-num {
+        width: 22px;
+        height: 22px;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.72rem;
+        font-weight: 700;
+      }
+
+      .scene-tab:not(.active) .scene-tab-num {
+        background: var(--primary-bg);
+        color: var(--primary);
+      }
+
+      /* ===== 内容区 ===== */
+      .content-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2.5rem 2rem;
+        display: none;
+      }
+
+      .content-section.active {
+        display: block;
+      }
+
+      /* ===== 卡片 ===== */
+      .card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 1.6rem;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .card:hover::before {
+        opacity: 1;
+      }
+
+      .card:hover {
+        border-color: rgba(91, 82, 232, 0.25);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .card-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 1.4rem;
+      }
+
+      .card-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+      }
+
+      .card-title {
+        font-size: 0.97rem;
+        font-weight: 700;
+        color: var(--text-main);
+      }
+
+      .card-sub {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        margin-top: 2px;
+      }
+
+      /* ===== 角色面板 ===== */
+      .role-panel {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 14px;
+        margin-bottom: 2rem;
+      }
+
+      /* ===== 身份验证 ===== */
+      .auth-block {
+        background: linear-gradient(135deg, #E8FAF6, #F0F9FF);
+        border: 1px solid rgba(12, 191, 154, 0.3);
+        border-radius: 14px;
+        padding: 1rem 1.4rem;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        box-shadow: 0 2px 12px rgba(12, 191, 154, 0.08);
+      }
+
+      .auth-icon {
+        width: 38px;
+        height: 38px;
+        background: rgba(12, 191, 154, 0.15);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent);
+        font-size: 1rem;
+        flex-shrink: 0;
+      }
+
+      .auth-info {
+        flex: 1;
+      }
+
+      .auth-name {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: #0A9B7E;
+      }
+
+      .auth-meta {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        margin-top: 1px;
+      }
+
+      .auth-scope {
+        font-size: 0.75rem;
+        color: var(--primary);
+        background: var(--primary-bg);
+        padding: 4px 12px;
+        border-radius: 8px;
+        white-space: nowrap;
+        font-weight: 500;
+      }
+
+      /* ===== 数据表格 ===== */
+      .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.82rem;
+      }
+
+      .data-table th {
+        padding: 9px 13px;
+        text-align: left;
+        font-size: 0.71rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--text-muted);
+        background: var(--bg-card2);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .data-table td {
+        padding: 9px 13px;
+        border-bottom: 1px solid #F0F2F8;
+        color: var(--text-sub);
+      }
+
+      .data-table tr:hover td {
+        background: #F7F8FF;
+      }
+
+      .data-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      /* ===== 进度条 ===== */
+      .progress-bar {
+        height: 6px;
+        background: #EEF0F8;
+        border-radius: 3px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        border-radius: 3px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        transition: width 1.2s cubic-bezier(.4, 0, .2, 1);
+      }
+
+      /* ===== 准备度徽章 ===== */
+      .readiness-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 0.74rem;
+        font-weight: 600;
+      }
+
+      .badge-high {
+        background: var(--accent-bg);
+        color: #0A9B7E;
+        border: 1px solid rgba(12, 191, 154, 0.3);
+      }
+
+      .badge-mid {
+        background: var(--primary-bg);
+        color: var(--primary);
+        border: 1px solid rgba(91, 82, 232, 0.25);
+      }
+
+      .badge-low {
+        background: var(--accent-warm-bg);
+        color: #C0392B;
+        border: 1px solid rgba(232, 80, 74, 0.25);
+      }
+
+      .badge-warn {
+        background: var(--accent-yellow-bg);
+        color: #B5780A;
+        border: 1px solid rgba(212, 146, 10, 0.25);
+      }
+
+      /* ===== 风险/建议块 ===== */
+      .risk-block {
+        background: #FEF5F4;
+        border: 1px solid #F5C5C3;
+        border-left: 3px solid var(--accent-warm);
+        border-radius: 10px;
+        padding: 12px 14px;
+        margin-bottom: 10px;
+      }
+
+      .risk-title {
+        font-size: 0.84rem;
+        font-weight: 700;
+        color: #C0392B;
+        margin-bottom: 4px;
+      }
+
+      .risk-body {
+        font-size: 0.78rem;
+        color: #7D5555;
+        line-height: 1.65;
+      }
+
+      .suggest-block {
+        background: #F0FBF8;
+        border: 1px solid #B8EAE0;
+        border-left: 3px solid var(--accent);
+        border-radius: 10px;
+        padding: 12px 14px;
+        margin-bottom: 10px;
+      }
+
+      .suggest-title {
+        font-size: 0.84rem;
+        font-weight: 700;
+        color: #0A9B7E;
+        margin-bottom: 4px;
+      }
+
+      .suggest-body {
+        font-size: 0.78rem;
+        color: #3D7065;
+        line-height: 1.65;
+      }
+
+      /* ===== 优先级标签 ===== */
+      .priority-tag {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 5px;
+        font-size: 0.68rem;
+        font-weight: 700;
+        margin-right: 6px;
+      }
+
+      .p0 {
+        background: #FEE;
+        color: #C0392B;
+      }
+
+      .p1 {
+        background: var(--accent-yellow-bg);
+        color: #9A6A00;
+      }
+
+      .p2 {
+        background: var(--primary-bg);
+        color: var(--primary);
+      }
+
+      /* ===== 分隔标题 ===== */
+      .section-divider {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 1.8rem 0 1.2rem;
+      }
+
+      .section-divider-line {
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+
+      .section-divider-text {
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-muted);
+        white-space: nowrap;
+      }
+
+      /* ===== 能力行 ===== */
+      .ability-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 0;
+        border-bottom: 1px solid #F0F2F8;
+      }
+
+      .ability-name {
+        width: 80px;
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        flex-shrink: 0;
+      }
+
+      .ability-bar-wrap {
+        flex: 1;
+      }
+
+      .ability-score {
+        width: 36px;
+        text-align: right;
+        font-size: 0.82rem;
+        font-weight: 700;
+        flex-shrink: 0;
+        color: var(--text-main);
+      }
+
+      .ability-diff {
+        width: 45px;
+        font-size: 0.75rem;
+        text-align: right;
+        flex-shrink: 0;
+      }
+
+      .diff-pos {
+        color: var(--accent);
+        font-weight: 700;
+      }
+
+      .diff-neg {
+        color: var(--accent-warm);
+        font-weight: 700;
+      }
+
+      /* ===== Aha Moment ===== */
+      .aha-block {
+        background: linear-gradient(135deg, #F0EEFF, #E8FAF6);
+        border: 1px solid rgba(91, 82, 232, 0.2);
+        border-radius: 14px;
+        padding: 1.4rem 1.8rem;
+        margin-top: 2rem;
+        position: relative;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .aha-block::before {
+        content: '💡';
+        position: absolute;
+        top: -14px;
+        left: 24px;
+        font-size: 1.3rem;
+        background: var(--bg-page);
+        padding: 0 6px;
+      }
+
+      .aha-title {
+        font-size: 0.75rem;
+        color: var(--primary);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 0.6rem;
+      }
+
+      .aha-text {
+        font-size: 0.9rem;
+        color: var(--text-sub);
+        line-height: 1.75;
+        font-style: italic;
+      }
+
+      /* ===== 步进流程 ===== */
+      .step-flow {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .step-item {
+        display: flex;
+        gap: 16px;
+      }
+
+      .step-left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .step-dot {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.78rem;
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+
+      .step-line {
+        width: 2px;
+        flex: 1;
+        min-height: 24px;
+        margin: 4px 0;
+      }
+
+      .step-content {
+        padding-bottom: 20px;
+        flex: 1;
+      }
+
+      .step-title {
+        font-size: 0.88rem;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+
+      .step-desc {
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+
+      /* ===== 图表 ===== */
+      .chart-wrap {
+        position: relative;
+        height: 280px;
+      }
+
+      /* ===== 指标卡 ===== */
+      .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 12px;
+        margin-bottom: 1.5rem;
+      }
+
+      .metric-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1rem;
+        text-align: center;
+        box-shadow: var(--shadow-sm);
+        transition: all 0.25s;
+      }
+
+      .metric-card:hover {
+        border-color: rgba(91, 82, 232, 0.3);
+        box-shadow: var(--shadow-md);
+        transform: translateY(-1px);
+      }
+
+      .metric-num {
+        font-size: 1.55rem;
+        font-weight: 700;
+      }
+
+      .metric-label {
+        font-size: 0.71rem;
+        color: var(--text-muted);
+        margin-top: 4px;
+      }
+
+      .metric-trend {
+        font-size: 0.71rem;
+        margin-top: 6px;
+      }
+
+      /* ===== 双列布局 ===== */
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      @media (max-width: 1024px) {
+
+        [style*="grid-template-columns:auto 1fr 1fr"],
+        [style*="grid-template-columns:1fr 1fr 1fr"] {
+          grid-template-columns: 1fr 1fr !important;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .two-col {
+          grid-template-columns: 1fr;
+        }
+
+        .role-panel {
+          grid-template-columns: 1fr;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        [style*="grid-template-columns:auto 1fr 1fr"],
+        [style*="grid-template-columns:1fr 1fr 1fr"],
+        [style*="grid-template-columns:repeat(3,1fr)"],
+        [style*="grid-template-columns:repeat(4,1fr)"],
+        [style*="grid-template-columns:repeat(5,1fr)"] {
+          grid-template-columns: 1fr 1fr !important;
+        }
+      }
+
+      @media (max-width: 480px) {
+        [style*="grid-template-columns"] {
+          grid-template-columns: 1fr !important;
+        }
+      }
+
+      /* ===== 场景标题 ===== */
+      .scene-header {
+        margin-bottom: 2rem;
+      }
+
+      .scene-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--primary-bg);
+        border: 1px solid rgba(91, 82, 232, 0.25);
+        border-radius: 20px;
+        padding: 4px 14px;
+        font-size: 0.74rem;
+        color: var(--primary);
+        margin-bottom: 0.8rem;
+        font-weight: 600;
+      }
+
+      .scene-title {
+        font-family: "Noto Serif SC", serif;
+        font-size: clamp(1.4rem, 3vw, 2rem);
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 0.5rem;
+      }
+
+      .scene-desc {
+        font-size: 0.88rem;
+        color: var(--text-muted);
+        line-height: 1.75;
+      }
+
+      /* ===== 层级切换 ===== */
+      .layer-tabs {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .layer-tab {
+        padding: 7px 16px;
+        border-radius: 10px;
+        font-size: 0.82rem;
+        cursor: pointer;
+        transition: all 0.25s;
+        border: 1px solid var(--border);
+        color: var(--text-muted);
+        background: white;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .layer-tab:hover {
+        color: var(--primary);
+        border-color: rgba(91, 82, 232, 0.3);
+        background: var(--primary-bg);
+      }
+
+      .layer-tab.active {
+        background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        border-color: var(--primary);
+        color: white;
+        font-weight: 600;
+        box-shadow: 0 3px 10px rgba(91, 82, 232, 0.25);
+      }
+
+      .layer-content {
+        display: none;
+      }
+
+      .layer-content.active {
+        display: block;
+      }
+
+      /* ===== 滚动条 ===== */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--bg-page);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #C8CFDF;
+        border-radius: 3px;
+      }
+
+      /* ===== 总结卡片 ===== */
+      .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+      }
+
+      .summary-card {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 1.4rem;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .summary-card:hover {
+        border-color: rgba(91, 82, 232, 0.3);
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .summary-card-stripe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        border-radius: 16px 16px 0 0;
+      }
+
+      .summary-scene-num {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 10px;
+      }
+
+      .summary-scene-title {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 8px;
+      }
+
+      .summary-scene-desc {
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+        margin-bottom: 12px;
+      }
+
+      .summary-aha {
+        font-size: 0.78rem;
+        color: var(--primary);
+        font-style: italic;
+        line-height: 1.5;
+      }
+
+      /* ===== 动画 ===== */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pulse-soft {
+
+        0%,
+        100% {
+          opacity: 1;
+        }
+
+        50% {
+          opacity: 0.4;
+        }
+      }
+
+      .live-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent);
+        animation: pulse-soft 2s infinite;
+        flex-shrink: 0;
+      }
+
+      .live-dot-warn {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent-warm);
+        animation: pulse-soft 1.5s infinite;
+        flex-shrink: 0;
+      }
+
+      .live-dot-yellow {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #D4920A;
+        animation: pulse-soft 2s infinite;
+        flex-shrink: 0;
+      }
+
+      /* ===== 版本信息 ===== */
+      .version-bar {
+        background: white;
+        border-top: 1px solid var(--border);
+        padding: 1.4rem 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+        box-shadow: 0 -2px 10px rgba(60, 72, 100, 0.04);
+      }
+
+      .version-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.77rem;
+        color: var(--text-muted);
+      }
+
+      .version-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+      }
+
+      /* ===== 决策节点 ===== */
+      .decision-node {
+        background: var(--bg-card2);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 10px 14px;
+        font-size: 0.8rem;
+        margin-bottom: 8px;
+        color: var(--text-sub);
+      }
+
+      /* ===== 标题装饰线 ===== */
+      .section-title-line {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 1rem;
+      }
+
+      .section-title-line-bar {
+        width: 4px;
+        height: 18px;
+        border-radius: 2px;
+        background: linear-gradient(180deg, var(--primary), var(--accent));
+        flex-shrink: 0;
+      }
+
+      .section-title-text {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--text-main);
+      }
+
+      .gap-section {
+        margin-top: 16px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas id="canvas-bg"></canvas>
+
+    <!-- ===== 导航栏 ===== -->
+    <nav class="nav-bar">
+      <div class="nav-logo">
+        <div class="nav-logo-icon">
+          <i class="fas fa-rocket" style="color:white;font-size:0.95rem"></i>
+        </div>
+        <span class="nav-logo-text">Talent-Pilot</span>
+      </div>
+      <div class="nav-links">
+        <span class="nav-link" onclick="scrollToSection('hero')">首页</span>
+        <span class="nav-link" onclick="switchScene(0);scrollToSection('scenes')">场景一</span>
+        <span class="nav-link" onclick="switchScene(1);scrollToSection('scenes')">场景二</span>
+        <span class="nav-link" onclick="switchScene(2);scrollToSection('scenes')">场景三</span>
+        <span class="nav-link" onclick="switchScene(3);scrollToSection('scenes')">场景四</span>
+        <span class="nav-link" onclick="switchScene(4);scrollToSection('scenes')">总结</span>
+      </div>
+      <span class="nav-badge"><i class="fas fa-brain mr-1" style="font-size:0.75rem"></i> 组织决策超级大脑</span>
+    </nav>
+
+    <div class="main-wrap">
+
+      <!-- ===== Hero ===== -->
+      <section class="hero" id="hero">
+        <div class="hero-glow"></div>
+        <div class="hero-deco-1"></div>
+        <div class="hero-deco-2"></div>
+        <div style="position:relative;z-index:2;width:100%;max-width:760px">
+          <h1 class="hero-title">
+            <span>Talent-Pilot</span><br>
+            组织决策超级大脑
+          </h1>
+          <p class="hero-subtitle">
+            从组织洞察到个人发展，用数据驱动人才决策，让每一次管理判断都有据可循
+          </p>
+        </div>
+      </section>
+
+      <!-- ===== 场景标签导航 ===== -->
+      <section id="scenes">
+        <div class="scene-nav">
+          <div class="scene-tab active" onclick="switchScene(0)">
+            <div class="scene-tab-num">1</div>组织仪表盘 + 团队盘点
+          </div>
+          <div class="scene-tab" onclick="switchScene(1)">
+            <div class="scene-tab-num">2</div>晋升全流程辅助
+          </div>
+          <div class="scene-tab" onclick="switchScene(2)">
+            <div class="scene-tab-num">3</div>项目团队配置
+          </div>
+          <div class="scene-tab" onclick="switchScene(3)">
+            <div class="scene-tab-num">4</div>个人晋升诊断
+          </div>
+          <div class="scene-tab" onclick="switchScene(4)">
+            <div class="scene-tab-num" style="background:linear-gradient(135deg,#FFD93D,#FF6B6B);color:white">∑</div>路演总结
+          </div>
+        </div>
+
+        <!-- ============================================================
+             场景一：组织仪表盘 + 团队盘点
+        ============================================================ -->
+        <div class="content-section active" id="scene-0">
+          <div class="scene-header">
+            <div class="scene-tag"><i class="fas fa-building-columns"></i> 场景一</div>
+            <h2 class="scene-title">组织仪表盘 + 团队盘点</h2>
+            <p class="scene-desc">支持两层视角：事业部VP的全局洞察 + 团队负责人的精细诊断</p>
+          </div>
+
+          <div class="layer-tabs">
+            <button class="layer-tab active" onclick="switchLayer('s1',0)">
+              <i class="fas fa-eye" style="margin-right:6px"></i>事业部VP视角
+            </button>
+            <button class="layer-tab" onclick="switchLayer('s1',1)">
+              <i class="fas fa-users" style="margin-right:6px"></i>团队负责人视角
+            </button>
+            <button class="layer-tab" onclick="switchLayer('s1',2)">
+              <i class="fas fa-magnifying-glass-chart" style="margin-right:6px"></i>HR专家视角
+            </button>
+          </div>
+
+          <!-- VP视角 -->
+          <div class="layer-content active" id="s1-layer-0">
+            <div class="auth-block">
+              <div class="auth-icon"><i class="fas fa-lock-open"></i></div>
+              <div class="auth-info">
+                <div class="auth-name">🔐 王**（工号：100001）· 事业部VP</div>
+                <div class="auth-meta">智能教育事业部 · 5个团队 / 86人</div>
+              </div>
+              <div class="auth-scope"><i class="fas fa-database" style="margin-right:4px"></i>全局数据权限</div>
+            </div>
+
+            <!-- 顶部指标 + 热力图 + 梯队矩阵 三列布局 -->
+            <div style="display:grid;grid-template-columns:auto 1fr 1fr;gap:14px;align-items:start;margin-bottom:14px">
+              <!-- 指标列 -->
+              <div style="display:flex;flex-direction:column;gap:10px;min-width:130px">
+                <div class="metric-card">
+                  <div class="metric-num" style="color:var(--text-main)">86</div>
+                  <div class="metric-label">事业部总人数</div>
+                </div>
+                <div class="metric-card" style="border-top:3px solid var(--accent)">
+                  <div class="metric-num" style="color:var(--accent)">9</div>
+                  <div class="metric-label">高准备度 10.5%</div>
+                  <div class="metric-trend" style="color:#C0392B"><i class="fas fa-triangle-exclamation"></i> 低于健康标准</div>
+                </div>
+                <div class="metric-card" style="border-top:3px solid var(--primary)">
+                  <div class="metric-num" style="color:var(--primary)">34</div>
+                  <div class="metric-label">中准备度 39.5%</div>
+                </div>
+                <div class="metric-card" style="border-top:3px solid #D4920A">
+                  <div class="metric-num" style="color:#D4920A">33</div>
+                  <div class="metric-label">待培养 38.4%</div>
+                </div>
+                <div class="metric-card" style="border-top:3px solid var(--accent-warm)">
+                  <div class="metric-num" style="color:var(--accent-warm)">10</div>
+                  <div class="metric-label">风险 11.6%</div>
+                </div>
+              </div>
+
+              <!-- 热力图 -->
+              <div class="card" style="height:100%">
+                <div class="card-header">
+                  <div class="card-icon" style="background:var(--primary-bg)"><i class="fas fa-fire" style="color:var(--primary)"></i></div>
+                  <div>
+                    <div class="card-title">人才密度热力图</div>
+                    <div class="card-sub">各团队准备度分布</div>
+                  </div>
+                </div>
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>团队</th>
+                      <th>人数</th>
+                      <th>高准</th>
+                      <th>中准</th>
+                      <th>待培</th>
+                      <th>风险</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>智能教学产品部</td>
+                      <td>18</td>
+                      <td><b style="color:var(--accent)">2</b></td>
+                      <td><b style="color:var(--primary)">8</b></td>
+                      <td><b style="color:#D4920A">6</b></td>
+                      <td><b style="color:var(--accent-warm)">2</b></td>
+                    </tr>
+                    <tr>
+                      <td>智能答疑</td>
+                      <td>22</td>
+                      <td><b style="color:var(--accent)">3</b></td>
+                      <td><b style="color:var(--primary)">9</b></td>
+                      <td><b style="color:#D4920A">8</b></td>
+                      <td><b style="color:var(--accent-warm)">2</b></td>
+                    </tr>
+                    <tr>
+                      <td>内容理解</td>
+                      <td>15</td>
+                      <td><b style="color:var(--accent)">1</b></td>
+                      <td><b style="color:var(--primary)">6</b></td>
+                      <td><b style="color:#D4920A">6</b></td>
+                      <td><b style="color:var(--accent-warm)">2</b></td>
+                    </tr>
+                    <tr>
+                      <td>数据中台</td>
+                      <td>19</td>
+                      <td><b style="color:var(--accent)">1</b></td>
+                      <td><b style="color:var(--primary)">7</b></td>
+                      <td><b style="color:#D4920A">9</b></td>
+                      <td><b style="color:var(--accent-warm)">2</b></td>
+                    </tr>
+                    <tr>
+                      <td>算法引擎</td>
+                      <td>12</td>
+                      <td><b style="color:var(--accent)">2</b></td>
+                      <td><b style="color:var(--primary)">4</b></td>
+                      <td><b style="color:#D4920A">4</b></td>
+                      <td><b style="color:var(--accent-warm)">2</b></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- 梯队矩阵 -->
+              <div class="card" style="height:100%">
+                <div class="card-header">
+                  <div class="card-icon" style="background:var(--accent-bg)"><i class="fas fa-chart-bar" style="color:var(--accent)"></i></div>
+                  <div>
+                    <div class="card-title">梯队健康度矩阵</div>
+                    <div class="card-sub">当前结构 vs 健康标准</div>
+                  </div>
+                </div>
+                <div style="margin-bottom:1rem">
+                  <div style="font-size:0.74rem;color:var(--text-muted);margin-bottom:6px;font-weight:600">Level 3 专家级</div>
+                  <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
+                    <div style="flex:1">
+                      <div class="progress-bar">
+                        <div class="progress-fill" style="width:3.5%;background:linear-gradient(90deg,#E8504A,#F08080)"></div>
+                      </div>
+                    </div>
+                    <span style="font-size:0.76rem;color:#C0392B;font-weight:600;white-space:nowrap">3人 3.5%</span>
+                    <span class="readiness-badge badge-low">严重不足</span>
+                  </div>
+                  <div style="font-size:0.7rem;color:var(--text-muted)">健康标准：8-10%</div>
+                </div>
+                <div style="margin-bottom:1rem">
+                  <div style="font-size:0.74rem;color:var(--text-muted);margin-bottom:6px;font-weight:600">Level 2 骨干级</div>
+                  <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
+                    <div style="flex:1">
+                      <div class="progress-bar">
+                        <div class="progress-fill" style="width:20.9%"></div>
+                      </div>
+                    </div>
+                    <span style="font-size:0.76rem;color:var(--accent);font-weight:600;white-space:nowrap">18人 20.9%</span>
+                    <span class="readiness-badge badge-high">健康</span>
+                  </div>
+                  <div style="font-size:0.7rem;color:var(--text-muted)">健康标准：约20%</div>
+                </div>
+                <div style="margin-bottom:1rem">
+                  <div style="font-size:0.74rem;color:var(--text-muted);margin-bottom:6px;font-weight:600">Level 1 一线级</div>
+                  <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
+                    <div style="flex:1">
+                      <div class="progress-bar">
+                        <div class="progress-fill" style="width:75.6%;background:linear-gradient(90deg,#D4920A,#E8B040)"></div>
+                      </div>
+                    </div>
+                    <span style="font-size:0.76rem;color:#D4920A;font-weight:600;white-space:nowrap">65人 75.6%</span>
+                    <span class="readiness-badge badge-warn">过剩</span>
+                  </div>
+                  <div style="font-size:0.7rem;color:var(--text-muted)">健康标准：60-65%</div>
+                </div>
+                <div style="padding:8px 10px;background:#FEF5F4;border-radius:8px;border:1px solid #F5C5C3;font-size:0.75rem;color:#C0392B">
+                  ⚠ 如不干预，6个月后Level 3缺口将达5-7人
+                </div>
+              </div>
+            </div>
+
+            <!-- 战略建议 + 风险预警 两列 -->
+            <div class="two-col">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-icon" style="background:var(--accent-warm-bg)"><i class="fas fa-chess-king" style="color:var(--accent-warm)"></i></div>
+                  <div>
+                    <div class="card-title">战略资源压强建议</div>
+                    <div class="card-sub">按优先级执行</div>
+                  </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:10px">
+                  <div class="risk-block">
+                    <div class="risk-title"><span class="priority-tag p0">P0</span>本月内 · 智能教学产品部</div>
+                    <div class="risk-body">引入2.3级专家1名，启动外招，薪资+20%预算。</div>
+                  </div>
+                  <div class="risk-block">
+                    <div class="risk-title"><span class="priority-tag p0">P0</span>本月内 · 数据中台</div>
+                    <div class="risk-body">4名1.1级新人中3人活跃度下降，本周内逐一谈话，建立mentor机制。</div>
+                  </div>
+                  <div class="suggest-block">
+                    <div class="suggest-title"><span class="priority-tag p1">P1</span>本季度 · 全事业部</div>
+                    <div class="suggest-body">建立跨团队人才流动机制，建立内部人才市场。</div>
+                  </div>
+                  <div class="suggest-block">
+                    <div class="suggest-title"><span class="priority-tag p1">P1</span>本季度 · 智能答疑团队</div>
+                    <div class="suggest-body">业务理解+9分，技术深度-4分，建议与算法引擎团队联合项目。</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-icon" style="background:var(--accent-yellow-bg)"><i class="fas fa-satellite" style="color:#D4920A"></i></div>
+                  <div>
+                    <div class="card-title">跨团队风险预警</div>
+                    <div class="card-sub">系统自动检测 · 实时更新</div>
+                  </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:10px">
+                  <div style="background:#F0FBF8;border:1px solid #B8EAE0;border-radius:10px;padding:12px">
+                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+                      <div class="live-dot"></div>
+                      <span style="font-size:0.82rem;font-weight:700;color:var(--text-main)">信号1：高潜跨团队流动意向</span>
+                    </div>
+                    <div style="font-size:0.77rem;color:var(--text-sub);line-height:1.65">李**（2.2级，84分）有意向算法引擎团队<br><span style="color:var(--primary);font-weight:600">内部转岗概率65%</span> · <span style="color:var(--accent-warm);font-weight:600">离职概率25%</span></div>
+                  </div>
+                  <div style="background:#FEF5F4;border:1px solid #F5C5C3;border-radius:10px;padding:12px">
+                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+                      <div class="live-dot-warn"></div>
+                      <span style="font-size:0.82rem;font-weight:700;color:var(--text-main)">信号2：校招明星流失风险</span>
+                    </div>
+                    <div style="font-size:0.77rem;color:var(--text-sub);line-height:1.65">周**（1.3级）3个月内离职概率 <span style="color:var(--accent-warm);font-weight:700">70%</span><br>代码提交↓40%，出勤时长↓1.5h（系统提前3周预警）</div>
+                  </div>
+                  <div style="background:#FFFDF0;border:1px solid #F0D98A;border-radius:10px;padding:12px">
+                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+                      <div class="live-dot-yellow"></div>
+                      <span style="font-size:0.82rem;font-weight:700;color:var(--text-main)">信号3：评价分歧群体趋势</span>
+                    </div>
+                    <div style="font-size:0.77rem;color:var(--text-sub);line-height:1.65">入职6-12月校招员工，自评-他评差距均值8分，高于社招员工，建立认知纠偏机制。</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- HR专家视角 -->
+          <div class="layer-content" id="s1-layer-2">
+            <div class="auth-block">
+              <div class="auth-icon"><i class="fas fa-lock-open"></i></div>
+              <div class="auth-info">
+                <div class="auth-name">🔐 赵**（工号：300001）· HRBP Leader</div>
+                <div class="auth-meta">异常人才识别报告 · 智能教学产品部</div>
+              </div>
+              <div class="auth-scope"><i class="fas fa-triangle-exclamation" style="margin-right:4px"></i>18人 · 4例异常 · 1个群体风险</div>
+            </div>
+
+            <!-- 案例1 -->
+            <div class="card" style="margin-bottom:16px;border-left:4px solid var(--accent-warm)">
+              <div class="card-header">
+                <div class="card-icon" style="background:var(--accent-warm-bg)">
+                  <i class="fas fa-person-falling" style="color:var(--accent-warm)"></i>
+                </div>
+                <div style="flex:1">
+                  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+                    <div class="card-title">案例 1 · 高潜流失风险</div>
+                    <span class="readiness-badge badge-low">高风险</span>
+                    <span style="background:#FEE;color:#C0392B;font-size:0.7rem;font-weight:700;padding:3px 10px;border-radius:20px;border:1px solid #F5C5C3">⏱ 48小时内干预</span>
+                  </div>
+                  <div class="card-sub">周**（1.3级，校招明星）· 入职1.8年</div>
+                </div>
+              </div>
+
+              <div class="two-col" style="margin-bottom:14px">
+                <div>
+                  <div class="section-title-line" style="margin-bottom:10px">
+                    <div class="section-title-line-bar"></div>
+                    <div class="section-title-text">历史标签</div>
+                  </div>
+                  <div style="display:flex;flex-wrap:wrap;gap:7px">
+                    <span style="background:var(--accent-yellow-bg);color:#9A6A00;font-size:0.73rem;font-weight:600;padding:3px 10px;border-radius:8px;border:1px solid rgba(212,146,10,0.2)">🏆 校招尖子生</span>
+                    <span style="background:var(--accent-yellow-bg);color:#9A6A00;font-size:0.73rem;font-weight:600;padding:3px 10px;border-radius:8px;border:1px solid rgba(212,146,10,0.2)">🥇 转正答辩第一名</span>
+                    <span style="background:var(--accent-yellow-bg);color:#9A6A00;font-size:0.73rem;font-weight:600;padding:3px 10px;border-radius:8px;border:1px solid rgba(212,146,10,0.2)">📈 历史绩效95分</span>
+                  </div>
+                </div>
+                <div>
+                  <div class="section-title-line" style="margin-bottom:10px">
+                    <div class="section-title-line-bar" style="background:linear-gradient(180deg,var(--accent-warm),#F08080)"></div>
+                    <div class="section-title-text">风险信号（系统提前3周预警）</div>
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:6px">
+                    <div style="display:flex;align-items:center;gap:8px;font-size:0.78rem">
+                      <div class="live-dot-warn"></div><span style="color:var(--text-sub)">绩效趋势：<b style="color:#C0392B">95→88→82分</b>（连续下滑）</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:8px;font-size:0.78rem">
+                      <div class="live-dot-warn"></div><span style="color:var(--text-sub)">代码提交：每天3-4次 → <b style="color:#C0392B">1-2次</b></span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:8px;font-size:0.78rem">
+                      <div class="live-dot-warn"></div><span style="color:var(--text-sub)">主动任务：Q1主动认领3个，Q2仅 <b style="color:#C0392B">1个</b></span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:8px;font-size:0.78rem">
+                      <div class="live-dot-warn"></div><span style="color:var(--text-sub)">技术文章阅读：下降 <b style="color:#C0392B">60%</b></span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:8px;font-size:0.78rem">
+                      <div class="live-dot-warn"></div><span style="color:var(--text-sub)">日均出勤时长：降低 <b style="color:#C0392B">1.5h</b></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="background:#FFFDF0;border:1px solid #F0D98A;border-radius:10px;padding:12px 14px;margin-bottom:12px">
+                <div style="font-size:0.74rem;color:#9A6A00;font-weight:700;margin-bottom:5px"><i class="fas fa-magnifying-glass" style="margin-right:5px"></i>深度归因</div>
+                <div style="font-size:0.8rem;color:var(--text-sub);line-height:1.75">这不是能力不足，而是"高潜员工的成长焦虑"。周**从1.1快速晋升到1.3，一直是最优秀的新人。现在晋升2.1需要跨级，难度陡增，同期同学开始分化，他开始迷茫该往哪走。</div>
+              </div>
+
+              <div class="section-title-line" style="margin-bottom:10px">
+                <div class="section-title-line-bar" style="background:linear-gradient(180deg,var(--accent),#0AB889)"></div>
+                <div class="section-title-text">干预方案（48小时内）</div>
+              </div>
+              <div class="step-flow">
+                <div class="step-item">
+                  <div class="step-left">
+                    <div class="step-dot" style="background:rgba(91,82,232,0.15);color:var(--primary)">1</div>
+                    <div class="step-line" style="background:rgba(91,82,232,0.15)"></div>
+                  </div>
+                  <div class="step-content">
+                    <div class="step-title">总监亲自面谈</div>
+                    <div class="step-desc">核心问题："未来3年想成为什么样的人"</div>
+                  </div>
+                </div>
+                <div class="step-item">
+                  <div class="step-left">
+                    <div class="step-dot" style="background:rgba(12,191,154,0.15);color:var(--accent)">2</div>
+                    <div class="step-line" style="background:rgba(12,191,154,0.15)"></div>
+                  </div>
+                  <div class="step-content">
+                    <div class="step-title">针对性发展方案</div>
+                    <div class="step-desc">安排与2.3级专家1对1，给予项目owner机会，明确内部发展路径</div>
+                  </div>
+                </div>
+                <div class="step-item">
+                  <div class="step-left">
+                    <div class="step-dot" style="background:rgba(212,146,10,0.15);color:#D4920A">3</div>
+                  </div>
+                  <div class="step-content">
+                    <div class="step-title">建立长期联系</div>
+                    <div class="step-desc">即使离开也好聚好散，维护雇主品牌</div>
+                  </div>
+                </div>
+              </div>
+              <div style="margin-top:10px;padding:8px 13px;background:var(--accent-bg);border-radius:8px;font-size:0.78rem;color:#0A9B7E;font-weight:600">
+                📊 预期结果：如果干预及时，<b>60%</b>概率可挽回
+              </div>
+            </div>
+
+            <!-- 案例2 -->
+            <div class="card" style="margin-bottom:16px;border-left:4px solid var(--primary)">
+              <div class="card-header">
+                <div class="card-icon" style="background:var(--primary-bg)">
+                  <i class="fas fa-scale-unbalanced" style="color:var(--primary)"></i>
+                </div>
+                <div style="flex:1">
+                  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+                    <div class="card-title">案例 2 · 评价分歧型</div>
+                    <span class="readiness-badge badge-low">高风险</span>
+                    <span style="background:var(--primary-bg);color:var(--primary);font-size:0.7rem;font-weight:700;padding:3px 10px;border-radius:20px;border:1px solid rgba(91,82,232,0.2)">⏱ 本周内启动干预</span>
+                  </div>
+                  <div class="card-sub">吴**（1.2级，985硕士）· 入职10个月</div>
+                </div>
+              </div>
+
+              <div class="two-col" style="margin-bottom:14px">
+                <div>
+                  <div style="background:var(--bg-card2);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">
+                    <div style="font-size:0.74rem;color:var(--text-muted);margin-bottom:6px">评价对比</div>
+                    <div style="display:flex;justify-content:center;align-items:center;gap:16px">
+                      <div>
+                        <div style="font-size:1.5rem;font-weight:700;color:var(--primary)">90</div>
+                        <div style="font-size:0.72rem;color:var(--text-muted)">自评</div>
+                      </div>
+                      <div style="font-size:1.3rem;color:var(--accent-warm)">→</div>
+                      <div>
+                        <div style="font-size:1.5rem;font-weight:700;color:var(--accent-warm)">74</div>
+                        <div style="font-size:0.72rem;color:var(--text-muted)">上级评</div>
+                      </div>
+                      <div>
+                        <div style="font-size:1.5rem;font-weight:700;color:#C0392B">-16</div>
+                        <div style="font-size:0.72rem;color:#C0392B;font-weight:600">差距</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div style="background:#FFFDF0;border:1px solid #F0D98A;border-radius:10px;padding:13px">
+                  <div style="font-size:0.74rem;color:#9A6A00;font-weight:700;margin-bottom:6px"><i class="fas fa-magnifying-glass" style="margin-right:5px"></i>深度归因</div>
+                  <div style="font-size:0.78rem;color:var(--text-sub);line-height:1.7">典型的"好学生心态"，习惯了被表扬，不习惯被挑战。入职6-12个月校招均值差距<b>8分</b>，吴**是均值的<b style="color:#C0392B">2倍</b>。</div>
+                </div>
+              </div>
+
+              <div class="section-title-line" style="margin-bottom:10px">
+                <div class="section-title-line-bar" style="background:linear-gradient(180deg,var(--accent),#0AB889)"></div>
+                <div class="section-title-text">9周认知纠偏计划</div>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:10px">
+                <div style="background:var(--primary-bg);border:1px solid rgba(91,82,232,0.2);border-radius:10px;padding:11px">
+                  <div style="font-size:0.7rem;color:var(--primary);font-weight:700;margin-bottom:5px">Week 1 · 打破认知</div>
+                  <div style="font-size:0.76rem;color:var(--text-sub)">展示同事协作反馈，直面差距</div>
+                </div>
+                <div style="background:#F8F0FF;border:1px solid rgba(91,82,232,0.15);border-radius:10px;padding:11px">
+                  <div style="font-size:0.7rem;color:var(--primary);font-weight:700;margin-bottom:5px">Week 2-3 · 小步验证</div>
+                  <div style="font-size:0.76rem;color:var(--text-sub)">安排协作任务 + 影子导师</div>
+                </div>
+                <div style="background:var(--accent-yellow-bg);border:1px solid rgba(212,146,10,0.2);border-radius:10px;padding:11px">
+                  <div style="font-size:0.7rem;color:#9A6A00;font-weight:700;margin-bottom:5px">Week 4 · 引导复盘</div>
+                  <div style="font-size:0.76rem;color:var(--text-sub)">引导自己发现问题</div>
+                </div>
+                <div style="background:var(--bg-card2);border:1px solid var(--border);border-radius:10px;padding:11px">
+                  <div style="font-size:0.7rem;color:var(--text-muted);font-weight:700;margin-bottom:5px">Week 5-8 · 建立新习惯</div>
+                  <div style="font-size:0.76rem;color:var(--text-sub)">强制Code Review & 技术分享</div>
+                </div>
+                <div style="background:var(--accent-bg);border:1px solid rgba(12,191,154,0.2);border-radius:10px;padding:11px">
+                  <div style="font-size:0.7rem;color:var(--accent);font-weight:700;margin-bottom:5px">Week 9 · 复评</div>
+                  <div style="font-size:0.76rem;color:var(--text-sub)">目标差距缩小到8分以内</div>
+                </div>
+              </div>
+              <div style="padding:8px 13px;background:var(--accent-bg);border-radius:8px;font-size:0.78rem;color:#0A9B7E;font-weight:600">
+                📊 预期结果：<b>70%</b>概率可纠正，晋升1.3成功率提升至 <b>80%</b>
+              </div>
+            </div>
+
+            <!-- 案例3 -->
+            <div class="card" style="margin-bottom:16px;border-left:4px solid #D4920A">
+              <div class="card-header">
+                <div class="card-icon" style="background:var(--accent-yellow-bg)">
+                  <i class="fas fa-arrows-left-right" style="color:#D4920A"></i>
+                </div>
+                <div style="flex:1">
+                  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+                    <div class="card-title">案例 3 · 技能不匹配型</div>
+                    <span class="readiness-badge badge-warn">中风险</span>
+                    <span style="background:var(--accent-yellow-bg);color:#9A6A00;font-size:0.7rem;font-weight:700;padding:3px 10px;border-radius:20px;border:1px solid rgba(212,146,10,0.25)">⏱ 2周内沟通方案</span>
+                  </div>
+                  <div class="card-sub">郑**（1.1级，测试转开发）· 入职8个月</div>
+                </div>
+              </div>
+
+              <div class="two-col" style="margin-bottom:14px">
+                <div>
+                  <div class="section-title-line" style="margin-bottom:10px">
+                    <div class="section-title-line-bar" style="background:linear-gradient(180deg,#D4920A,#E8B040)"></div>
+                    <div class="section-title-text">绩效数据对比</div>
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:8px">
+                    <div style="display:flex;align-items:center;gap:10px">
+                      <span style="width:80px;font-size:0.75rem;color:var(--text-muted)">测试岗</span>
+                      <div style="flex:1">
+                        <div class="progress-bar">
+                          <div class="progress-fill" style="width:82%;background:linear-gradient(90deg,var(--accent),#0AB889)"></div>
+                        </div>
+                      </div>
+                      <span style="font-size:0.78rem;font-weight:700;color:var(--accent)">82分（优秀）</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:10px">
+                      <span style="width:80px;font-size:0.75rem;color:var(--text-muted)">开发岗</span>
+                      <div style="flex:1">
+                        <div class="progress-bar">
+                          <div class="progress-fill" style="width:62%;background:linear-gradient(90deg,#E8504A,#F08080)"></div>
+                        </div>
+                      </div>
+                      <span style="font-size:0.78rem;font-weight:700;color:#C0392B">62分（不合格）</span>
+                    </div>
+                  </div>
+                  <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px">
+                    <div style="display:flex;align-items:center;gap:8px;font-size:0.77rem"><span style="width:70px;color:var(--text-muted)">测试思维</span>
+                      <div style="flex:1">
+                        <div class="progress-bar">
+                          <div class="progress-fill" style="width:90%;background:linear-gradient(90deg,var(--accent),#0AB889)"></div>
+                        </div>
+                      </div><b style="color:var(--accent)">90分</b>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:8px;font-size:0.77rem"><span style="width:70px;color:var(--text-muted)">开发能力</span>
+                      <div style="flex:1">
+                        <div class="progress-bar">
+                          <div class="progress-fill" style="width:58%;background:linear-gradient(90deg,#E8504A,#F08080)"></div>
+                        </div>
+                      </div><b style="color:#C0392B">58分</b>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:8px;font-size:0.77rem"><span style="width:70px;color:var(--text-muted)">学习能力</span>
+                      <div style="flex:1">
+                        <div class="progress-bar">
+                          <div class="progress-fill" style="width:65%;background:linear-gradient(90deg,#D4920A,#E8B040)"></div>
+                        </div>
+                      </div><b style="color:#D4920A">65分</b>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div class="section-title-line" style="margin-bottom:10px">
+                    <div class="section-title-line-bar" style="background:linear-gradient(180deg,var(--accent),#0AB889)"></div>
+                    <div class="section-title-text">干预方案</div>
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:10px">
+                    <div style="background:var(--accent-bg);border:2px solid rgba(12,191,154,0.4);border-radius:10px;padding:12px;position:relative">
+                      <div style="position:absolute;top:-9px;right:10px;background:var(--accent);color:white;font-size:0.65rem;font-weight:700;padding:2px 9px;border-radius:8px">推荐</div>
+                      <div style="font-size:0.78rem;font-weight:700;color:#0A9B7E;margin-bottom:5px">方案A · 回退测试岗</div>
+                      <div style="font-size:0.75rem;color:var(--text-sub);line-height:1.6">保留薪资职级，提供测试专家路径。人岗匹配比坚持更重要。</div>
+                    </div>
+                    <div style="background:var(--bg-card2);border:1px solid var(--border);border-radius:10px;padding:12px">
+                      <div style="font-size:0.78rem;font-weight:700;color:var(--text-muted);margin-bottom:5px">方案B · 延长适应期</div>
+                      <div style="font-size:0.75rem;color:var(--text-sub);line-height:1.6">延长3个月，配备专属mentor，持续观察。</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="padding:9px 13px;background:#FFFDF0;border:1px solid #F0D98A;border-radius:8px;font-size:0.78rem;color:#9A6A00">
+                <b>归因：</b>转岗适应失败，不是态度问题。优先方案A，人岗匹配比坚持更重要。
+              </div>
+            </div>
+
+            <!-- 案例4 -->
+            <div class="card" style="margin-bottom:16px;border-left:4px solid var(--accent-warm)">
+              <div class="card-header">
+                <div class="card-icon" style="background:var(--accent-warm-bg)">
+                  <i class="fas fa-users-slash" style="color:var(--accent-warm)"></i>
+                </div>
+                <div style="flex:1">
+                  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+                    <div class="card-title">案例 4 · 群体性风险</div>
+                    <span class="readiness-badge badge-warn">中风险</span>
+                    <span style="background:#FEE;color:#C0392B;font-size:0.7rem;font-weight:700;padding:3px 10px;border-radius:20px;border:1px solid #F5C5C3">⏱ 本周内建立新人保护机制</span>
+                  </div>
+                  <div class="card-sub">1.1级新人集体流失预警 · 4人中3人异常</div>
+                </div>
+              </div>
+
+              <div class="two-col" style="margin-bottom:14px">
+                <div>
+                  <div class="section-title-line" style="margin-bottom:10px">
+                    <div class="section-title-line-bar" style="background:linear-gradient(180deg,var(--accent-warm),#F08080)"></div>
+                    <div class="section-title-text">共同异常信号</div>
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:7px">
+                    <div style="display:flex;align-items:center;gap:8px;font-size:0.78rem">
+                      <div class="live-dot-warn"></div><span style="color:var(--text-sub)">代码提交集中在<b style="color:#C0392B">下班前</b>（被动应付）</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:8px;font-size:0.78rem">
+                      <div class="live-dot-warn"></div><span style="color:var(--text-sub)">内部技术文档阅读下降 <b style="color:#C0392B">50%</b></span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:8px;font-size:0.78rem">
+                      <div class="live-dot-warn"></div><span style="color:var(--text-sub)">团队群聊参与度明显下降</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:8px;font-size:0.78rem">
+                      <div class="live-dot-warn"></div><span style="color:var(--text-sub)">请假频率增加（集中周五下午）</span>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div class="section-title-line" style="margin-bottom:10px">
+                    <div class="section-title-line-bar" style="background:linear-gradient(180deg,#D4920A,#E8B040)"></div>
+                    <div class="section-title-text">根因分析</div>
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:7px">
+                    <div style="display:flex;align-items:center;gap:8px;font-size:0.78rem"><i class="fas fa-xmark" style="color:#C0392B;width:14px"></i><span style="color:var(--text-sub)">Mentor机制未落实（仅名义上）</span></div>
+                    <div style="display:flex;align-items:center;gap:8px;font-size:0.78rem"><i class="fas fa-xmark" style="color:#C0392B;width:14px"></i><span style="color:var(--text-sub)">Onboarding缺失（直接进项目）</span></div>
+                    <div style="display:flex;align-items:center;gap:8px;font-size:0.78rem"><i class="fas fa-xmark" style="color:#C0392B;width:14px"></i><span style="color:var(--text-sub)">上级1对1仅0.5次/月（健康应≥2次）</span></div>
+                  </div>
+                  <div style="margin-top:10px;background:#FEF5F4;border:1px solid #F5C5C3;border-radius:8px;padding:9px 12px;font-size:0.77rem;color:#C0392B;font-weight:600">
+                    ⚠ 新人感到"被忽视"，缺乏归属感
+                  </div>
+                </div>
+              </div>
+
+              <div class="section-title-line" style="margin-bottom:10px">
+                <div class="section-title-line-bar" style="background:linear-gradient(180deg,var(--accent),#0AB889)"></div>
+                <div class="section-title-text">干预方案（本周内）</div>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:10px">
+                <div style="background:var(--primary-bg);border:1px solid rgba(91,82,232,0.2);border-radius:10px;padding:12px">
+                  <div style="font-size:0.7rem;color:var(--primary);font-weight:700;margin-bottom:5px">① 立即行动</div>
+                  <div style="font-size:0.76rem;color:var(--text-sub);line-height:1.65">团队负责人与4名新人逐个谈话（不谈工作，只谈关心）</div>
+                </div>
+                <div style="background:var(--accent-bg);border:1px solid rgba(12,191,154,0.2);border-radius:10px;padding:12px">
+                  <div style="font-size:0.7rem;color:var(--accent);font-weight:700;margin-bottom:5px">② 建立新人保护期</div>
+                  <div style="font-size:0.76rem;color:var(--text-sub);line-height:1.65">前3个月每周1次1对1，指定真实Mentor，组织新人团建</div>
+                </div>
+                <div style="background:var(--accent-yellow-bg);border:1px solid rgba(212,146,10,0.2);border-radius:10px;padding:12px">
+                  <div style="font-size:0.7rem;color:#9A6A00;font-weight:700;margin-bottom:5px">③ 优化Onboarding</div>
+                  <div style="font-size:0.76rem;color:var(--text-sub);line-height:1.65">第1周熟悉环境 → 第1月配合Mentor → 第2月独立子模块</div>
+                </div>
+              </div>
+              <div style="padding:8px 13px;background:var(--accent-bg);border-radius:8px;font-size:0.78rem;color:#0A9B7E;font-weight:600">
+                📊 预期结果：如果本周内干预，<b>80%</b>概率可稳定团队，避免3个月内2人离职
+              </div>
+            </div>
+
+            <!-- 汇总 + HRBP行动 并排 -->
+            <div class="two-col" style="margin-bottom:16px">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-icon" style="background:var(--primary-bg)"><i class="fas fa-table-list" style="color:var(--primary)"></i></div>
+                  <div>
+                    <div class="card-title">异常案例汇总</div>
+                    <div class="card-sub">4例 · 按优先级排序</div>
+                  </div>
+                </div>
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>人员</th>
+                      <th>职级</th>
+                      <th>风险</th>
+                      <th>行动时限</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><b>周**</b></td>
+                      <td>1.3</td>
+                      <td><span class="readiness-badge badge-low">高</span></td>
+                      <td style="color:#C0392B;font-weight:600;font-size:0.76rem">48小时内总监面谈</td>
+                    </tr>
+                    <tr>
+                      <td><b>吴**</b></td>
+                      <td>1.2</td>
+                      <td><span class="readiness-badge badge-low">高</span></td>
+                      <td style="color:#C0392B;font-weight:600;font-size:0.76rem">本周内启动纠偏计划</td>
+                    </tr>
+                    <tr>
+                      <td><b>郑**</b></td>
+                      <td>1.1</td>
+                      <td><span class="readiness-badge badge-warn">中</span></td>
+                      <td style="color:#B5780A;font-weight:600;font-size:0.76rem">2周内沟通方案</td>
+                    </tr>
+                    <tr>
+                      <td><b>1.1级群体×4</b></td>
+                      <td>1.1</td>
+                      <td><span class="readiness-badge badge-warn">中</span></td>
+                      <td style="color:#B5780A;font-weight:600;font-size:0.76rem">本周内新人保护机制</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-icon" style="background:var(--accent-bg)"><i class="fas fa-clipboard-check" style="color:var(--accent)"></i></div>
+                  <div>
+                    <div class="card-title">HRBP 行动建议</div>
+                    <div class="card-sub">本周 + 本月双线推进</div>
+                  </div>
+                </div>
+                <div style="font-size:0.73rem;color:var(--accent-warm);font-weight:700;margin-bottom:8px">🔥 本周</div>
+                <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px">
+                  <div style="display:flex;gap:8px;align-items:flex-start">
+                    <div style="min-width:20px;height:20px;border-radius:5px;background:var(--accent-warm-bg);color:var(--accent-warm);font-size:0.68rem;font-weight:700;display:flex;align-items:center;justify-content:center">1</div>
+                    <div style="font-size:0.78rem;color:var(--text-sub)">向团队负责人同步4个案例（脱敏）</div>
+                  </div>
+                  <div style="display:flex;gap:8px;align-items:flex-start">
+                    <div style="min-width:20px;height:20px;border-radius:5px;background:var(--accent-warm-bg);color:var(--accent-warm);font-size:0.68rem;font-weight:700;display:flex;align-items:center;justify-content:center">2</div>
+                    <div style="font-size:0.78rem;color:var(--text-sub)">推动48小时内干预（特别是周**）</div>
+                  </div>
+                  <div style="display:flex;gap:8px;align-items:flex-start">
+                    <div style="min-width:20px;height:20px;border-radius:5px;background:var(--accent-warm-bg);color:var(--accent-warm);font-size:0.68rem;font-weight:700;display:flex;align-items:center;justify-content:center">3</div>
+                    <div style="font-size:0.78rem;color:var(--text-sub)">协助制定新人保护机制</div>
+                  </div>
+                </div>
+                <div style="font-size:0.73rem;color:var(--primary);font-weight:700;margin-bottom:8px">📅 本月</div>
+                <div style="display:flex;flex-direction:column;gap:6px">
+                  <div style="display:flex;gap:8px;align-items:flex-start">
+                    <div style="min-width:20px;height:20px;border-radius:5px;background:var(--primary-bg);color:var(--primary);font-size:0.68rem;font-weight:700;display:flex;align-items:center;justify-content:center">4</div>
+                    <div style="font-size:0.78rem;color:var(--text-sub)">跟进吴**纠偏进展，第9周复评</div>
+                  </div>
+                  <div style="display:flex;gap:8px;align-items:flex-start">
+                    <div style="min-width:20px;height:20px;border-radius:5px;background:var(--primary-bg);color:var(--primary);font-size:0.68rem;font-weight:700;display:flex;align-items:center;justify-content:center">5</div>
+                    <div style="font-size:0.78rem;color:var(--text-sub)">确定郑**去留（优先方案A转岗）</div>
+                  </div>
+                  <div style="display:flex;gap:8px;align-items:flex-start">
+                    <div style="min-width:20px;height:20px;border-radius:5px;background:var(--primary-bg);color:var(--primary);font-size:0.68rem;font-weight:700;display:flex;align-items:center;justify-content:center">6</div>
+                    <div style="font-size:0.78rem;color:var(--text-sub)">建立1.1级新人月度健康度扫描</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="aha-block">
+              <div class="aha-title">HR专家 Aha Moment</div>
+              <div class="aha-text">"以前靠感觉发现异常员工，现在系统提前3周预警，还给了具体干预方案。从'救火'变成'防火'！"</div>
+            </div>
+          </div>
+
+          <!-- 团队负责人视角 -->
+          <div class="layer-content" id="s1-layer-1">
+            <div class="auth-block">
+              <div class="auth-icon"><i class="fas fa-lock-open"></i></div>
+              <div class="auth-info">
+                <div class="auth-name">🔐 张**（工号：289545）· 智能教学产品部负责人</div>
+                <div class="auth-meta">智能教学产品部 · 18人 · 平均司龄1.8年 · 平均职级1.6</div>
+              </div>
+              <div class="auth-scope"><i class="fas fa-users" style="margin-right:4px"></i>团队数据权限</div>
+            </div>
+
+            <!-- 团队作战地图 + 准备度 + 能力维度 三列 -->
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-icon" style="background:var(--primary-bg)"><i class="fas fa-sitemap" style="color:var(--primary)"></i></div>
+                  <div>
+                    <div class="card-title">团队作战地图</div>
+                  </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:8px">
+                  <div style="display:flex;align-items:center;gap:8px"><span style="width:80px;font-size:0.73rem;color:var(--text-muted)">2.3 专家</span>
+                    <div style="flex:1">
+                      <div class="progress-bar">
+                        <div class="progress-fill" style="width:5.6%;background:linear-gradient(90deg,#E8504A,#F08080)"></div>
+                      </div>
+                    </div><span style="font-size:0.73rem;color:#C0392B;font-weight:600;width:28px">1人</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px"><span style="width:80px;font-size:0.73rem;color:var(--text-muted)">2.2 资深</span>
+                    <div style="flex:1">
+                      <div class="progress-bar">
+                        <div class="progress-fill" style="width:11.1%"></div>
+                      </div>
+                    </div><span style="font-size:0.73rem;color:var(--primary);font-weight:600;width:28px">2人</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px"><span style="width:80px;font-size:0.73rem;color:var(--text-muted)">2.1 骨干</span>
+                    <div style="flex:1">
+                      <div class="progress-bar">
+                        <div class="progress-fill" style="width:11.1%"></div>
+                      </div>
+                    </div><span style="font-size:0.73rem;color:var(--primary);font-weight:600;width:28px">2人</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px"><span style="width:80px;font-size:0.73rem;color:var(--text-muted)">1.3 熟练</span>
+                    <div style="flex:1">
+                      <div class="progress-bar">
+                        <div class="progress-fill" style="width:16.7%;background:linear-gradient(90deg,var(--accent),#0AB889)"></div>
+                      </div>
+                    </div><span style="font-size:0.73rem;color:var(--accent);font-weight:600;width:28px">3人</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px"><span style="width:80px;font-size:0.73rem;color:var(--text-muted)">1.2 成长</span>
+                    <div style="flex:1">
+                      <div class="progress-bar">
+                        <div class="progress-fill" style="width:33.3%;background:linear-gradient(90deg,var(--accent),#0AB889)"></div>
+                      </div>
+                    </div><span style="font-size:0.73rem;color:var(--accent);font-weight:600;width:28px">6人</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px"><span style="width:80px;font-size:0.73rem;color:var(--text-muted)">1.1 初级</span>
+                    <div style="flex:1">
+                      <div class="progress-bar">
+                        <div class="progress-fill" style="width:22.2%;background:linear-gradient(90deg,#D4920A,#E8B040)"></div>
+                      </div>
+                    </div><span style="font-size:0.73rem;color:#D4920A;font-weight:600;width:28px">4人</span>
+                  </div>
+                </div>
+                <div style="margin-top:10px;padding:8px 10px;background:#FEF5F4;border-radius:8px;border:1px solid #F5C5C3;font-size:0.74rem;color:#C0392B">⚠ 2.3级仅1人，单点风险高</div>
+              </div>
+
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-icon" style="background:var(--accent-bg)"><i class="fas fa-chart-pie" style="color:var(--accent)"></i></div>
+                  <div>
+                    <div class="card-title">晋升准备度全景</div>
+                    <div class="card-sub">均值74.5分 · 事业部排名第1</div>
+                  </div>
+                </div>
+                <div class="chart-wrap"><canvas id="readinessChart"></canvas></div>
+              </div>
+
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-icon" style="background:var(--primary-bg)"><i class="fas fa-circle-nodes" style="color:var(--primary)"></i></div>
+                  <div>
+                    <div class="card-title">能力维度对比</div>
+                    <div class="card-sub">团队 vs 组织均值</div>
+                  </div>
+                </div>
+                <div class="chart-wrap"><canvas id="abilityChart"></canvas></div>
+              </div>
+            </div>
+
+            <div class="card gap-section">
+              <div class="card-header">
+                <div class="card-icon" style="background:var(--accent-yellow-bg)"><i class="fas fa-star" style="color:#D4920A"></i></div>
+                <div>
+                  <div class="card-title">关键人才识别</div>
+                  <div class="card-sub">立即晋升 · 3月可晋 · 风险关注</div>
+                </div>
+              </div>
+
+              <div style="font-size:0.76rem;font-weight:700;color:var(--accent);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.08em">⭐ 立即晋升区（2人）</div>
+              <table class="data-table" style="margin-bottom:1.2rem">
+                <thead>
+                  <tr>
+                    <th>姓名</th>
+                    <th>当前</th>
+                    <th>目标</th>
+                    <th>准备度</th>
+                    <th>核心优势</th>
+                    <th>建议</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b style="color:var(--text-main)">张*</b></td>
+                    <td><span class="readiness-badge badge-mid">1.3</span></td>
+                    <td><span class="readiness-badge badge-high">2.1</span></td>
+                    <td><b style="color:var(--accent)">96分</b></td>
+                    <td style="font-size:0.74rem;color:var(--text-sub)">代码质量97分，推荐准确率↑12%，零故障上线</td>
+                    <td><span class="readiness-badge badge-high">启动跨级晋升</span></td>
+                  </tr>
+                  <tr>
+                    <td><b style="color:var(--text-main)">李*</b></td>
+                    <td><span class="readiness-badge badge-mid">2.2</span></td>
+                    <td><span class="readiness-badge badge-high">2.3</span></td>
+                    <td><b style="color:var(--accent)">93分</b></td>
+                    <td style="font-size:0.74rem;color:var(--text-sub)">技术影响力强，主导智能答疑项目，满意度↑15%</td>
+                    <td><span class="readiness-badge badge-high">档内晋升</span></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div style="font-size:0.76rem;font-weight:700;color:var(--primary);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.08em">✅ 3个月内可晋升（3人）</div>
+              <table class="data-table" style="margin-bottom:1.2rem">
+                <thead>
+                  <tr>
+                    <th>姓名</th>
+                    <th>当前→目标</th>
+                    <th>准备度</th>
+                    <th>关键洞察</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>王*</td>
+                    <td>1.2→1.3</td>
+                    <td><b style="color:var(--primary)">85分</b></td>
+                    <td style="font-size:0.74rem;color:var(--text-sub)">技术扎实(86)，文档待提升(72)</td>
+                  </tr>
+                  <tr>
+                    <td>陈*</td>
+                    <td>1.1→1.2</td>
+                    <td><b style="color:var(--primary)">82分</b></td>
+                    <td style="font-size:0.74rem;color:var(--text-sub)">学习能力强，再历练1个项目可晋升</td>
+                  </tr>
+                  <tr>
+                    <td>刘*</td>
+                    <td>2.1→2.2</td>
+                    <td><b style="color:var(--primary)">81分</b></td>
+                    <td style="font-size:0.74rem;color:var(--text-sub)">协作突出，技术深度待加强</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div style="font-size:0.76rem;font-weight:700;color:var(--accent-warm);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.08em">🚨 风险关注（2人）</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+                <div class="risk-block">
+                  <div class="risk-title">赵* · 1.2级 · 68分</div>
+                  <div class="risk-body">入职8个月，绩效下滑78→65，代码提交量下降，日报遗漏。建议2周内面谈，制定改进计划。</div>
+                </div>
+                <div style="background:#FEF5F4;border:1px solid #E89C9A;border-left:3px solid #C0392B;border-radius:10px;padding:12px 14px">
+                  <div style="font-size:0.84rem;font-weight:700;color:#C0392B;margin-bottom:4px">孙* · 2.1级 · 58分 · <span style="color:#C0392B">流失概率65%</span></div>
+                  <div style="font-size:0.78rem;color:#7D5555;line-height:1.65">历史高绩效85分→近3月骤降至58分。系统检测：出勤时长↓1.2h，提交时间异常，频繁半天假。建议立即retention谈话。</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 能力洞察（合并到关键人才下方） -->
+            <div class="two-col" style="margin-top:14px">
+              <div class="suggest-block" style="border-radius:10px;padding:13px">
+                <div class="suggest-title">💎 隐藏优势：业务理解 +11分</div>
+                <div class="suggest-body">产品经理满意度4.6/5，技术方案采纳率91%，需求返工率仅8%。建议参与更多产品决策，打造"技术+业务双强"标签。</div>
+              </div>
+              <div class="risk-block" style="border-radius:10px;padding:13px">
+                <div class="risk-title">⚠ 短板预警：协作能力 -5分</div>
+                <div class="risk-body">团队年轻化（均司龄1.8年）、远程办公比例高40%。建议增加跨团队项目、建立Code Review文化。</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             场景二：晋升全流程辅助
+        ============================================================ -->
+        <div class="content-section" id="scene-1">
+          <div class="scene-header">
+            <div class="scene-tag"><i class="fas fa-arrow-trend-up"></i> 场景二</div>
+            <h2 class="scene-title">晋升全流程辅助（前—中—后）</h2>
+            <p class="scene-desc">晋升前科学提报 → 晋升中客观评审 → 晋升后持续纠偏，形成完整价值闭环</p>
+          </div>
+
+          <div class="layer-tabs">
+            <button class="layer-tab active" onclick="switchLayer('s2',0)"><i class="fas fa-clipboard-list" style="margin-right:6px"></i>晋升前·提报辅助</button>
+            <button class="layer-tab" onclick="switchLayer('s2',1)"><i class="fas fa-scale-balanced" style="margin-right:6px"></i>晋升中·评审辅助</button>
+            <button class="layer-tab" onclick="switchLayer('s2',2)"><i class="fas fa-rotate" style="margin-right:6px"></i>晋升后·复盘纠偏</button>
+          </div>
+
+          <!-- 晋升前 -->
+          <div class="layer-content active" id="s2-layer-0">
+            <div class="auth-block">
+              <div class="auth-icon"><i class="fas fa-lock-open"></i></div>
+              <div class="auth-info">
+                <div class="auth-name">🔐 张**（工号：289545）· 智能教学产品部负责人</div>
+                <div class="auth-meta">Q2技术序列晋升提报</div>
+              </div>
+              <div class="auth-scope">提报名额建议：2-3人</div>
+            </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-header">
+                <div class="card-icon" style="background:var(--primary-bg)"><i class="fas fa-list-check" style="color:var(--primary)"></i></div>
+                <div>
+                  <div class="card-title">晋升提报智能辅助</div>
+                  <div class="card-sub">全员准备度评估 · AI建议</div>
+                </div>
+              </div>
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>人员</th>
+                    <th>当前</th>
+                    <th>目标</th>
+                    <th>准备度</th>
+                    <th>AI提报建议</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>张*</b></td>
+                    <td>1.3</td>
+                    <td>2.1</td>
+                    <td><b style="color:var(--accent)">96分</b></td>
+                    <td><span class="readiness-badge badge-high">⭐ 强烈推荐（跨级）</span></td>
+                  </tr>
+                  <tr>
+                    <td><b>李*</b></td>
+                    <td>2.2</td>
+                    <td>2.3</td>
+                    <td><b style="color:var(--accent)">93分</b></td>
+                    <td><span class="readiness-badge badge-high">⭐ 强烈推荐（档内）</span></td>
+                  </tr>
+                  <tr>
+                    <td>王*</td>
+                    <td>1.2</td>
+                    <td>1.3</td>
+                    <td><b style="color:var(--primary)">85分</b></td>
+                    <td><span class="readiness-badge badge-mid">✅ 建议提报</span></td>
+                  </tr>
+                  <tr>
+                    <td>陈*</td>
+                    <td>1.1</td>
+                    <td>1.2</td>
+                    <td><b style="color:var(--primary)">82分</b></td>
+                    <td><span class="readiness-badge badge-mid">✅ 建议提报</span></td>
+                  </tr>
+                  <tr>
+                    <td>刘*</td>
+                    <td>2.1</td>
+                    <td>2.2</td>
+                    <td><b style="color:#D4920A">81分</b></td>
+                    <td><span class="readiness-badge badge-warn">△ 谨慎考虑</span></td>
+                  </tr>
+                  <tr>
+                    <td>赵*</td>
+                    <td>1.2</td>
+                    <td>1.3</td>
+                    <td><b style="color:var(--accent-warm)">68分</b></td>
+                    <td><span class="readiness-badge badge-low">❌ 不推荐（差距大）</span></td>
+                  </tr>
+                  <tr>
+                    <td>孙*</td>
+                    <td>2.1</td>
+                    <td>2.2</td>
+                    <td><b style="color:var(--accent-warm)">58分</b></td>
+                    <td><span class="readiness-badge badge-low">❌ 不推荐（风险高）</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px">
+              <div style="background:var(--accent-bg);border:1px solid rgba(12,191,154,0.3);border-radius:14px;padding:14px">
+                <div style="font-size:0.7rem;color:var(--accent);font-weight:700;text-transform:uppercase;margin-bottom:8px">方案A · 进取型</div>
+                <div style="font-size:0.87rem;font-weight:700;color:var(--text-main);margin-bottom:6px">张* + 李* + 王*</div>
+                <div style="font-size:0.76rem;color:var(--text-sub);line-height:1.6">平均准备度91分，成功率最高。适用于战功突出、预算充足时。</div>
+              </div>
+              <div style="background:var(--primary-bg);border:2px solid var(--primary);border-radius:14px;padding:14px;position:relative;box-shadow:0 4px 14px rgba(91,82,232,0.15)">
+                <div style="position:absolute;top:-10px;right:12px;background:var(--primary);color:white;font-size:0.65rem;font-weight:700;padding:2px 10px;border-radius:10px">推荐</div>
+                <div style="font-size:0.7rem;color:var(--primary);font-weight:700;text-transform:uppercase;margin-bottom:8px">方案B · 稳健型</div>
+                <div style="font-size:0.87rem;font-weight:700;color:var(--text-main);margin-bottom:6px">张* + 李*</div>
+                <div style="font-size:0.76rem;color:var(--text-sub);line-height:1.6">双高准备度，通过概率&gt;90%。名额紧张时的最优选择。</div>
+              </div>
+              <div style="background:var(--bg-card2);border:1px solid var(--border);border-radius:14px;padding:14px">
+                <div style="font-size:0.7rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;margin-bottom:8px">方案C · 梯队型</div>
+                <div style="font-size:0.87rem;font-weight:700;color:var(--text-main);margin-bottom:6px">李* + 王* + 陈*</div>
+                <div style="font-size:0.76rem;color:var(--text-sub);line-height:1.6">覆盖不同职级，梯队均衡。注重长期梯队健康时选择。</div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="card-icon" style="background:var(--accent-yellow-bg)"><i class="fas fa-triangle-exclamation" style="color:#D4920A"></i></div>
+                <div>
+                  <div class="card-title">⚠ 近因效应识别 · 张* OKR达成趋势</div>
+                  <div class="card-sub">系统自动识别认知偏差，确保评价公正</div>
+                </div>
+              </div>
+              <div class="chart-wrap" style="height:260px"><canvas id="okrTrendChart"></canvas></div>
+              <div style="margin-top:12px;padding:10px 14px;background:#FFFDF0;border:1px solid #F0D98A;border-radius:8px;font-size:0.78rem;color:#9A6A00;line-height:1.65">
+                ⚠ <b>近因效应确认：</b>Q2战功突增（4-6月平均96% vs Q1均值82%）。协作贡献持续偏低（平均68%，低于团队均值78%）。评审时建议关注Q1成长历程，追问协作改进计划。
+              </div>
+            </div>
+
+            <div class="aha-block">
+              <div class="aha-title">管理者 Aha Moment</div>
+              <div class="aha-text">"原来提名谁不该凭感觉！系统不仅给了名单建议，还提醒我注意近因效应——张*Q2表现好但Q1平淡，这个我自己都没注意到。"</div>
+            </div>
+          </div>
+
+          <!-- 晋升中 -->
+          <div class="layer-content" id="s2-layer-1">
+            <div class="auth-block">
+              <div class="auth-icon"><i class="fas fa-lock-open"></i></div>
+              <div class="auth-info">
+                <div class="auth-name">🔐 刘**（工号：500001）· 晋升校准会评委 / HR负责人</div>
+                <div class="auth-meta">Q2晋升评审 · 3名候选人</div>
+              </div>
+              <div class="auth-scope">评审数据权限</div>
+            </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-header">
+                <div class="card-icon" style="background:var(--accent-bg)"><i class="fas fa-table" style="color:var(--accent)"></i></div>
+                <div>
+                  <div class="card-title">多源数据矩阵 · 张*（1.3→2.1）</div>
+                  <div class="card-sub">综合准备度：89分 · AI预测通过率：87%</div>
+                </div>
+              </div>
+              <div style="overflow-x:auto">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>维度</th>
+                      <th>自评</th>
+                      <th>上级</th>
+                      <th>360团队</th>
+                      <th>业务方</th>
+                      <th>行为数据</th>
+                      <th>OKR达成</th>
+                      <th>一致性</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>战功贡献</td>
+                      <td>92</td>
+                      <td>90</td>
+                      <td>88</td>
+                      <td>91</td>
+                      <td>89</td>
+                      <td>89%</td>
+                      <td><span class="readiness-badge badge-high">✓ 高</span></td>
+                    </tr>
+                    <tr>
+                      <td>技术能力</td>
+                      <td>95</td>
+                      <td>94</td>
+                      <td>90</td>
+                      <td>—</td>
+                      <td>93</td>
+                      <td>93%</td>
+                      <td><span class="readiness-badge badge-high">✓ 高</span></td>
+                    </tr>
+                    <tr>
+                      <td style="color:#C0392B;font-weight:600">协作能力</td>
+                      <td style="color:#C0392B">85</td>
+                      <td style="color:#C0392B">82</td>
+                      <td style="color:#C0392B">78</td>
+                      <td style="color:#C0392B">85</td>
+                      <td style="color:#C0392B">80</td>
+                      <td style="color:#C0392B">68%</td>
+                      <td><span class="readiness-badge badge-warn">△ 中</span></td>
+                    </tr>
+                    <tr>
+                      <td>业务理解</td>
+                      <td>88</td>
+                      <td>90</td>
+                      <td>85</td>
+                      <td>92</td>
+                      <td>87</td>
+                      <td>87%</td>
+                      <td><span class="readiness-badge badge-high">✓ 高</span></td>
+                    </tr>
+                    <tr>
+                      <td>成长潜力</td>
+                      <td>90</td>
+                      <td>88</td>
+                      <td>85</td>
+                      <td>—</td>
+                      <td>86</td>
+                      <td>91%↑</td>
+                      <td><span class="readiness-badge badge-warn">△ 中</span></td>
+                    </tr>
+                    <tr>
+                      <td>文化契合</td>
+                      <td>95</td>
+                      <td>94</td>
+                      <td>92</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td><span class="readiness-badge badge-high">✓ 高</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-header">
+                <div class="card-icon" style="background:var(--primary-bg)"><i class="fas fa-comment-dots" style="color:var(--primary)"></i></div>
+                <div>
+                  <div class="card-title">AI 生成提问建议</div>
+                  <div class="card-sub">基于数据缺口精准定向提问</div>
+                </div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:12px">
+                <div style="background:var(--primary-bg);border:1px solid rgba(91,82,232,0.2);border-radius:10px;padding:14px">
+                  <div style="font-size:0.71rem;color:var(--primary);font-weight:700;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.06em">Q1 · 验证协作能力</div>
+                  <div style="font-size:0.86rem;color:var(--text-main);line-height:1.7">"张*，你的技术能力得到了广泛认可，但360反馈显示协作评分相对较低。能否分享一个你主动推动跨团队协作的具体案例？"</div>
+                </div>
+                <div style="background:var(--primary-bg);border:1px solid rgba(91,82,232,0.2);border-radius:10px;padding:14px">
+                  <div style="font-size:0.71rem;color:var(--primary);font-weight:700;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.06em">Q2 · 验证战功持续性</div>
+                  <div style="font-size:0.86rem;color:var(--text-main);line-height:1.7">"你Q2的战功非常突出，但Q1相对平淡。能否分享一下这中间的转变？是项目机会使然，还是个人能力跃迁？"</div>
+                </div>
+                <div style="background:#FFFDF0;border:1px solid #F0D98A;border-radius:10px;padding:14px">
+                  <div style="font-size:0.71rem;color:#9A6A00;font-weight:700;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.06em">Q3 · 基于OKR趋势追问</div>
+                  <div style="font-size:0.86rem;color:var(--text-main);line-height:1.7">"系统显示你的OKR战功达成率从Q1的82%提升到Q2的96%。查看你的周报记录，Q1在做推荐模块维护，Q2在做准确率优化专项。请解释：这个跃迁更多是因为项目难度变化，还是个人能力突破？"</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="card-icon" style="background:var(--accent-bg)"><i class="fas fa-scale-balanced" style="color:var(--accent)"></i></div>
+                <div>
+                  <div class="card-title">校准会决策结果</div>
+                  <div class="card-sub">最终评审结论</div>
+                </div>
+              </div>
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>候选人</th>
+                    <th>职级变动</th>
+                    <th>准备度</th>
+                    <th>AI通过率</th>
+                    <th>一致性</th>
+                    <th>评审结果</th>
+                    <th>后续要求</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>张*</b></td>
+                    <td>1.3→2.1</td>
+                    <td>89分</td>
+                    <td>87%</td>
+                    <td><span class="readiness-badge badge-warn">中高</span></td>
+                    <td><span class="readiness-badge badge-high">✓ 通过</span></td>
+                    <td style="font-size:0.74rem">3月内跨团队项目</td>
+                  </tr>
+                  <tr>
+                    <td><b>李*</b></td>
+                    <td>2.2→2.3</td>
+                    <td>91分</td>
+                    <td>92%</td>
+                    <td><span class="readiness-badge badge-high">高</span></td>
+                    <td><span class="readiness-badge badge-high">✓ 通过</span></td>
+                    <td style="font-size:0.74rem">3月内mentoring</td>
+                  </tr>
+                  <tr>
+                    <td><b>王*</b></td>
+                    <td>1.2→1.3</td>
+                    <td>76分</td>
+                    <td style="color:#C0392B;font-weight:700">42%</td>
+                    <td><span class="readiness-badge badge-low">低</span></td>
+                    <td><span class="readiness-badge badge-low">✗ 暂缓</span></td>
+                    <td style="font-size:0.74rem">延期3月再评估</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="aha-block">
+              <div class="aha-title">评委 Aha Moment</div>
+              <div class="aha-text">"以前评审靠15分钟述职和感觉，现在系统给我多源数据矩阵，连问什么问题都帮我想好了！特别是用OKR数据验证近因效应，太实用了。"</div>
+            </div>
+          </div>
+
+          <!-- 晋升后 -->
+          <div class="layer-content" id="s2-layer-2">
+            <div class="auth-block">
+              <div class="auth-icon"><i class="fas fa-lock-open"></i></div>
+              <div class="auth-info">
+                <div class="auth-name">🔐 赵**（工号：300001）· HR负责人 / 晋升校准会组织者</div>
+                <div class="auth-meta">晋升后复盘与异常预警</div>
+              </div>
+              <div class="auth-scope">AI预测准确率 100%</div>
+            </div>
+
+            <div class="two-col" style="margin-bottom:16px">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-icon" style="background:var(--accent-bg)"><i class="fas fa-bullseye" style="color:var(--accent)"></i></div>
+                  <div>
+                    <div class="card-title">AI预测准确性验证</div>
+                    <div class="card-sub">本次评审准确率：100%</div>
+                  </div>
+                </div>
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>候选人</th>
+                      <th>AI预测</th>
+                      <th>实际结果</th>
+                      <th>一致性</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>张*</td>
+                      <td>87%</td>
+                      <td>通过</td>
+                      <td><span class="readiness-badge badge-high">✓</span></td>
+                    </tr>
+                    <tr>
+                      <td>李*</td>
+                      <td>92%</td>
+                      <td>通过</td>
+                      <td><span class="readiness-badge badge-high">✓</span></td>
+                    </tr>
+                    <tr>
+                      <td>王*</td>
+                      <td>42%</td>
+                      <td>暂缓</td>
+                      <td><span class="readiness-badge badge-high">✓</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div style="margin-top:14px;text-align:center">
+                  <div style="font-size:2.2rem;font-weight:700;background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">100%</div>
+                  <div style="font-size:0.76rem;color:var(--text-muted)">AI预测准确率（3/3）</div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-icon" style="background:var(--accent-warm-bg)"><i class="fas fa-magnifying-glass-chart" style="color:var(--accent-warm)"></i></div>
+                  <div>
+                    <div class="card-title">识别出的评审偏差</div>
+                    <div class="card-sub">系统自动检测主观偏差</div>
+                  </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:10px">
+                  <div class="risk-block" style="padding:10px 12px">
+                    <div class="risk-title">偏差1：上级评价虚高</div>
+                    <div class="risk-body">张*上级比360高6分，存在上级主观偏好</div>
+                  </div>
+                  <div class="risk-block" style="padding:10px 12px">
+                    <div class="risk-title">偏差2：近因效应影响</div>
+                    <div class="risk-body">张*/王* Q2均出现表现突增，影响评审客观性</div>
+                  </div>
+                  <div class="risk-block" style="padding:10px 12px">
+                    <div class="risk-title">偏差3：自评与他评严重分歧</div>
+                    <div class="risk-body">王*自评vs他评差距13分，典型认知过高</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="card-icon" style="background:var(--primary-bg)"><i class="fas fa-rotate" style="color:var(--primary)"></i></div>
+                <div>
+                  <div class="card-title">晋升全流程价值闭环</div>
+                  <div class="card-sub">三阶段持续赋能</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:stretch;gap:0">
+                <div style="flex:1;background:var(--primary-bg);border:1px solid rgba(91,82,232,0.2);border-radius:12px 0 0 12px;padding:16px;text-align:center">
+                  <div style="font-size:1.5rem;margin-bottom:8px">📋</div>
+                  <div style="font-size:0.82rem;font-weight:700;color:var(--primary);margin-bottom:6px">晋升前</div>
+                  <div style="font-size:0.75rem;color:var(--text-sub);line-height:1.65">帮助管理者科学提报，消除近因效应，提供提报组合方案</div>
+                </div>
+                <div style="display:flex;align-items:center;padding:0 8px;color:var(--primary);font-size:1.4rem">→</div>
+                <div style="flex:1;background:var(--accent-bg);border:1px solid rgba(12,191,154,0.25);padding:16px;text-align:center">
+                  <div style="font-size:1.5rem;margin-bottom:8px">⚖️</div>
+                  <div style="font-size:0.82rem;font-weight:700;color:var(--accent);margin-bottom:6px">晋升中</div>
+                  <div style="font-size:0.75rem;color:var(--text-sub);line-height:1.65">帮助评委客观评审，识别主观偏差，AI生成提问建议</div>
+                </div>
+                <div style="display:flex;align-items:center;padding:0 8px;color:var(--accent);font-size:1.4rem">→</div>
+                <div style="flex:1;background:var(--accent-yellow-bg);border:1px solid rgba(212,146,10,0.2);border-radius:0 12px 12px 0;padding:16px;text-align:center">
+                  <div style="font-size:1.5rem;margin-bottom:8px">🔄</div>
+                  <div style="font-size:0.82rem;font-weight:700;color:#B5780A;margin-bottom:6px">晋升后</div>
+                  <div style="font-size:0.75rem;color:var(--text-sub);line-height:1.65">帮助组织持续纠偏，优化评审质量，跟踪未通过人员</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             场景三：项目团队配置
+        ============================================================ -->
+        <div class="content-section" id="scene-2">
+          <div class="scene-header">
+            <div class="scene-tag"><i class="fas fa-diagram-project"></i> 场景三</div>
+            <h2 class="scene-title">项目团队配置</h2>
+            <p class="scene-desc">基于技能标签 + 历史协作数据，科学推荐项目团队组合，告别"找熟人"配团队</p>
+          </div>
+
+          <div class="auth-block">
+            <div class="auth-icon"><i class="fas fa-lock-open"></i></div>
+            <div class="auth-info">
+              <div class="auth-name">🔐 陈**（工号：400001）· 项目经理</div>
+              <div class="auth-meta">AI课程推荐算法优化项目 · 5人团队 · 12周</div>
+            </div>
+            <div class="auth-scope">项目配置权限</div>
+          </div>
+
+          <div class="card" style="margin-bottom:14px;border:2px solid rgba(12,191,154,0.4)">
+            <div style="position:absolute;top:16px;right:16px">
+              <span style="background:linear-gradient(135deg,var(--accent),#0AB889);color:white;font-size:0.72rem;font-weight:700;padding:4px 14px;border-radius:20px;box-shadow:0 3px 10px rgba(12,191,154,0.3)">最优方案 · 匹配度92%</span>
+            </div>
+            <div class="card-header">
+              <div class="card-icon" style="background:var(--accent-bg)"><i class="fas fa-trophy" style="color:var(--accent)"></i></div>
+              <div>
+                <div class="card-title">方案A（最优匹配）</div>
+                <div class="card-sub">系统预测项目成功率：87%（高于事业部均值72%）</div>
+              </div>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>角色</th>
+                  <th>推荐人选</th>
+                  <th>职级</th>
+                  <th>匹配理由</th>
+                  <th>协作历史</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="readiness-badge badge-high">技术负责人</span></td>
+                  <td><b>张*</b></td>
+                  <td>2.1</td>
+                  <td style="font-size:0.74rem">推荐算法领域Top 3，主导过3个推荐项目</td>
+                  <td><span class="readiness-badge badge-high">与王*协作91分</span></td>
+                </tr>
+                <tr>
+                  <td><span class="readiness-badge badge-mid">核心开发1</span></td>
+                  <td><b>王*</b></td>
+                  <td>1.3</td>
+                  <td style="font-size:0.74rem">TensorFlow 2年经验，代码质量97分</td>
+                  <td>与张*协作默契</td>
+                </tr>
+                <tr>
+                  <td><span class="readiness-badge badge-mid">核心开发2</span></td>
+                  <td><b>李*</b></td>
+                  <td>1.2</td>
+                  <td style="font-size:0.74rem">业务理解85分，成长潜力高，适合挑战项目</td>
+                  <td>无冲突记录</td>
+                </tr>
+                <tr>
+                  <td><span class="readiness-badge badge-mid">核心开发3</span></td>
+                  <td><b>刘*</b></td>
+                  <td>1.2</td>
+                  <td style="font-size:0.74rem">数据处理能力强，跨团队沟通经验丰富</td>
+                  <td>协作评分88</td>
+                </tr>
+                <tr>
+                  <td><span class="readiness-badge badge-warn">测试工程师</span></td>
+                  <td><b>孙*（测试）</b></td>
+                  <td>测试</td>
+                  <td style="font-size:0.74rem">推荐系统测试经验，协作评分91分</td>
+                  <td>高协作评分</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="two-col">
+            <div style="background:#FEF5F4;border:1px solid #F5C5C3;border-radius:14px;padding:1.4rem">
+              <div style="font-size:0.74rem;color:var(--accent-warm);font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px">❌ 传统方式</div>
+              <div class="step-flow">
+                <div class="step-item">
+                  <div class="step-left">
+                    <div class="step-dot" style="background:#F5C5C3;color:#C0392B">1</div>
+                    <div class="step-line" style="background:#F5C5C3"></div>
+                  </div>
+                  <div class="step-content">
+                    <div class="step-title" style="color:#C0392B">在群里问"谁有空"</div>
+                    <div class="step-desc">响应的都是熟人，而非最合适的人</div>
+                  </div>
+                </div>
+                <div class="step-item">
+                  <div class="step-left">
+                    <div class="step-dot" style="background:#F5C5C3;color:#C0392B">2</div>
+                    <div class="step-line" style="background:#F5C5C3"></div>
+                  </div>
+                  <div class="step-content">
+                    <div class="step-title" style="color:#C0392B">招进来发现技能不匹配</div>
+                    <div class="step-desc">沟通成本高，技术能力与项目需求错位</div>
+                  </div>
+                </div>
+                <div class="step-item">
+                  <div class="step-left">
+                    <div class="step-dot" style="background:#F5C5C3;color:#C0392B">3</div>
+                  </div>
+                  <div class="step-content">
+                    <div class="step-title" style="color:#C0392B">项目延期 → 下次还凭感觉</div>
+                    <div class="step-desc">恶性循环，组织能力无法积累</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="background:var(--accent-bg);border:1px solid rgba(12,191,154,0.3);border-radius:14px;padding:1.4rem">
+              <div style="font-size:0.74rem;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px">✅ Talent-Pilot</div>
+              <div class="step-flow">
+                <div class="step-item">
+                  <div class="step-left">
+                    <div class="step-dot" style="background:rgba(12,191,154,0.2);color:var(--accent)">1</div>
+                    <div class="step-line" style="background:rgba(12,191,154,0.2)"></div>
+                  </div>
+                  <div class="step-content">
+                    <div class="step-title" style="color:#0A9B7E">分析86人的技能标签 + 协作数据</div>
+                    <div class="step-desc">全局视角，无死角扫描每一个潜在成员</div>
+                  </div>
+                </div>
+                <div class="step-item">
+                  <div class="step-left">
+                    <div class="step-dot" style="background:rgba(12,191,154,0.2);color:var(--accent)">2</div>
+                    <div class="step-line" style="background:rgba(12,191,154,0.2)"></div>
+                  </div>
+                  <div class="step-content">
+                    <div class="step-title" style="color:#0A9B7E">给出3套方案 + 匹配度 + 风险预测</div>
+                    <div class="step-desc">决策透明化，每套方案都有数据支撑</div>
+                  </div>
+                </div>
+                <div class="step-item">
+                  <div class="step-left">
+                    <div class="step-dot" style="background:rgba(12,191,154,0.2);color:var(--accent)">3</div>
+                  </div>
+                  <div class="step-content">
+                    <div class="step-title" style="color:#0A9B7E">项目成功率从72%提升到87%</div>
+                    <div class="step-desc">数据驱动决策，效果可量化、可复用</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="aha-block">
+            <div class="aha-title">项目经理 Aha Moment</div>
+            <div class="aha-text">"以前配团队靠'找熟人'，现在系统基于技能标签和历史协作数据推荐，还能预测项目成功率！这才是科学配团队。"</div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             场景四：个人晋升诊断
+        ============================================================ -->
+        <div class="content-section" id="scene-3">
+          <div class="scene-header">
+            <div class="scene-tag"><i class="fas fa-person-circle-check"></i> 场景四</div>
+            <h2 class="scene-title">个人晋升诊断（员工视角）</h2>
+            <p class="scene-desc">让每位员工都知道自己在哪里、差什么、怎么提升——给明确的方向，而非模糊的感觉</p>
+          </div>
+
+          <div class="layer-tabs">
+            <button class="layer-tab active" onclick="switchLayer('s4',0)"><i class="fas fa-seedling" style="margin-right:6px"></i>1.2级工程师·成长期</button>
+            <button class="layer-tab" onclick="switchLayer('s4',1)"><i class="fas fa-star" style="margin-right:6px"></i>2.2级高级工程师·冲刺期</button>
+          </div>
+
+          <!-- 员工A -->
+          <div class="layer-content active" id="s4-layer-0">
+            <div class="auth-block">
+              <div class="auth-icon"><i class="fas fa-lock-open"></i></div>
+              <div class="auth-info">
+                <div class="auth-name">🔐 陈**（工号：200001）· 当前1.2级 → 目标1.3级</div>
+                <div class="auth-meta">入职11个月 · 个人发展报告</div>
+              </div>
+              <div class="auth-scope">本人数据权限</div>
+            </div>
+
+            <div class="two-col" style="margin-bottom:16px">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-icon" style="background:var(--primary-bg)"><i class="fas fa-code-branch" style="color:var(--primary)"></i></div>
+                  <div>
+                    <div class="card-title">工作回顾与项目总结</div>
+                  </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:10px">
+                  <div style="background:var(--bg-card2);border-radius:8px;padding:11px 13px;border:1px solid var(--border)">
+                    <div style="font-size:0.71rem;color:var(--primary);font-weight:600;margin-bottom:4px">Q2 · AI课程推荐模型优化</div>
+                    <div style="font-size:0.8rem;color:var(--text-sub)">负责特征工程模块，代码质量稳定</div>
+                  </div>
+                  <div style="background:var(--bg-card2);border-radius:8px;padding:11px 13px;border:1px solid var(--border)">
+                    <div style="font-size:0.71rem;color:var(--primary);font-weight:600;margin-bottom:4px">Q1-Q2 · 推荐系统性能调优</div>
+                    <div style="font-size:0.8rem;color:var(--text-sub)">参与延迟优化专项</div>
+                  </div>
+                  <div style="padding:11px 13px;background:var(--accent-bg);border:1px solid rgba(12,191,154,0.25);border-radius:8px">
+                    <div style="font-size:0.78rem;color:var(--accent);font-weight:600">✓ 连续4个sprint按时交付，无延期</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-icon" style="background:var(--accent-yellow-bg)"><i class="fas fa-layer-group" style="color:#D4920A"></i></div>
+                  <div>
+                    <div class="card-title">1.3级能力要求拆解</div>
+                    <div class="card-sub">核心变化：执行者 → 独立贡献者</div>
+                  </div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                  <div style="background:#FEF5F4;border:1px solid #F5C5C3;border-radius:8px;padding:12px">
+                    <div style="font-size:0.7rem;color:#C0392B;font-weight:700;margin-bottom:6px">1.2级（当前）</div>
+                    <div style="font-size:0.78rem;color:#7D5555;line-height:1.6">"上级告诉我做什么，我做好"</div>
+                  </div>
+                  <div style="background:var(--accent-bg);border:1px solid rgba(12,191,154,0.25);border-radius:8px;padding:12px">
+                    <div style="font-size:0.7rem;color:var(--accent);font-weight:700;margin-bottom:6px">1.3级（目标）</div>
+                    <div style="font-size:0.78rem;color:#3D7065;line-height:1.6">"我看到问题，主动推动解决"</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-header">
+                <div class="card-icon" style="background:var(--accent-bg)"><i class="fas fa-comments" style="color:var(--accent)"></i></div>
+                <div>
+                  <div class="card-title">直线上级反馈 · 王经理</div>
+                </div>
+              </div>
+              <div class="two-col">
+                <div>
+                  <div style="font-size:0.74rem;color:var(--accent);font-weight:700;margin-bottom:10px">优势区</div>
+                  <div style="display:flex;flex-direction:column;gap:9px">
+                    <div style="display:flex;align-items:flex-start;gap:8px"><i class="fas fa-check-circle" style="color:var(--accent);margin-top:2px;flex-shrink:0"></i>
+                      <div>
+                        <div style="font-size:0.82rem;font-weight:700;color:var(--text-main)">代码能力扎实</div>
+                        <div style="font-size:0.74rem;color:var(--text-muted)">逻辑清晰，Bug率低</div>
+                      </div>
+                    </div>
+                    <div style="display:flex;align-items:flex-start;gap:8px"><i class="fas fa-check-circle" style="color:var(--accent);margin-top:2px;flex-shrink:0"></i>
+                      <div>
+                        <div style="font-size:0.82rem;font-weight:700;color:var(--text-main)">学习能力强</div>
+                        <div style="font-size:0.74rem;color:var(--text-muted)">Transformer架构2周掌握</div>
+                      </div>
+                    </div>
+                    <div style="display:flex;align-items:flex-start;gap:8px"><i class="fas fa-check-circle" style="color:var(--accent);margin-top:2px;flex-shrink:0"></i>
+                      <div>
+                        <div style="font-size:0.82rem;font-weight:700;color:var(--text-main)">责任心强</div>
+                        <div style="font-size:0.74rem;color:var(--text-muted)">连续4个sprint无延期</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div style="font-size:0.74rem;color:#D4920A;font-weight:700;margin-bottom:10px">待发展区</div>
+                  <div style="display:flex;flex-direction:column;gap:9px">
+                    <div style="display:flex;align-items:flex-start;gap:8px"><i class="fas fa-triangle-exclamation" style="color:#D4920A;margin-top:2px;flex-shrink:0"></i>
+                      <div>
+                        <div style="font-size:0.82rem;font-weight:700;color:var(--text-main)">主动性待加强</div>
+                        <div style="font-size:0.74rem;color:var(--text-muted)">习惯等安排，较少主动发现问题</div>
+                      </div>
+                    </div>
+                    <div style="display:flex;align-items:flex-start;gap:8px"><i class="fas fa-triangle-exclamation" style="color:#D4920A;margin-top:2px;flex-shrink:0"></i>
+                      <div>
+                        <div style="font-size:0.82rem;font-weight:700;color:var(--text-main)">技术表达待提升</div>
+                        <div style="font-size:0.74rem;color:var(--text-muted)">文档写得不够清楚</div>
+                      </div>
+                    </div>
+                    <div style="display:flex;align-items:flex-start;gap:8px"><i class="fas fa-triangle-exclamation" style="color:#D4920A;margin-top:2px;flex-shrink:0"></i>
+                      <div>
+                        <div style="font-size:0.82rem;font-weight:700;color:var(--text-main)">跨团队协作少</div>
+                        <div style="font-size:0.74rem;color:var(--text-muted)">与其他组互动不多</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="card-icon" style="background:var(--primary-bg)"><i class="fas fa-calendar-check" style="color:var(--primary)"></i></div>
+                <div>
+                  <div class="card-title">个人发展建议 · 6周行动计划</div>
+                </div>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+                <div style="background:var(--primary-bg);border:1px solid rgba(91,82,232,0.2);border-radius:12px;padding:14px">
+                  <div style="font-size:0.7rem;color:var(--primary);font-weight:700;margin-bottom:8px">Week 1-2 · 提升主动性</div>
+                  <div style="font-size:0.78rem;color:var(--text-sub);line-height:1.65">主动发现1个可优化点，向团队提出改进建议，打破"等待指令"模式</div>
+                </div>
+                <div style="background:var(--accent-bg);border:1px solid rgba(12,191,154,0.2);border-radius:12px;padding:14px">
+                  <div style="font-size:0.7rem;color:var(--accent);font-weight:700;margin-bottom:8px">Week 3-4 · 提升协作可见度</div>
+                  <div style="font-size:0.78rem;color:var(--text-sub);line-height:1.65">参与跨团队项目或技术分享，让其他团队认识你的能力</div>
+                </div>
+                <div style="background:var(--accent-yellow-bg);border:1px solid rgba(212,146,10,0.2);border-radius:12px;padding:14px">
+                  <div style="font-size:0.7rem;color:#9A6A00;font-weight:700;margin-bottom:8px">Week 5-6 · 补齐文档短板</div>
+                  <div style="font-size:0.78rem;color:var(--text-sub);line-height:1.65">重写1份技术文档，以"新人能读懂"为标准，提升技术表达能力</div>
+                </div>
+              </div>
+              <div style="margin-top:14px;background:linear-gradient(135deg,var(--primary-bg),var(--accent-bg));border-radius:10px;padding:14px;border:1px solid rgba(91,82,232,0.15)">
+                <div style="font-size:0.86rem;color:var(--text-sub);line-height:1.75;font-style:italic">"陈同学，你的技术底子很好。从1.2到1.3，本质不是'技术考试'，而是'职业成熟度'的跃迁。按照上面的6周计划，1.3级是水到渠成的事。"</div>
+              </div>
+            </div>
+
+            <div class="aha-block">
+              <div class="aha-title">员工 Aha Moment</div>
+              <div class="aha-text">"原来晋升不只是技术考试！系统告诉我具体要提升什么、怎么提升，还有6周计划，终于知道往哪使劲了。"</div>
+            </div>
+          </div>
+
+          <!-- 员工B -->
+          <div class="layer-content" id="s4-layer-1">
+            <div class="auth-block">
+              <div class="auth-icon"><i class="fas fa-lock-open"></i></div>
+              <div class="auth-info">
+                <div class="auth-name">🔐 李**（工号：200002）· 当前2.2级 → 目标2.3级</div>
+                <div class="auth-meta">入职3.5年 · 个人发展报告</div>
+              </div>
+              <div class="auth-scope">本人数据权限</div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:1.5rem">
+              <div class="metric-card" style="border-top:3px solid var(--accent)">
+                <div class="metric-num" style="color:var(--accent)">+12%</div>
+                <div class="metric-label">推荐准确率提升</div>
+                <div class="metric-trend" style="color:var(--text-muted)">2年 owner</div>
+              </div>
+              <div class="metric-card" style="border-top:3px solid var(--primary)">
+                <div class="metric-num" style="color:var(--primary)">+15%</div>
+                <div class="metric-label">用户满意度提升</div>
+                <div class="metric-trend" style="color:var(--text-muted)">Q2主导</div>
+              </div>
+              <div class="metric-card" style="border-top:3px solid #D4920A">
+                <div class="metric-num" style="color:#D4920A">91%</div>
+                <div class="metric-label">技术方案采纳率</div>
+                <div class="metric-trend" style="color:var(--accent);font-weight:600">团队Top 1</div>
+              </div>
+            </div>
+
+            <div class="two-col" style="margin-bottom:16px">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-icon" style="background:var(--accent-yellow-bg)"><i class="fas fa-crown" style="color:#D4920A"></i></div>
+                  <div>
+                    <div class="card-title">2.3级专家级核心要求</div>
+                  </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:10px">
+                  <div style="display:flex;align-items:center;gap:10px;padding:11px;background:var(--bg-card2);border-radius:8px;border:1px solid var(--border)"><i class="fas fa-people-group" style="color:var(--accent);width:20px"></i>
+                    <div>
+                      <div style="font-size:0.82rem;font-weight:700;color:var(--text-main)">能带人</div>
+                      <div style="font-size:0.74rem;color:var(--text-muted)">让新人能独立工作</div>
+                    </div>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:10px;padding:11px;background:var(--bg-card2);border-radius:8px;border:1px solid var(--border)"><i class="fas fa-share-nodes" style="color:var(--primary);width:20px"></i>
+                    <div>
+                      <div style="font-size:0.82rem;font-weight:700;color:var(--text-main)">能推广</div>
+                      <div style="font-size:0.74rem;color:var(--text-muted)">技术方案能被团队复用</div>
+                    </div>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:10px;padding:11px;background:var(--bg-card2);border-radius:8px;border:1px solid var(--border)"><i class="fas fa-network-wired" style="color:#D4920A;width:20px"></i>
+                    <div>
+                      <div style="font-size:0.82rem;font-weight:700;color:var(--text-main)">能影响</div>
+                      <div style="font-size:0.74rem;color:var(--text-muted)">在更大范围建立技术影响力</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-icon" style="background:var(--accent-bg)"><i class="fas fa-comments" style="color:var(--accent)"></i></div>
+                  <div>
+                    <div class="card-title">上级反馈</div>
+                  </div>
+                </div>
+                <div style="margin-bottom:12px">
+                  <div style="font-size:0.72rem;color:var(--accent);font-weight:700;margin-bottom:8px">已达标项</div>
+                  <div style="font-size:0.78rem;color:var(--text-sub);line-height:1.8">
+                    ✓ 技术深度强 — 推荐算法领域团队Top 2<br>
+                    ✓ 业务敏感度高 — 技术方案采纳率91%
+                  </div>
+                </div>
+                <div>
+                  <div style="font-size:0.72rem;color:#D4920A;font-weight:700;margin-bottom:8px">待提升项（差距）</div>
+                  <div style="font-size:0.78rem;color:var(--text-sub);line-height:1.8">
+                    △ 人才培养 — 带的实习生成长较慢<br>
+                    △ 技术推广 — 文档和分享不够<br>
+                    △ 跨团队影响 — 其他组了解你的不到30%
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="card-icon" style="background:var(--accent-yellow-bg)"><i class="fas fa-gem" style="color:#D4920A"></i></div>
+                <div>
+                  <div class="card-title">系统发现的隐藏优势</div>
+                  <div class="card-sub">这是你的核心竞争力，要放大它</div>
+                </div>
+              </div>
+              <div style="background:linear-gradient(135deg,#FFFDF0,#FEF6E4);border:1px solid #F0D98A;border-radius:12px;padding:16px">
+                <div style="font-size:0.9rem;font-weight:700;color:#9A6A00;margin-bottom:8px">💎 技术-业务转化率：全事业部最高（91%）</div>
+                <div style="font-size:0.82rem;color:var(--text-sub);line-height:1.75">
+                  这是架构师的核心能力，意味着你不只懂技术，更懂如何把技术转化为业务价值。这一能力很稀缺——在86人的事业部里，你是 Top 1。
+                  <br><br>
+                  <b style="color:var(--text-main)">建议：</b>在未来发展中主动放大这个标签。通过技术分享、跨团队项目输出，让更多人感知到你的这一核心优势。
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             路演总结
+        ============================================================ -->
+        <div class="content-section" id="scene-4">
+          <div class="scene-header">
+            <div class="scene-tag"><i class="fas fa-flag-checkered"></i> 路演总结</div>
+            <h2 class="scene-title">4个场景的 Aha Moment</h2>
+            <p class="scene-desc">每个场景都在解答一个核心问题：用数据，而不是感觉，做出更好的人才决策</p>
+          </div>
+
+          <div class="summary-grid">
+            <div class="summary-card">
+              <div class="summary-card-stripe" style="background:linear-gradient(90deg,var(--primary),var(--primary-light))"></div>
+              <div class="summary-scene-num" style="color:var(--primary)"><i class="fas fa-building-columns" style="margin-right:6px"></i>场景一</div>
+              <div class="summary-scene-title">组织仪表盘 + 团队盘点</div>
+              <div class="summary-scene-desc">从VP全局洞察到负责人精细诊断，两层权限视角，信息按需呈现</div>
+              <div class="summary-aha">"原来Level 3专家6个月后会缺5-7人，而我完全不知道——现在系统自动预警了。"</div>
+            </div>
+            <div class="summary-card">
+              <div class="summary-card-stripe" style="background:linear-gradient(90deg,var(--accent),#0AB889)"></div>
+              <div class="summary-scene-num" style="color:var(--accent)"><i class="fas fa-arrow-trend-up" style="margin-right:6px"></i>场景二</div>
+              <div class="summary-scene-title">晋升全流程辅助</div>
+              <div class="summary-scene-desc">晋升前科学提报 → 晋升中客观评审 → 晋升后持续纠偏，完整价值闭环</div>
+              <div class="summary-aha" style="color:var(--accent)">"提名谁不该凭感觉！系统提醒我注意近因效应，连问什么问题都帮我想好了。"</div>
+            </div>
+            <div class="summary-card">
+              <div class="summary-card-stripe" style="background:linear-gradient(90deg,#D4920A,#E8B040)"></div>
+              <div class="summary-scene-num" style="color:#D4920A"><i class="fas fa-diagram-project" style="margin-right:6px"></i>场景三</div>
+              <div class="summary-scene-title">项目团队配置</div>
+              <div class="summary-scene-desc">基于技能标签 + 历史协作数据，给出3套方案 + 匹配度 + 成功率预测</div>
+              <div class="summary-aha" style="color:#9A6A00">"以前配团队靠'找熟人'，现在系统科学推荐，项目成功率从72%提升到87%！"</div>
+            </div>
+            <div class="summary-card">
+              <div class="summary-card-stripe" style="background:linear-gradient(90deg,var(--accent-warm),#F08080)"></div>
+              <div class="summary-scene-num" style="color:var(--accent-warm)"><i class="fas fa-person-circle-check" style="margin-right:6px"></i>场景四</div>
+              <div class="summary-scene-title">个人晋升诊断</div>
+              <div class="summary-scene-desc">从模糊感觉到明确路径，6周行动计划，让每位员工都知道往哪使劲</div>
+              <div class="summary-aha" style="color:#C0392B">"原来晋升不只是技术考试！系统给了具体计划，终于知道往哪努力了。"</div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:24px">
+            <div class="card-header">
+              <div class="card-icon" style="background:var(--primary-bg)"><i class="fas fa-shield-halved" style="color:var(--primary)"></i></div>
+              <div>
+                <div class="card-title">产品基座：权限控制体系</div>
+                <div class="card-sub">信息可访问性 = 用户权限级别</div>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px">
+              <div style="background:#FEF5F4;border:1px solid #F5C5C3;border-radius:10px;padding:12px;text-align:center">
+                <div style="font-size:0.75rem;color:#C0392B;font-weight:700;margin-bottom:4px">❌ 1.2级员工</div>
+                <div style="font-size:0.77rem;color:#7D5555">申请查看团队数据 → 拒绝</div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--text-muted)">→</div>
+              <div style="background:var(--accent-yellow-bg);border:1px solid rgba(212,146,10,0.3);border-radius:10px;padding:12px;text-align:center">
+                <div style="font-size:0.75rem;color:#9A6A00;font-weight:700;margin-bottom:4px">✅ 团队负责人</div>
+                <div style="font-size:0.77rem;color:var(--text-sub)">申请查看团队数据 → 完整报告</div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--text-muted)">→</div>
+              <div style="background:var(--accent-bg);border:1px solid rgba(12,191,154,0.3);border-radius:10px;padding:12px;text-align:center">
+                <div style="font-size:0.75rem;color:var(--accent);font-weight:700;margin-bottom:4px">🔓 事业部VP</div>
+                <div style="font-size:0.77rem;color:var(--text-sub)">申请全局数据 → 跨团队洞察</div>
+              </div>
+            </div>
+            <div style="margin-top:14px;text-align:center;font-size:0.83rem;color:var(--primary);font-style:italic;padding:10px;background:var(--primary-bg);border-radius:8px">
+              "同一个'查看团队数据'的请求，1.2级员工被拒绝，团队负责人获得完整报告——这就是信息权限对等。"
+            </div>
+          </div>
+
+          <div style="margin-top:24px;background:linear-gradient(135deg,var(--primary-bg),var(--accent-bg));border:1px solid rgba(91,82,232,0.2);border-radius:20px;padding:2.5rem;text-align:center;box-shadow:var(--shadow-md)">
+            <div style="font-size:0.74rem;color:var(--primary);font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem">核心价值主张</div>
+            <div style="font-family:'Noto Serif SC',serif;font-size:clamp(1.2rem,3vw,1.65rem);font-weight:700;color:var(--text-main);line-height:1.6;margin-bottom:1rem">
+              让每一次人才决策<br>
+              <span style="background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">有据可循，可量化，可改进</span>
+            </div>
+            <div style="font-size:0.9rem;color:var(--text-muted);max-width:500px;margin:0 auto;line-height:1.75">
+              从组织洞察到个人发展，从晋升提报到项目配置<br>
+              Talent-Pilot 让数据说话，让管理更科学
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- 页脚 -->
+      <footer class="version-bar">
+        <div class="version-item">
+          <div class="version-dot" style="background:var(--accent)"></div>版本：v1.0
+        </div>
+        <div class="version-item">
+          <div class="version-dot" style="background:var(--primary)"></div>生成时间：2026-05-14
+        </div>
+        <div class="version-item">
+          <div class="version-dot" style="background:#D4920A"></div>生效时间：2026-05-14 至路演结束
+        </div>
+        <div class="version-item">
+          <div class="version-dot" style="background:var(--accent-warm)"></div>Talent-Pilot · 智能教育事业部
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      // ===== 背景粒子 =====
+      const canvas = document.getElementById('canvas-bg');
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      class Particle {
+        constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 1.8 + 0.5;
+          this.speedX = (Math.random() - 0.5) * 0.25;
+          this.speedY = (Math.random() - 0.5) * 0.25;
+          this.opacity = Math.random() * 0.35 + 0.06;
+        }
+        update() {
+          this.x += this.speedX;
+          this.y += this.speedY;
+          if (this.x > canvas.width) this.x = 0;
+          if (this.x < 0) this.x = canvas.width;
+          if (this.y > canvas.height) this.y = 0;
+          if (this.y < 0) this.y = canvas.height;
+        }
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(91, 82, 232, ${this.opacity})`;
+          ctx.fill();
+        }
+      }
+
+      function initParticles() {
+        particles = [];
+        for (let i = 0; i < 60; i++) particles.push(new Particle());
+      }
+
+      function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          p.update();
+          p.draw();
+        });
+        requestAnimationFrame(animateParticles);
+      }
+      resizeCanvas();
+      initParticles();
+      animateParticles();
+      window.addEventListener('resize', () => {
+        resizeCanvas();
+        initParticles();
+      });
+      // ===== 场景切换 =====
+      function switchScene(idx) {
+        document.querySelectorAll('.content-section').forEach((s, i) => s.classList.toggle('active', i === idx));
+        document.querySelectorAll('.scene-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
+        document.querySelectorAll('.nav-link').forEach((t, i) => t.classList.toggle('active', i === idx + 1));
+        if (idx === 0) setTimeout(initScene1Charts, 120);
+        if (idx === 1) setTimeout(initScene2Charts, 120);
+      }
+      // ===== 层级切换 =====
+      function switchLayer(sid, idx) {
+        const contents = document.querySelectorAll(`[id^="${sid}-layer-"]`);
+        const section = contents[0].closest('.content-section');
+        section.querySelectorAll('.layer-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
+        contents.forEach((c, i) => c.classList.toggle('active', i === idx));
+      }
+
+      function scrollToSection(id) {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({
+          behavior: 'smooth'
+        });
+      }
+      // ===== 图表：场景一 =====
+      let readinessChartInst = null,
+        abilityChartInst = null;
+
+      function initScene1Charts() {
+        const ctx1 = document.getElementById('readinessChart');
+        if (!ctx1) return;
+        if (readinessChartInst) readinessChartInst.destroy();
+        readinessChartInst = new Chart(ctx1, {
+          type: 'doughnut',
+          data: {
+            labels: ['高准备度(90-100)', '中准备度(75-89)', '需重点培养(60-74)', '风险关注(<60)'],
+            datasets: [{
+              data: [2, 8, 6, 2],
+              backgroundColor: ['#0CBF9A', '#5B52E8', '#D4920A', '#E8504A'],
+              borderColor: 'white',
+              borderWidth: 3,
+              spacing: 2
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '68%',
+            plugins: {
+              legend: {
+                position: 'bottom',
+                labels: {
+                  color: '#7D8AA0',
+                  font: {
+                    size: 11
+                  },
+                  padding: 14,
+                  boxWidth: 12
+                }
+              },
+              tooltip: {
+                callbacks: {
+                  label: (c) => ` ${c.label}: ${c.parsed}人 (${Math.round(c.parsed/18*100)}%)`
+                }
+              }
+            }
+          }
+        });
+        const ctx2 = document.getElementById('abilityChart');
+        if (!ctx2) return;
+        if (abilityChartInst) abilityChartInst.destroy();
+        abilityChartInst = new Chart(ctx2, {
+          type: 'radar',
+          data: {
+            labels: ['技术能力', '协作能力', '业务理解', '成长潜力', '代码质量', '文档能力'],
+            datasets: [{
+                label: '团队得分',
+                data: [82, 71, 85, 78, 84, 68],
+                borderColor: '#5B52E8',
+                backgroundColor: 'rgba(91,82,232,0.12)',
+                borderWidth: 2,
+                pointBackgroundColor: '#5B52E8',
+                pointRadius: 4
+              },
+              {
+                label: '组织均值',
+                data: [79, 76, 74, 77, 80, 72],
+                borderColor: '#0CBF9A',
+                backgroundColor: 'rgba(12,191,154,0.06)',
+                borderWidth: 1.5,
+                borderDash: [5, 3],
+                pointBackgroundColor: '#0CBF9A',
+                pointRadius: 3
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              r: {
+                min: 60,
+                max: 95,
+                ticks: {
+                  color: '#7D8AA0',
+                  font: {
+                    size: 10
+                  },
+                  stepSize: 10,
+                  backdropColor: 'transparent'
+                },
+                grid: {
+                  color: '#E2E6F0'
+                },
+                angleLines: {
+                  color: '#E2E6F0'
+                },
+                pointLabels: {
+                  color: '#3D4A63',
+                  font: {
+                    size: 11
+                  }
+                }
+              }
+            },
+            plugins: {
+              legend: {
+                labels: {
+                  color: '#7D8AA0',
+                  font: {
+                    size: 11
+                  },
+                  boxWidth: 12
+                }
+              }
+            }
+          }
+        });
+      }
+      // ===== 图表：场景二 =====
+      let okrTrendInst = null;
+
+      function initScene2Charts() {
+        const ctx3 = document.getElementById('okrTrendChart');
+        if (!ctx3) return;
+        if (okrTrendInst) okrTrendInst.destroy();
+        okrTrendInst = new Chart(ctx3, {
+          type: 'line',
+          data: {
+            labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
+            datasets: [{
+                label: 'O1-战功达成',
+                data: [85, 80, 82, 95, 98, 96],
+                borderColor: '#0CBF9A',
+                backgroundColor: 'rgba(12,191,154,0.08)',
+                borderWidth: 2.5,
+                tension: 0.4,
+                fill: true,
+                pointBackgroundColor: '#0CBF9A',
+                pointRadius: 5
+              },
+              {
+                label: 'O2-能力提升',
+                data: [90, 88, 85, 92, 95, 93],
+                borderColor: '#5B52E8',
+                backgroundColor: 'transparent',
+                borderWidth: 2,
+                tension: 0.4,
+                pointBackgroundColor: '#5B52E8',
+                pointRadius: 4
+              },
+              {
+                label: 'O3-协作贡献',
+                data: [60, 65, 62, 70, 75, 78],
+                borderColor: '#E8504A',
+                backgroundColor: 'transparent',
+                borderWidth: 2,
+                borderDash: [5, 3],
+                tension: 0.4,
+                pointBackgroundColor: '#E8504A',
+                pointRadius: 4
+              },
+              {
+                label: '综合达成',
+                data: [78, 78, 76, 86, 89, 89],
+                borderColor: '#D4920A',
+                backgroundColor: 'transparent',
+                borderWidth: 2,
+                tension: 0.4,
+                pointBackgroundColor: '#D4920A',
+                pointRadius: 4
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              x: {
+                grid: {
+                  color: '#F0F2F8'
+                },
+                ticks: {
+                  color: '#7D8AA0',
+                  font: {
+                    size: 11
+                  }
+                }
+              },
+              y: {
+                min: 50,
+                max: 105,
+                grid: {
+                  color: '#F0F2F8'
+                },
+                ticks: {
+                  color: '#7D8AA0',
+                  font: {
+                    size: 11
+                  },
+                  callback: (v) => v + '%'
+                }
+              }
+            },
+            plugins: {
+              legend: {
+                labels: {
+                  color: '#7D8AA0',
+                  font: {
+                    size: 11
+                  },
+                  boxWidth: 12,
+                  padding: 16
+                }
+              },
+              tooltip: {
+                callbacks: {
+                  label: (c) => ` ${c.dataset.label}: ${c.parsed.y}%`
+                }
+              }
+            },
+            interaction: {
+              mode: 'index',
+              intersect: false
+            }
+          }
+        });
+      }
+      // ===== 进度条入场动画 =====
+      function animateProgressBars() {
+        document.querySelectorAll('.progress-fill').forEach(bar => {
+          const target = bar.style.width;
+          bar.style.width = '0%';
+          setTimeout(() => {
+            bar.style.width = target;
+          }, 300);
+        });
+      }
+      // ===== 初始化 =====
+      document.addEventListener('DOMContentLoaded', () => {
+        initScene1Charts();
+        setTimeout(animateProgressBars, 400);
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = '1';
+              entry.target.style.transform = 'translateY(0)';
+            }
+          });
+        }, {
+          threshold: 0.08
+        });
+        document.querySelectorAll('.card, .metric-card, .summary-card').forEach(el => {
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(14px)';
+          el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+          observer.observe(el);
+        });
+      });
+    </script>
+  </body>
+</html>
