@@ -1,238 +1,1399 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Talent-Pilot | OpenClaw 决赛路演</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%233157ff'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-size='20' font-family='Arial' font-weight='700' fill='white'%3ETP%3C/text%3E%3C/svg%3E" />
-    <link rel="stylesheet" href="./prep.css" />
+    <title>Talent-Pilot · 路演复盘</title>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdmirror.com/npm/tailwindcss@2.2.19/dist/tailwind.min.css" />
+    <link rel="stylesheet" href="https://static0.xesimg.com/alading-resources/css/css2.css?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" />
+    <style>
+      :root {
+        --primary: #4F46E5;
+        --primary-dark: #3730A3;
+        --accent: #06D6A0;
+        --accent2: #F59E0B;
+        --dark: #F8F9FC;
+        --dark2: #EEF0F7;
+        --dark3: #E2E5F0;
+        --text-main: #1A1A2E;
+        --text-sub: #6B7280;
+        --glass: rgba(255, 255, 255, 0.75);
+        --glass-border: rgba(0, 0, 0, 0.08);
+        /* 路演字号基准 */
+        --fs-xs: 13px;
+        --fs-sm: 15px;
+        --fs-base: 17px;
+        --fs-md: 19px;
+        --fs-lg: 22px;
+        --fs-xl: 26px;
+        --fs-2xl: 32px;
+        --fs-hero: clamp(32px, 4.2vw, 58px);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        font-family: 'Noto Sans SC', Tahoma, Arial, sans-serif;
+        background: var(--dark);
+        color: var(--text-main);
+        font-size: var(--fs-base);
+      }
+
+      /* ── Slide Container ── */
+      .slide-wrapper {
+        width: 100%;
+        height: 100vh;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .slide {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .55s cubic-bezier(.4, 0, .2, 1), transform .55s cubic-bezier(.4, 0, .2, 1);
+        transform: translateY(30px);
+        overflow: hidden;
+      }
+
+      .slide.active {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .slide.exit {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-30px);
+      }
+
+      /* ── BG Gradients ── */
+      .slide-01 {
+        background: radial-gradient(ellipse 80% 60% at 70% 20%, #EDE9FE 0%, #F8F9FC 70%);
+      }
+
+      .slide-02 {
+        background: radial-gradient(ellipse 70% 60% at 15% 40%, #DBEAFE 0%, #F8F9FC 70%);
+      }
+
+      .slide-03 {
+        background: radial-gradient(ellipse 80% 60% at 60% 70%, #EDE9FE 0%, #F8F9FC 70%);
+      }
+
+      .slide-04 {
+        background: radial-gradient(ellipse 80% 50% at 50% 10%, #D1FAE5 0%, #F8F9FC 65%);
+      }
+
+      .slide-05 {
+        background: radial-gradient(ellipse 70% 60% at 30% 60%, #EDE9FE 0%, #F8F9FC 70%);
+      }
+
+      .slide::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
+        opacity: .2;
+        z-index: 0;
+      }
+
+      .grid-lines {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        background-image:
+          linear-gradient(rgba(79, 70, 229, .05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(79, 70, 229, .05) 1px, transparent 1px);
+        background-size: 60px 60px;
+      }
+
+      /* ── Inner Scroll ── */
+      .slide-inner {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+        padding: 88px clamp(20px, 5vw, 88px) 90px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .slide-inner::-webkit-scrollbar {
+        width: 4px;
+      }
+
+      .slide-inner::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      .slide-inner::-webkit-scrollbar-thumb {
+        background: rgba(79, 70, 229, .25);
+        border-radius: 2px;
+      }
+
+      /* ── Top Bar ── */
+      .top-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px clamp(20px, 5vw, 88px);
+        background: linear-gradient(180deg, rgba(248, 249, 252, .97) 0%, transparent 100%);
+        backdrop-filter: blur(2px);
+      }
+
+      .logo-mark {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: var(--fs-sm);
+        font-weight: 700;
+        letter-spacing: .08em;
+        color: #1A1A2E;
+      }
+
+      .logo-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 9px;
+        background: linear-gradient(135deg, var(--primary) 0%, #a855f7 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+      }
+
+      .slide-counter {
+        font-size: var(--fs-sm);
+        color: var(--text-sub);
+        letter-spacing: .12em;
+      }
+
+      /* ── Bottom Nav ── */
+      .bottom-nav {
+        position: fixed;
+        bottom: 28px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: rgba(255, 255, 255, .92);
+        border: 1px solid rgba(0, 0, 0, .1);
+        backdrop-filter: blur(16px);
+        border-radius: 50px;
+        padding: 9px 18px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, .08);
+      }
+
+      .nav-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, .18);
+        cursor: pointer;
+        transition: all .3s;
+      }
+
+      .nav-dot.active {
+        background: var(--primary);
+        width: 22px;
+        border-radius: 4px;
+      }
+
+      .nav-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid rgba(0, 0, 0, .1);
+        background: rgba(79, 70, 229, .08);
+        color: var(--text-sub);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        transition: all .25s;
+      }
+
+      .nav-btn:hover {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+      }
+
+      .nav-btn:disabled {
+        opacity: .3;
+        cursor: not-allowed;
+      }
+
+      /* ── Common Components ── */
+      .slide-num-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: var(--fs-sm);
+        font-weight: 700;
+        letter-spacing: .12em;
+        color: var(--primary);
+        text-transform: uppercase;
+        margin-bottom: 14px;
+      }
+
+      .slide-num-badge .line {
+        width: 28px;
+        height: 2px;
+        background: var(--primary);
+      }
+
+      .slide-title {
+        font-family: 'Noto Serif SC', serif;
+        font-size: var(--fs-hero);
+        font-weight: 700;
+        line-height: 1.22;
+        color: #1A1A2E;
+        margin-bottom: 14px;
+      }
+
+      .slide-title .accent {
+        color: var(--primary);
+      }
+
+      .slide-title .accent2 {
+        color: #D97706;
+      }
+
+      .slide-subtitle {
+        font-size: var(--fs-md);
+        color: #4B5563;
+        line-height: 1.75;
+        max-width: 680px;
+        margin-bottom: 36px;
+      }
+
+      .glass-card {
+        background: rgba(255, 255, 255, .88);
+        border: 1px solid rgba(0, 0, 0, .08);
+        border-radius: 18px;
+        padding: 24px 26px;
+        backdrop-filter: blur(8px);
+        transition: all .3s;
+        box-shadow: 0 2px 14px rgba(0, 0, 0, .04);
+      }
+
+      .glass-card:hover {
+        background: #fff;
+        border-color: rgba(79, 70, 229, .25);
+        transform: translateY(-2px);
+        box-shadow: 0 14px 44px rgba(79, 70, 229, .1);
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: var(--fs-sm);
+        font-weight: 600;
+        letter-spacing: .05em;
+        padding: 6px 14px;
+        border-radius: 22px;
+      }
+
+      .tag-purple {
+        background: rgba(79, 70, 229, .1);
+        color: #4F46E5;
+        border: 1px solid rgba(79, 70, 229, .2);
+      }
+
+      .tag-green {
+        background: rgba(6, 214, 160, .1);
+        color: #059669;
+        border: 1px solid rgba(6, 214, 160, .2);
+      }
+
+      .tag-gold {
+        background: rgba(245, 158, 11, .1);
+        color: #D97706;
+        border: 1px solid rgba(245, 158, 11, .2);
+      }
+
+      .tag-red {
+        background: rgba(239, 68, 68, .08);
+        color: #DC2626;
+        border: 1px solid rgba(239, 68, 68, .15);
+      }
+
+      .glow-orb {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
+        filter: blur(100px);
+        opacity: .22;
+      }
+
+      .progress-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        z-index: 200;
+        background: linear-gradient(90deg, var(--primary), #818CF8, #06D6A0);
+        transition: width .5s cubic-bezier(.4, 0, .2, 1);
+      }
+
+      .anim-item {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity .5s ease, transform .5s ease;
+      }
+
+      .anim-item.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .closing-quote {
+        border-left: 3px solid var(--primary);
+        padding: 18px 22px;
+        border-radius: 0 14px 14px 0;
+        background: rgba(79, 70, 229, .04);
+        font-size: var(--fs-base);
+        color: #374151;
+        line-height: 1.85;
+        font-style: italic;
+      }
+
+      /* ── SLIDE 01 specific ── */
+      .team-member {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px 20px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, .82);
+        border: 1px solid rgba(0, 0, 0, .07);
+        transition: all .3s;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, .04);
+      }
+
+      .team-member:hover {
+        background: #fff;
+        border-color: rgba(79, 70, 229, .2);
+        box-shadow: 0 6px 20px rgba(79, 70, 229, .08);
+      }
+
+      .avatar {
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        background: linear-gradient(135deg, var(--primary) 0%, #a855f7 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        font-weight: 700;
+        color: #fff;
+      }
+
+      .avatar.green {
+        background: linear-gradient(135deg, #06D6A0 0%, #0ea5e9 100%);
+      }
+
+      .avatar.gold {
+        background: linear-gradient(135deg, #FFB703 0%, #fb923c 100%);
+      }
+
+      .member-name {
+        font-size: var(--fs-base);
+        font-weight: 700;
+        color: #1A1A2E;
+      }
+
+      .member-role {
+        font-size: var(--fs-sm);
+        color: var(--primary);
+        font-weight: 600;
+        letter-spacing: .04em;
+        margin-top: 1px;
+      }
+
+      .member-desc {
+        font-size: var(--fs-xs);
+        color: #9CA3AF;
+        margin-top: 2px;
+        line-height: 1.5;
+      }
+
+      /* ── SLIDE 02 specific ── */
+      .role-card {
+        padding: 20px 22px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, .82);
+        border: 1px solid rgba(0, 0, 0, .07);
+        transition: all .3s;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, .04);
+      }
+
+      .role-card:hover {
+        border-left: 3px solid var(--primary);
+        background: #fff;
+        transform: translateX(4px);
+        box-shadow: 0 4px 20px rgba(79, 70, 229, .1);
+      }
+
+      .role-label {
+        font-size: var(--fs-sm);
+        font-weight: 700;
+        letter-spacing: .06em;
+        margin-bottom: 5px;
+      }
+
+      .role-desc {
+        font-size: var(--fs-sm);
+        color: var(--text-sub);
+        line-height: 1.65;
+      }
+
+      .role-desc strong {
+        color: #1A1A2E;
+      }
+
+      /* ── SLIDE 03 specific ── */
+      .step-chain {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        flex-wrap: wrap;
+      }
+
+      .step-node {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 18px 20px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, .88);
+        border: 1px solid rgba(0, 0, 0, .08);
+        min-width: 100px;
+        transition: all .3s;
+        cursor: default;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, .04);
+      }
+
+      .step-node:hover {
+        background: #fff;
+        border-color: rgba(79, 70, 229, .3);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 28px rgba(79, 70, 229, .12);
+      }
+
+      .step-icon {
+        font-size: 22px;
+        margin-bottom: 8px;
+      }
+
+      .step-label {
+        font-size: var(--fs-sm);
+        font-weight: 700;
+        color: #1A1A2E;
+      }
+
+      .step-arrow {
+        color: #9CA3AF;
+        font-size: 15px;
+        margin: 0 6px;
+        flex-shrink: 0;
+      }
+
+      /* ── SLIDE 04 specific ── */
+      .scene-card {
+        border-radius: 16px;
+        background: rgba(255, 255, 255, .88);
+        border: 1px solid rgba(0, 0, 0, .08);
+        padding: 22px 24px;
+        transition: all .3s;
+        cursor: default;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 1px 8px rgba(0, 0, 0, .04);
+      }
+
+      .scene-card::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 16px;
+        background: linear-gradient(135deg, transparent 60%, rgba(79, 70, 229, .03));
+        pointer-events: none;
+      }
+
+      .scene-card:hover {
+        background: #fff;
+        border-color: rgba(79, 70, 229, .25);
+        transform: translateY(-3px);
+        box-shadow: 0 16px 44px rgba(79, 70, 229, .1);
+      }
+
+      .scene-num {
+        font-size: var(--fs-xs);
+        font-weight: 800;
+        letter-spacing: .15em;
+        color: var(--primary);
+        margin-bottom: 10px;
+        text-transform: uppercase;
+      }
+
+      .scene-title {
+        font-size: var(--fs-md);
+        font-weight: 700;
+        color: #1A1A2E;
+        margin-bottom: 8px;
+      }
+
+      .scene-desc {
+        font-size: var(--fs-sm);
+        color: var(--text-sub);
+        line-height: 1.7;
+        margin-bottom: 10px;
+      }
+
+      .scene-value {
+        font-size: var(--fs-sm);
+        color: #059669;
+        font-weight: 500;
+      }
+
+      .skill-pill {
+        flex: 1;
+        min-width: 140px;
+        background: rgba(255, 255, 255, .9);
+        border: 1px solid rgba(79, 70, 229, .12);
+        border-radius: 14px;
+        padding: 16px 18px;
+        transition: all .3s;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, .04);
+      }
+
+      .skill-pill:hover {
+        background: #fff;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(79, 70, 229, .1) !important;
+        border-color: rgba(79, 70, 229, .25);
+      }
+
+      .skill-pill .sp-icon {
+        font-size: 20px;
+        margin-bottom: 8px;
+      }
+
+      .skill-pill .sp-name {
+        font-size: var(--fs-base);
+        font-weight: 700;
+        color: #1A1A2E;
+        margin-bottom: 4px;
+      }
+
+      .skill-pill .sp-desc {
+        font-size: var(--fs-xs);
+        color: #9CA3AF;
+        line-height: 1.55;
+      }
+
+      /* ── SLIDE 05 specific ── */
+      .insight-card {
+        border-radius: 14px;
+        background: rgba(255, 255, 255, .88);
+        border: 1px solid rgba(0, 0, 0, .08);
+        padding: 22px 22px;
+        transition: all .3s;
+        box-shadow: 0 1px 8px rgba(0, 0, 0, .04);
+      }
+
+      .insight-card:hover {
+        background: #fff;
+        border-color: rgba(79, 70, 229, .22);
+        box-shadow: 0 8px 24px rgba(79, 70, 229, .08);
+      }
+
+      .insight-title {
+        font-size: var(--fs-md);
+        font-weight: 700;
+        color: #1A1A2E;
+        margin-bottom: 8px;
+      }
+
+      .insight-text {
+        font-size: var(--fs-sm);
+        color: var(--text-sub);
+        line-height: 1.75;
+      }
+
+      .ois-table {
+        background: rgba(255, 255, 255, .92);
+        border: 1px solid rgba(0, 0, 0, .08);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, .04);
+      }
+
+      .ois-row {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 18px 22px;
+        border-bottom: 1px solid rgba(0, 0, 0, .06);
+        transition: background .2s;
+      }
+
+      .ois-row:last-child {
+        border-bottom: none;
+      }
+
+      .ois-row:hover {
+        background: rgba(79, 70, 229, .04);
+      }
+
+      .ois-key {
+        font-size: var(--fs-md);
+        font-weight: 700;
+        color: var(--primary);
+        width: 42px;
+        flex-shrink: 0;
+      }
+
+      .ois-val {
+        font-size: var(--fs-base);
+        color: #374151;
+      }
+
+      .dark-banner {
+        background: #1e2235;
+        border-radius: 16px;
+        padding: 24px 28px;
+        color: #F0EFFF;
+      }
+
+      .dark-banner .db-title {
+        font-size: var(--fs-lg);
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 12px;
+      }
+
+      .dark-banner .db-text {
+        font-size: var(--fs-sm);
+        color: rgba(255, 255, 255, .7);
+        line-height: 1.8;
+      }
+
+      .demo-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 24px;
+        border-radius: 32px;
+        background: linear-gradient(135deg, var(--primary) 0%, #818CF8 100%);
+        color: #fff;
+        font-size: var(--fs-base);
+        font-weight: 600;
+        text-decoration: none;
+        transition: all .3s;
+        box-shadow: 0 4px 22px rgba(79, 70, 229, .3);
+      }
+
+      .demo-link:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 36px rgba(79, 70, 229, .45);
+      }
+
+      /* ── Responsive ── */
+      @media (max-width: 900px) {
+        :root {
+          --fs-xs: 12px;
+          --fs-sm: 14px;
+          --fs-base: 15px;
+          --fs-md: 17px;
+          --fs-lg: 20px;
+          --fs-xl: 24px;
+          --fs-hero: clamp(26px, 5vw, 44px);
+        }
+
+        .step-node {
+          min-width: 76px;
+          padding: 12px 12px;
+        }
+
+        .step-arrow {
+          margin: 0 3px;
+          font-size: 12px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        :root {
+          --fs-xs: 11px;
+          --fs-sm: 13px;
+          --fs-base: 14px;
+          --fs-md: 16px;
+          --fs-lg: 18px;
+          --fs-hero: clamp(24px, 6vw, 38px);
+        }
+
+        .step-node {
+          min-width: 62px;
+          padding: 10px 10px;
+        }
+
+        .step-icon {
+          font-size: 16px !important;
+        }
+
+        .dark-banner {
+          grid-template-columns: 1fr !important;
+        }
+      }
+    </style>
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href="#intro" aria-label="Talent-Pilot">
-        <span class="brand-mark">TAL</span>
-        <span>
-          <strong>Talent-Pilot</strong>
-          <small>组织治理与人才决策领航智能体</small>
-        </span>
-      </a>
-      <nav aria-label="路演结构">
-        <a href="#intro">产品与团队</a>
-        <a href="#why">为什么做</a>
-        <a href="#product">产品是什么</a>
-        <a href="#demo">做到什么</a>
-        <a href="#future">复盘与未来</a>
-      </nav>
-      <a class="header-action" href="./decision-demo-v7.html">
-        进入实机
-      </a>
-    </header>
 
-    <main>
-      <section class="page hero-page" id="intro">
-        <div class="page-index">01 / Product & Team</div>
-        <div class="hero-grid">
-          <div class="hero-copy">
-            <h1>打破管理黑盒<br />成为组织的超级大脑</h1>
-            <p>
-              Talent-Pilot 是基于 OpenClaw Multi-Agent 架构构建的组织治理与人才决策领航智能体。通过海量碎片化行为数据，构建防偏见的效能证据链，实现从“博弈型管理”到“事实型决策”的根本性转变。
+    <div class="progress-bar" id="progressBar" style="width:20%"></div>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <div class="logo-mark">
+        <div class="logo-icon"><i class="fas fa-rocket" style="color:#fff"></i></div>
+        <span>TALENT-PILOT</span>
+      </div>
+      <span class="slide-counter" id="slideCounter">01 / 05</span>
+    </div>
+
+    <div class="slide-wrapper">
+
+      <!-- ══════════════════════════════ SLIDE 01 ══ -->
+      <div class="slide slide-01 active" data-slide="0">
+        <div class="glow-orb" style="width:540px;height:540px;right:-120px;top:-160px;background:#818CF8"></div>
+        <div class="glow-orb" style="width:320px;height:320px;left:-80px;bottom:-60px;background:#a78bfa"></div>
+        <div class="grid-lines"></div>
+        <div class="slide-inner">
+          <div style="max-width:1160px;margin:0 auto;width:100%">
+
+            <div class="slide-num-badge anim-item">
+              <div class="line"></div>01 产品与团队
+            </div>
+            <h1 class="slide-title anim-item" style="transition-delay:.08s">
+              打破管理黑盒，<br /><span class="accent">成为组织的超级大脑</span>
+            </h1>
+            <p class="slide-subtitle anim-item" style="transition-delay:.16s">
+              Talent-Pilot 是基于 OpenClaw Multi-Agent 架构构建的组织治理与人才决策领航智能体。通过海量碎片化行为数据，构建防偏见的效能证据链，实现从「博弈型管理」到「事实型决策」的根本性转变。
             </p>
-            <div class="hero-actions">
-              <a href="#why">进入路演</a>
-              <a href="./decision-demo-v7.html">打开实机产品</a>
+
+            <div class="flex flex-wrap gap-2 mb-8 anim-item" style="transition-delay:.22s">
+              <span class="tag tag-purple"><i class="fas fa-network-wired"></i>Multi-Agent 架构</span>
+              <span class="tag tag-green"><i class="fas fa-shield-alt"></i>防偏见证据链</span>
+              <span class="tag tag-gold"><i class="fas fa-chart-network"></i>组织治理智能体</span>
+              <span class="tag tag-purple"><i class="fas fa-database"></i>行为数据驱动</span>
             </div>
+
+            <div class="anim-item" style="transition-delay:.30s">
+              <div style="font-size:var(--fs-xs);font-weight:700;letter-spacing:.12em;color:#9CA3AF;text-transform:uppercase;margin-bottom:16px">
+                <i class="fas fa-users" style="color:var(--primary);margin-right:6px"></i>核心团队
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px">
+                <div class="team-member">
+                  <div class="avatar">付</div>
+                  <div>
+                    <div class="member-name">付兴东</div>
+                    <div class="member-role">负责人 / 产品</div>
+                    <div class="member-desc">产品策略与业务场景设计</div>
+                  </div>
+                </div>
+                <div class="team-member">
+                  <div class="avatar green">王</div>
+                  <div>
+                    <div class="member-name">王坤</div>
+                    <div class="member-role">数字效能工程师</div>
+                    <div class="member-desc">数字化效能建设与系统集成开发</div>
+                  </div>
+                </div>
+                <div class="team-member">
+                  <div class="avatar gold">苏</div>
+                  <div>
+                    <div class="member-name">苏东亮</div>
+                    <div class="member-role">数字效能工程师</div>
+                    <div class="member-desc">数据管道构建与 RAG 知识底座</div>
+                  </div>
+                </div>
+                <div class="team-member">
+                  <div class="avatar">周</div>
+                  <div>
+                    <div class="member-name">周翔宇</div>
+                    <div class="member-role">组织发展专家</div>
+                    <div class="member-desc">组织人才发展与评估体系建设</div>
+                  </div>
+                </div>
+                <div class="team-member">
+                  <div class="avatar green">包</div>
+                  <div>
+                    <div class="member-name">包亦然</div>
+                    <div class="member-role">组织发展专家</div>
+                    <div class="member-desc">产品定位及价值边界设计</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
-          <aside class="team-panel" aria-label="团队成员">
-            <div class="panel-title">
-              <span>Team</span>
-              <strong>跨职能小队</strong>
-            </div>
-            <div class="member-list">
-              <article>
-                <i>付</i>
-                <div><b>付兴东</b><span>负责人 / 产品</span><em>产品策略与业务场景设计</em></div>
-              </article>
-              <article>
-                <i>王</i>
-                <div><b>王坤</b><span>数字效能工程师</span><em>数字化效能建设与系统集成开发</em></div>
-              </article>
-              <article>
-                <i>苏</i>
-                <div><b>苏东亮</b><span>数字效能工程师</span><em>数据管道构建与 RAG 知识底座</em></div>
-              </article>
-              <article>
-                <i>周</i>
-                <div><b>周翔宇</b><span>组织发展专家</span><em>组织人才发展与评估体系建设</em></div>
-              </article>
-              <article>
-                <i>包</i>
-                <div><b>包亦然</b><span>组织发展专家</span><em>产品定位及价值边界设计</em></div>
-              </article>
-            </div>
-          </aside>
         </div>
-      </section>
+      </div>
 
-      <section class="page" id="why">
-        <div class="page-index">02 / Why</div>
-        <div class="section-head">
-          <h2>每个角色都在做人才判断，但都缺少事实全貌</h2>
-          <p>人才决策不是某一个部门的工作，而是组织里不同角色共同参与的资源配置。问题在于，大家都在判断人，但判断所依赖的事实并不完整。</p>
-        </div>
-        <div class="role-grid">
-          <article><span>战略决策层</span><b>需要组织仪表盘</b><p>提升人才识别的效率。</p></article>
-          <article><span>业务管理者</span><b>需要管理导航仪</b><p>把精力从找数据转向判断潜力。</p></article>
-          <article><span>项目经理</span><b>需要从“找熟人”到“找对人”</b><p>让项目配置更匹配。</p></article>
-          <article><span>一线伙伴</span><b>需要更公允的成长环境</b><p>让真实贡献被看见。</p></article>
-          <article><span>HR 专家</span><b>需要成为组织问题诊断者</b><p>不只是流程操作者。</p></article>
-        </div>
-        <div class="insight-band">
-          <strong>共同点</strong>
-          <p>他们面对的问题不同，但都缺少一套可复用、可追问的组织事实。</p>
-        </div>
-      </section>
+      <!-- ══════════════════════════════ SLIDE 02 ══ -->
+      <div class="slide slide-02" data-slide="1">
+        <div class="glow-orb" style="width:480px;height:480px;left:-80px;top:-100px;background:#93C5FD"></div>
+        <div class="glow-orb" style="width:300px;height:300px;right:-60px;bottom:-60px;background:#818CF8"></div>
+        <div class="grid-lines"></div>
+        <div class="slide-inner">
+          <div style="max-width:1160px;margin:0 auto;width:100%">
 
-      <section class="page" id="product">
-        <div class="page-index">03 / Product Logic</div>
-        <div class="section-head">
-          <h2>从一句提名理由，到一条可追问的证据链</h2>
-          <p>Talent-Pilot 不替评委做决定，而是把人才判断背后的事实、偏差和追问点整理出来，让评审从“凭印象讨论”变成“基于证据判断”。</p>
-        </div>
-        <div class="story-grid">
-          <article class="quote-card">
-            <span>过去，我们常听到这样的提名理由</span>
-            <blockquote>“这位伙伴最近重点项目表现突出，主管反馈很好，述职材料也比较完整，我建议推进晋升。”</blockquote>
-            <ul>
-              <li>“表现突出”有没有长期证据？</li>
-              <li>是个人核心贡献，还是团队共同成果？</li>
-              <li>有没有跨团队影响？</li>
-              <li>会不会受近期高光影响？</li>
-              <li>对标目标职级，还缺什么？</li>
-            </ul>
-          </article>
-          <article class="evidence-card">
-            <span>Talent-Pilot 会把它拆成证据链</span>
-            <div>
-              <b>目标标准</b>
-              <p>目标职级：2.3；重点要求：独立负责模块、跨团队协作、结果可复用。</p>
+            <div class="slide-num-badge anim-item">
+              <div class="line"></div>02 为什么做
             </div>
-            <div>
-              <b>行为证据</b>
-              <p>过去 6 个月参与 3 个关键项目；2 个项目产出被其他团队复用；周报多次记录主动拆解问题、推动跨部门协作。</p>
-            </div>
-            <div>
-              <b>偏差提醒</b>
-              <p>近期重点项目贡献突出，但历史技术影响力证据不足；主管评价较高，仍需补充跨团队协作反馈。</p>
-            </div>
-            <div>
-              <b>建议追问</b>
-              <p>哪些成果由本人主导？方法是否沉淀为可复用能力？是否具备下一档要求的独立牵引能力？</p>
-            </div>
-          </article>
-        </div>
-        <div class="logic-chain" aria-label="产品逻辑链">
-          <span>读标准</span>
-          <span>找事实</span>
-          <span>理证据</span>
-          <span>看偏差</span>
-          <span>给底稿</span>
-        </div>
-        <p class="closing-line">Talent-Pilot 的本质，是把人才判断从一句感受，变成一条可追问、可复核、可校准的证据链。</p>
-      </section>
+            <h1 class="slide-title anim-item" style="transition-delay:.08s">
+              每个角色都在做人才判断，<br /><span class="accent">但都缺少事实全貌</span>
+            </h1>
+            <p class="slide-subtitle anim-item" style="transition-delay:.16s;max-width:740px">
+              人才决策不是某一个部门的工作，而是组织里不同角色共同参与的资源配置。问题在于，大家都在判断人，但判断所依赖的事实并不完整。
+            </p>
 
-      <section class="page" id="demo">
-        <div class="page-index">04 / Showcase</div>
-        <div class="section-head with-action">
-          <div>
-            <h2>我们已经跑通 5 个可演示场景</h2>
-            <p>Talent-Pilot 已经围绕不同角色、不同权限、不同决策任务，完成从组织盘点、个人诊断、异常识别、项目组队到权限校验的演示闭环。</p>
+            <div class="anim-item" style="transition-delay:.24s;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;margin-bottom:24px">
+              <div class="role-card">
+                <div class="flex items-center gap-2 mb-2">
+                  <i class="fas fa-chess-king" style="color:#a855f7;font-size:15px"></i>
+                  <span class="role-label" style="color:#7C3AED">战略决策层</span>
+                </div>
+                <div class="role-desc">需要<strong>组织仪表盘</strong>，提升人才识别的效率与整体视野。</div>
+              </div>
+              <div class="role-card">
+                <div class="flex items-center gap-2 mb-2">
+                  <i class="fas fa-compass" style="color:#0284C7;font-size:15px"></i>
+                  <span class="role-label" style="color:#0284C7">业务管理者</span>
+                </div>
+                <div class="role-desc">需要<strong>管理导航仪</strong>，把精力从找数据转向判断潜力。</div>
+              </div>
+              <div class="role-card">
+                <div class="flex items-center gap-2 mb-2">
+                  <i class="fas fa-project-diagram" style="color:#059669;font-size:15px"></i>
+                  <span class="role-label" style="color:#059669">项目经理</span>
+                </div>
+                <div class="role-desc">需要从<strong>「找熟人」到「找对人」</strong>，让项目配置更匹配。</div>
+              </div>
+              <div class="role-card">
+                <div class="flex items-center gap-2 mb-2">
+                  <i class="fas fa-seedling" style="color:#D97706;font-size:15px"></i>
+                  <span class="role-label" style="color:#D97706">一线伙伴</span>
+                </div>
+                <div class="role-desc">需要<strong>更公允的成长环境</strong>，让真实贡献被看见。</div>
+              </div>
+              <div class="role-card">
+                <div class="flex items-center gap-2 mb-2">
+                  <i class="fas fa-stethoscope" style="color:#DC2626;font-size:15px"></i>
+                  <span class="role-label" style="color:#DC2626">HR 专家</span>
+                </div>
+                <div class="role-desc">需要成为<strong>组织问题诊断者</strong>，不只是流程操作者。</div>
+              </div>
+            </div>
+
+            <div class="glass-card anim-item" style="transition-delay:.32s;border-left:4px solid var(--primary)">
+              <div class="flex items-start gap-4">
+                <i class="fas fa-link" style="color:var(--primary);font-size:18px;margin-top:3px;flex-shrink:0"></i>
+                <div>
+                  <div style="font-size:var(--fs-md);font-weight:700;color:#1A1A2E;margin-bottom:6px">共同点</div>
+                  <div style="font-size:var(--fs-base);color:var(--text-sub);line-height:1.75">
+                    他们面对的问题不同，但都缺少一套<strong style="color:#1A1A2E">可复用、可追问的组织事实</strong>。
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
-          <a class="product-link" href="./decision-demo-v7.html">
-            进入 Talent-Pilot 实机演示
-          </a>
         </div>
-        <div class="showcase-grid">
-          <article>
-            <span>场景 1</span>
-            <h3>组织仪表盘 + 团队盘点</h3>
-            <p>事业部 GM 看组织全局，团队负责人看作战沙盘。</p>
-            <b>同一套数据，不同权限，看到不同层级的组织答案。</b>
-          </article>
-          <article>
-            <span>场景 2</span>
-            <h3>个人晋升诊断</h3>
-            <p>员工查看晋升准备度、能力差距、上级反馈和成长路径。</p>
-            <b>个人发展也可以有导航，而不是只等评审结果。</b>
-          </article>
-          <article>
-            <span>场景 3</span>
-            <h3>异常人才识别</h3>
-            <p>HRBP 提前识别高潜流失、评价分歧、技能不匹配和新人风险。</p>
-            <b>一些人才风险，不是等离职申请出现才看见。</b>
-          </article>
-          <article>
-            <span>场景 4</span>
-            <h3>项目团队配置</h3>
-            <p>基于项目周期、技术栈、角色需求和协作复杂度推荐团队。</p>
-            <b>项目用人不只看谁有空，更要看谁真正匹配。</b>
-          </article>
-          <article>
-            <span>场景 5</span>
-            <h3>权限控制对比</h3>
-            <p>同一句请求，不同角色得到不同响应，严格保护信息边界。</p>
-            <b>好的人才智能体，必须既聪明，也守边界。</b>
-          </article>
-        </div>
-        <p class="demo-note">演示数据为模拟生成，用于展示系统在真实数据接入后的洞察方式；真实场景严格基于授权数据和权限边界输出。</p>
-      </section>
+      </div>
 
-      <section class="page future-page" id="future">
-        <div class="page-index">05 / Reflection</div>
-        <div class="section-head">
-          <h2>好的人才智能，首先需要好的组织数据</h2>
-          <p>这次 Talent-Pilot Demo 和 AI 晋升预测探索让我们更清楚地看到：模型能力很重要，但真正决定上限的，是组织是否拥有持续、完整、可复用的数据基座。</p>
-        </div>
-        <div class="review-grid">
-          <article>
-            <span>01</span>
-            <h3>优秀预测，前提是优秀数据</h3>
-            <p>AI 可以捕捉到一些有效信号，但如果输入数据不完整、不连续、不统一，预测结果就很难稳定可靠。</p>
-          </article>
-          <article>
-            <span>02</span>
-            <h3>Demo 能展示价值，真实落地依赖系统打通</h3>
-            <p>要进入真实业务流程，必须持续打通周报、OKR、绩效、协作、项目、述职等系统。</p>
-          </article>
-          <article>
-            <span>03</span>
-            <h3>过去的探索，都指向同一个结论</h3>
-            <p>从高绩效行为预测、校招培养分析，到今天的 Talent-Pilot，核心阻碍不是 AI 不会分析，而是组织数据还没有被持续沉淀、统一治理和复用。</p>
-          </article>
-        </div>
-        <div class="future-layout">
-          <article>
-            <h3>我们对未来的判断</h3>
-            <p>未来组织不应该是一堆分散 Agent 让管理者逐个关注。更理想的方向是：组织里的多个 Agent 能力，逐步收敛为一个核心组织智能体。</p>
-            <p>它不是制造更多信息，而是帮助管理者整合信息、理解全貌、识别重点、提升决策质量。</p>
-          </article>
-          <article>
-            <h3>组织智能生命体的连接</h3>
-            <dl>
-              <div><dt>算力</dt><dd>人才密度和协作亲密度</dd></div>
-              <div><dt>算法</dt><dd>组织机制、评审标准和复盘纠错</dd></div>
-              <div><dt>算量</dt><dd>组织每天产生的真实行为数据</dd></div>
-            </dl>
-          </article>
-        </div>
-        <div class="try-band">
-          <h3>我们正在继续尝试</h3>
-          <p>我们正在积极尝试 AI 评审在真实组织场景中的落地。目前它的有效性还比较有限，但这个尝试本身很重要：它推动我们去打通更多系统，让组织里沉睡的数据真正被利用起来。</p>
-          <p>我们希望未来不只是少数人掌握信息，而是让组织中的关键事实能够被更好地沉淀、共享和复用。当所有人都能更高效地获取和使用信息，人才决策才有机会从经验驱动，逐步走向事实驱动。</p>
-        </div>
-        <p class="final-line">Talent-Pilot 不只是一个人才决策 Demo。它提醒我们：未来组织智能的竞争，不只在模型能力，更在数据基座、机制沉淀和组织自我校准能力。</p>
-      </section>
-    </main>
+      <!-- ══════════════════════════════ SLIDE 03 ══ -->
+      <div class="slide slide-03" data-slide="2">
+        <div class="glow-orb" style="width:520px;height:520px;right:-130px;bottom:-120px;background:#c4b5fd"></div>
+        <div class="glow-orb" style="width:280px;height:280px;left:-50px;top:80px;background:#818CF8"></div>
+        <div class="grid-lines"></div>
+        <div class="slide-inner">
+          <div style="max-width:1160px;margin:0 auto;width:100%">
 
-    <script src="./prep.js"></script>
+            <div class="slide-num-badge anim-item">
+              <div class="line"></div>03 产品是什么
+            </div>
+            <h1 class="slide-title anim-item" style="transition-delay:.08s">
+              从一句提名理由，<br /><span class="accent">到一条可追问的证据链</span>
+            </h1>
+            <p class="slide-subtitle anim-item" style="transition-delay:.16s;max-width:740px">
+              Talent-Pilot 不替评委做决定，而是把人才判断背后的事实、偏差和追问点整理出来，让评审从「凭印象讨论」变成「基于证据判断」。
+            </p>
+
+            <!-- Step Chain -->
+            <div class="anim-item" style="transition-delay:.22s;margin-bottom:32px">
+              <div style="font-size:var(--fs-xs);font-weight:700;letter-spacing:.12em;color:var(--text-sub);text-transform:uppercase;margin-bottom:14px">产品逻辑链</div>
+              <div class="step-chain">
+                <div class="step-node">
+                  <div class="step-icon" style="color:#a855f7"><i class="fas fa-book-open"></i></div>
+                  <div class="step-label">读标准</div>
+                </div>
+                <div class="step-arrow"><i class="fas fa-chevron-right"></i></div>
+                <div class="step-node">
+                  <div class="step-icon" style="color:#38bdf8"><i class="fas fa-search"></i></div>
+                  <div class="step-label">找事实</div>
+                </div>
+                <div class="step-arrow"><i class="fas fa-chevron-right"></i></div>
+                <div class="step-node">
+                  <div class="step-icon" style="color:#34d399"><i class="fas fa-layer-group"></i></div>
+                  <div class="step-label">理证据</div>
+                </div>
+                <div class="step-arrow"><i class="fas fa-chevron-right"></i></div>
+                <div class="step-node">
+                  <div class="step-icon" style="color:#fbbf24"><i class="fas fa-exclamation-triangle"></i></div>
+                  <div class="step-label">看偏差</div>
+                </div>
+                <div class="step-arrow"><i class="fas fa-chevron-right"></i></div>
+                <div class="step-node">
+                  <div class="step-icon" style="color:#f87171"><i class="fas fa-file-alt"></i></div>
+                  <div class="step-label">给底稿</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Case Breakdown -->
+            <div class="anim-item" style="transition-delay:.30s">
+              <div style="font-size:var(--fs-xs);font-weight:700;letter-spacing:.12em;color:var(--text-sub);text-transform:uppercase;margin-bottom:14px">案例拆解 · 「这个人表现突出，可以晋升」</div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-bottom:24px">
+                <div class="glass-card" style="border-top:3px solid #a855f7;padding:20px 22px">
+                  <div class="flex items-center gap-2 mb-3">
+                    <i class="fas fa-bullseye" style="color:#a855f7;font-size:15px"></i>
+                    <span style="font-size:var(--fs-sm);font-weight:700;color:#7C3AED">目标标准</span>
+                  </div>
+                  <div style="font-size:var(--fs-sm);color:var(--text-sub);line-height:1.7">目标职级是什么，要求什么能力。</div>
+                </div>
+                <div class="glass-card" style="border-top:3px solid #38bdf8;padding:20px 22px">
+                  <div class="flex items-center gap-2 mb-3">
+                    <i class="fas fa-clipboard-list" style="color:#38bdf8;font-size:15px"></i>
+                    <span style="font-size:var(--fs-sm);font-weight:700;color:#0284C7">行为证据</span>
+                  </div>
+                  <div style="font-size:var(--fs-sm);color:var(--text-sub);line-height:1.7">项目、周报、协作、复用成果中有什么事实。</div>
+                </div>
+                <div class="glass-card" style="border-top:3px solid #fbbf24;padding:20px 22px">
+                  <div class="flex items-center gap-2 mb-3">
+                    <i class="fas fa-binoculars" style="color:#fbbf24;font-size:15px"></i>
+                    <span style="font-size:var(--fs-sm);font-weight:700;color:#D97706">偏差提醒</span>
+                  </div>
+                  <div style="font-size:var(--fs-sm);color:var(--text-sub);line-height:1.7">近期高光、主管偏好、证据不足等风险。</div>
+                </div>
+                <div class="glass-card" style="border-top:3px solid #34d399;padding:20px 22px">
+                  <div class="flex items-center gap-2 mb-3">
+                    <i class="fas fa-question-circle" style="color:#34d399;font-size:15px"></i>
+                    <span style="font-size:var(--fs-sm);font-weight:700;color:#059669">建议追问</span>
+                  </div>
+                  <div style="font-size:var(--fs-sm);color:var(--text-sub);line-height:1.7">评委还应该问什么，哪里需要进一步确认。</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="closing-quote anim-item" style="transition-delay:.38s">
+              Talent-Pilot 的本质，是把人才判断从一句感受，变成一条<strong style="color:#1A1A2E;font-style:normal">可追问、可复核、可校准</strong>的证据链。
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════ SLIDE 04 ══ -->
+      <div class="slide slide-04" data-slide="3">
+        <div class="glow-orb" style="width:420px;height:420px;right:-80px;top:-80px;background:#6EE7B7"></div>
+        <div class="glow-orb" style="width:300px;height:300px;left:8%;bottom:-60px;background:#93C5FD"></div>
+        <div class="grid-lines"></div>
+        <div class="slide-inner">
+          <div style="max-width:1160px;margin:0 auto;width:100%">
+
+            <div class="slide-num-badge anim-item">
+              <div class="line" style="background:var(--accent)"></div>
+              <span style="color:var(--accent)">04 做到了什么</span>
+            </div>
+            <h1 class="slide-title anim-item" style="transition-delay:.08s">
+              已跑通 <span class="accent2">4 个</span>可演示场景
+            </h1>
+
+            <div class="flex items-center gap-4 mb-6 anim-item" style="transition-delay:.16s;flex-wrap:wrap">
+              <p style="font-size:var(--fs-base);color:#6B7280">实机演示入口</p>
+              <a href="https://jordanfu.github.io/talent-pilot-roadshow/decision-demo-v7.html" target="_blank" class="demo-link">
+                <i class="fas fa-play-circle"></i> v7 演示页面
+              </a>
+            </div>
+
+            <!-- 4 Scenes Grid -->
+            <div class="anim-item" style="transition-delay:.22s;display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:14px">
+              <!-- Scene 01 -->
+              <div class="scene-card">
+                <div class="scene-num">场景 01</div>
+                <div class="scene-title"><i class="fas fa-globe" style="color:#06D6A0;margin-right:6px;font-size:15px"></i>组织仪表盘 + 团队盘点</div>
+                <div class="scene-desc">事业部 GM 查看组织全局健康度，团队负责人打开团队作战沙盘——人员状态、能力分布、协作密度一屏掌握。</div>
+                <div class="scene-value"><i class="fas fa-lightbulb" style="margin-right:5px;font-size:12px"></i>同一套数据，不同权限，回答不同层级的组织问题。</div>
+              </div>
+
+              <!-- Scene 02 — HIGHLIGHT -->
+              <div class="scene-card" style="border:2.5px solid rgba(168,85,247,.5);background:linear-gradient(135deg,rgba(237,233,254,.72) 0%,rgba(255,255,255,.95) 100%);box-shadow:0 0 0 5px rgba(168,85,247,.07),0 16px 48px rgba(168,85,247,.16)">
+                <!-- Ribbon -->
+                <div style="position:absolute;top:14px;right:14px;background:linear-gradient(135deg,#a855f7 0%,#6366F1 100%);color:#fff;font-size:10px;font-weight:800;letter-spacing:.12em;padding:5px 12px;border-radius:22px;box-shadow:0 3px 12px rgba(168,85,247,.38);text-transform:uppercase;display:flex;align-items:center;gap:4px;z-index:1">
+                  <i class="fas fa-bolt" style="font-size:9px"></i>演示重点
+                </div>
+                <div class="scene-num" style="color:#7C3AED;font-size:var(--fs-xs)">场景 02</div>
+                <div class="scene-title" style="font-size:var(--fs-lg);color:#1A1A2E">
+                  <i class="fas fa-star-half-alt" style="color:#a855f7;margin-right:7px;font-size:18px"></i>人才评价与识别
+                </div>
+                <div class="scene-desc" style="color:#4B5563;font-size:var(--fs-base)">基于真实行为证据，生成防偏见的人才评价报告；识别高潜流失风险、评价分歧、明星员工依赖等组织隐患。</div>
+                <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px">
+                  <span style="background:rgba(168,85,247,.12);color:#7C3AED;border:1px solid rgba(168,85,247,.28);border-radius:22px;font-size:var(--fs-xs);font-weight:700;padding:5px 12px;display:flex;align-items:center;gap:4px">
+                    <i class="fas fa-search" style="font-size:10px"></i>多源证据融合
+                  </span>
+                  <span style="background:rgba(168,85,247,.12);color:#7C3AED;border:1px solid rgba(168,85,247,.28);border-radius:22px;font-size:var(--fs-xs);font-weight:700;padding:5px 12px;display:flex;align-items:center;gap:4px">
+                    <i class="fas fa-shield-alt" style="font-size:10px"></i>防偏见机制
+                  </span>
+                  <span style="background:rgba(168,85,247,.12);color:#7C3AED;border:1px solid rgba(168,85,247,.28);border-radius:22px;font-size:var(--fs-xs);font-weight:700;padding:5px 12px;display:flex;align-items:center;gap:4px">
+                    <i class="fas fa-exclamation-circle" style="font-size:10px"></i>组织风险识别
+                  </span>
+                </div>
+                <div style="font-size:var(--fs-sm);color:#6D28D9;font-weight:600;margin-top:10px">
+                  <i class="fas fa-lightbulb" style="margin-right:5px;font-size:12px"></i>人才判断从一句感受，变成一条可追问的证据链。
+                </div>
+              </div>
+
+              <!-- Scene 03 -->
+              <div class="scene-card">
+                <div class="scene-num">场景 03</div>
+                <div class="scene-title"><i class="fas fa-users-cog" style="color:#38bdf8;margin-right:6px;font-size:15px"></i>项目团队配置</div>
+                <div class="scene-desc">输入项目周期、技术栈、角色需求和协作复杂度，系统推荐最优团队组合，并给出配置理由与潜在风险提示。</div>
+                <div class="scene-value"><i class="fas fa-lightbulb" style="margin-right:5px;font-size:12px"></i>项目用人不只看谁有空，更要看谁真正匹配。</div>
+              </div>
+
+              <!-- Scene 04 -->
+              <div class="scene-card">
+                <div class="scene-num">场景 04</div>
+                <div class="scene-title"><i class="fas fa-user-graduate" style="color:#fbbf24;margin-right:6px;font-size:15px"></i>个人晋升诊断</div>
+                <div class="scene-desc">员工查看晋升准备度评分、能力差距、上级反馈摘要和成长建议路径，让每个人都能看到自己的发展导航仪。</div>
+                <div class="scene-value"><i class="fas fa-lightbulb" style="margin-right:5px;font-size:12px"></i>个人发展也可以有导航，不只是等待评审结果。</div>
+              </div>
+            </div>
+
+            <!-- 五大核心 Skill -->
+            <div class="anim-item" style="transition-delay:.30s;margin-bottom:14px">
+              <div style="font-size:var(--fs-xs);font-weight:700;letter-spacing:.12em;color:var(--text-sub);text-transform:uppercase;margin-bottom:12px">
+                <i class="fas fa-layer-group" style="color:var(--primary);margin-right:7px"></i>沉淀了 Talent-Pilot 五大核心 Skill
+              </div>
+              <div style="display:flex;gap:10px;flex-wrap:wrap">
+                <div class="skill-pill">
+                  <div class="sp-icon">📋</div>
+                  <div class="sp-name">周报复盘</div>
+                  <div class="sp-desc">提炼工作亮点与风险信号</div>
+                </div>
+                <div class="skill-pill" style="border-color:rgba(56,189,248,.22)">
+                  <div class="sp-icon">🕸️</div>
+                  <div class="sp-name">ONA 分析</div>
+                  <div class="sp-desc">知音楼组织网络分析</div>
+                </div>
+                <div class="skill-pill" style="border-color:rgba(168,85,247,.2)">
+                  <div class="sp-icon">🔄</div>
+                  <div class="sp-name">360 绩效汇总</div>
+                  <div class="sp-desc">多方评价聚合与偏差识别</div>
+                </div>
+                <div class="skill-pill" style="border-color:rgba(245,158,11,.22)">
+                  <div class="sp-icon">🚀</div>
+                  <div class="sp-name">晋升预测</div>
+                  <div class="sp-desc">准备度评估与差距诊断</div>
+                </div>
+                <div class="skill-pill" style="border-color:rgba(6,214,160,.22)">
+                  <div class="sp-icon">🎯</div>
+                  <div class="sp-name">胜任力评估</div>
+                  <div class="sp-desc">基于标准的能力画像构建</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Permission Banner -->
+            <div class="anim-item" style="transition-delay:.36s">
+              <div style="background:linear-gradient(135deg,#1e2235 0%,#2a2f4a 100%);border-radius:16px;padding:22px 28px;position:relative;overflow:hidden">
+                <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;border-radius:16px"></div>
+                <div style="position:relative;z-index:1;display:flex;align-items:flex-start;gap:24px;flex-wrap:wrap">
+                  <div style="flex-shrink:0;min-width:150px">
+                    <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(79,70,229,.25);border:1px solid rgba(79,70,229,.4);border-radius:22px;padding:5px 13px;margin-bottom:12px">
+                      <i class="fas fa-database" style="color:#818CF8;font-size:11px"></i>
+                      <span style="font-size:11px;font-weight:700;color:#818CF8;letter-spacing:.1em;text-transform:uppercase">数据基座</span>
+                    </div>
+                    <div style="font-size:var(--fs-md);font-weight:700;color:#fff;line-height:1.4;margin-bottom:6px">权限控制体系</div>
+                    <div style="font-size:var(--fs-xs);color:rgba(255,255,255,.5);line-height:1.5">所有场景的安全底座</div>
+                  </div>
+                  <div style="flex:1;min-width:220px">
+                    <div style="font-size:var(--fs-xs);font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px">核心原则</div>
+                    <div style="font-size:var(--fs-lg);font-weight:700;color:#fff;margin-bottom:6px">
+                      信息可访问性 <span style="color:#818CF8">=</span> 分权控制矩阵
+                    </div>
+                    <div style="font-size:var(--fs-sm);color:rgba(255,255,255,.55);line-height:1.7">
+                      同一句请求，因角色不同得到不同响应——好的人才智能体，必须既聪明，也守边界。
+                    </div>
+                  </div>
+                  <div style="flex-shrink:0;display:flex;flex-direction:column;gap:8px;min-width:190px">
+                    <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.07);border-radius:10px;padding:10px 14px">
+                      <i class="fas fa-chess-king" style="color:#fbbf24;font-size:13px;width:16px;text-align:center"></i>
+                      <span style="font-size:var(--fs-sm);color:rgba(255,255,255,.85)">战略层 · 全域可见</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.07);border-radius:10px;padding:10px 14px">
+                      <i class="fas fa-compass" style="color:#38bdf8;font-size:13px;width:16px;text-align:center"></i>
+                      <span style="font-size:var(--fs-sm);color:rgba(255,255,255,.85)">管理层 · 团队范围</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.07);border-radius:10px;padding:10px 14px">
+                      <i class="fas fa-user" style="color:#34d399;font-size:13px;width:16px;text-align:center"></i>
+                      <span style="font-size:var(--fs-sm);color:rgba(255,255,255,.85)">员工层 · 仅限本人</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════ SLIDE 05 ══ -->
+      <div class="slide slide-05" data-slide="4">
+        <div class="glow-orb" style="width:520px;height:520px;left:-120px;top:-120px;background:#a78bfa"></div>
+        <div class="glow-orb" style="width:340px;height:340px;right:-70px;bottom:-80px;background:#818CF8"></div>
+        <div class="grid-lines"></div>
+        <div class="slide-inner">
+          <div style="max-width:1160px;margin:0 auto;width:100%">
+
+            <!-- Header Row -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;margin-bottom:28px" class="anim-item">
+              <div>
+                <div class="slide-num-badge" style="margin-bottom:12px">
+                  <div class="line"></div>05 / REFLECTION
+                </div>
+                <h1 class="slide-title" style="font-size:clamp(30px,3.8vw,50px);line-height:1.2;margin-bottom:0">
+                  好的人才智能，<br />首先需要好的<span style="color:var(--primary)">组织数据</span>
+                </h1>
+              </div>
+              <div style="display:flex;align-items:center;padding-top:36px">
+                <p style="font-size:var(--fs-base);color:#4B5563;line-height:1.85">
+                  这次 Talent-Pilot Demo 和 AI 晋升预测探索让我们更清楚地看到：模型能力很重要，但真正决定上限的，是组织是否拥有持续、完整、可复用的数据基座。
+                </p>
+              </div>
+            </div>
+
+            <!-- 3 Insight Cards -->
+            <div class="anim-item" style="transition-delay:.1s;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px">
+              <div class="insight-card" style="border-top:3px solid var(--primary)">
+                <div style="font-size:11px;font-weight:800;color:var(--primary);letter-spacing:.1em;margin-bottom:10px">01</div>
+                <div class="insight-title">优秀预测，前提是优秀数据</div>
+                <div class="insight-text">AI 可以捕捉到一些有效信号，但如果输入数据不完整、不连续、不统一，预测结果就很难稳定可靠。</div>
+              </div>
+              <div class="insight-card" style="border-top:3px solid var(--primary)">
+                <div style="font-size:11px;font-weight:800;color:var(--primary);letter-spacing:.1em;margin-bottom:10px">02</div>
+                <div class="insight-title">Demo 能展示价值，真实落地依赖系统打通</div>
+                <div class="insight-text">要进入真实业务流程，必须持续打通周报、OKR、绩效、协作、项目、述职等系统。</div>
+              </div>
+              <div class="insight-card" style="border-top:3px solid var(--primary)">
+                <div style="font-size:11px;font-weight:800;color:var(--primary);letter-spacing:.1em;margin-bottom:10px">03</div>
+                <div class="insight-title">过去的探索，都指向同一个结论</div>
+                <div class="insight-text">核心阻碍不是 AI 不会分析，而是组织数据还没有被持续沉淀、统一治理和复用。</div>
+              </div>
+            </div>
+
+            <!-- Middle Two Columns -->
+            <div class="anim-item" style="transition-delay:.2s;display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
+              <div class="glass-card" style="padding:24px 26px">
+                <div style="font-size:var(--fs-md);font-weight:700;color:#1A1A2E;margin-bottom:14px">我们对未来的判断</div>
+                <div style="font-size:var(--fs-base);color:#4B5563;line-height:1.8;margin-bottom:12px">
+                  未来组织不应该是一堆分散 Agent 让管理者逐个关注。更理想的方向是：组织里的多个 Agent 能力，逐步收敛为一个核心组织智能体。
+                </div>
+                <div style="font-size:var(--fs-base);color:#4B5563;line-height:1.8">
+                  它不是制造更多信息，而是帮助管理者整合信息、理解全貌、识别重点、提升决策质量。
+                </div>
+              </div>
+              <div>
+                <div style="font-size:var(--fs-md);font-weight:700;color:#1A1A2E;margin-bottom:14px;padding-left:4px">组织智能生命体的连接</div>
+                <div class="ois-table">
+                  <div class="ois-row">
+                    <div class="ois-key">算力</div>
+                    <div class="ois-val">人才密度和协作亲密度</div>
+                  </div>
+                  <div class="ois-row">
+                    <div class="ois-key">算法</div>
+                    <div class="ois-val">组织机制、评审标准和复盘纠错</div>
+                  </div>
+                  <div class="ois-row" style="border-bottom:none">
+                    <div class="ois-key">算量</div>
+                    <div class="ois-val">组织每天产生的真实行为数据</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dark Banner -->
+            <div class="dark-banner anim-item" style="transition-delay:.3s;display:grid;grid-template-columns:auto 1fr 1fr;gap:28px;align-items:start">
+              <div style="white-space:nowrap">
+                <div class="db-title">我们正在继续尝试</div>
+              </div>
+              <div class="db-text">
+                我们正在积极尝试 AI 评审在真实组织场景中的落地。目前它的有效性还比较有限，但这个尝试本身很重要：它推动我们去打通更多系统，让组织里沉睡的数据真正被利用起来。
+              </div>
+              <div class="db-text">
+                我们希望未来不只是少数人掌握信息，而是让组织中的关键事实能够被更好地沉淀、共享和复用。当所有人都能更高效地获取和使用信息，人才决策才有机会从经验驱动，逐步走向事实驱动。
+              </div>
+            </div>
+
+            <!-- Final Quote -->
+            <div class="closing-quote anim-item" style="transition-delay:.38s;margin-top:16px">
+              <strong style="font-style:normal;color:#1A1A2E">Talent-Pilot 不只是一个人才决策 Demo。</strong>它提醒我们：未来组织智能的竞争，不只在模型能力，更在<strong style="font-style:normal;color:#1A1A2E">数据基座、机制沉淀和组织自我校准能力</strong>。
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end slide-wrapper -->
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+      <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <div id="navDots" style="display:flex;align-items:center;gap:7px">
+        <div class="nav-dot active" onclick="goToSlide(0)"></div>
+        <div class="nav-dot" onclick="goToSlide(1)"></div>
+        <div class="nav-dot" onclick="goToSlide(2)"></div>
+        <div class="nav-dot" onclick="goToSlide(3)"></div>
+        <div class="nav-dot" onclick="goToSlide(4)"></div>
+      </div>
+      <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <script>
+      const TOTAL = 5;
+      let current = 0,
+        isAnimating = false;
+      const slides = document.querySelectorAll('.slide');
+      const dots = document.querySelectorAll('.nav-dot');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const counter = document.getElementById('slideCounter');
+      const bar = document.getElementById('progressBar');
+
+      function updateUI() {
+        counter.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(TOTAL).padStart(2, '0');
+        bar.style.width = ((current + 1) / TOTAL * 100) + '%';
+        prevBtn.disabled = current === 0;
+        nextBtn.disabled = current === TOTAL - 1;
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      }
+
+      function animateItems(slideEl) {
+        const items = slideEl.querySelectorAll('.anim-item');
+        items.forEach(el => el.classList.remove('visible'));
+        items.forEach((el, i) => {
+          const delay = parseFloat(el.style.transitionDelay || '0') * 1000;
+          setTimeout(() => el.classList.add('visible'), 80 + delay + i * 18);
+        });
+      }
+
+      function goToSlide(index) {
+        if (index === current || isAnimating) return;
+        isAnimating = true;
+        const prev = slides[current],
+          next = slides[index];
+        prev.classList.add('exit');
+        setTimeout(() => {
+          prev.classList.remove('active', 'exit');
+          current = index;
+          next.classList.add('active');
+          animateItems(next);
+          updateUI();
+          setTimeout(() => {
+            isAnimating = false;
+          }, 600);
+        }, 350);
+      }
+
+      function changeSlide(dir) {
+        const t = current + dir;
+        if (t >= 0 && t < TOTAL) goToSlide(t);
+      }
+      // Keyboard
+      document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
+      });
+      // Touch / Swipe
+      let tx = 0,
+        ty = 0;
+      document.addEventListener('touchstart', e => {
+        tx = e.changedTouches[0].screenX;
+        ty = e.changedTouches[0].screenY;
+      }, {
+        passive: true
+      });
+      document.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].screenX - tx;
+        const dy = e.changedTouches[0].screenY - ty;
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) changeSlide(dx < 0 ? 1 : -1);
+        else if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 40) changeSlide(dy < 0 ? 1 : -1);
+      }, {
+        passive: true
+      });
+      // Mouse wheel
+      let wLock = false;
+      document.addEventListener('wheel', e => {
+        if (wLock || Math.abs(e.deltaY) < 30) return;
+        changeSlide(e.deltaY > 0 ? 1 : -1);
+        wLock = true;
+        setTimeout(() => {
+          wLock = false;
+        }, 900);
+      }, {
+        passive: true
+      });
+      // Init
+      animateItems(slides[0]);
+      updateUI();
+    </script>
   </body>
 </html>
