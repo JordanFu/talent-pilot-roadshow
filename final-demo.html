@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Talent-Pilot · 决赛演示 v5</title>
+    <title>Talent-Pilot · 决赛演示 v6</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%234f46e5'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-size='20' font-family='Arial' font-weight='700' fill='white'%3ETP%3C/text%3E%3C/svg%3E">
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdmirror.com/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
@@ -150,7 +150,7 @@
         flex: 1;
         overflow-x: auto;
         padding: 0 .5rem;
-        scrollbar-width: none;
+        scrollbar-width: none
       }
 
       .nav-scroll::-webkit-scrollbar {
@@ -208,22 +208,17 @@
         color: #92400e
       }
 
-      /* HERO */
-      .hero {
-        padding: 4.2rem 1.5rem 2.3rem;
-        max-width: 1160px;
-        margin: 0 auto;
-        text-align: left
+      .hero-kv,
+      #warn {
+        display: none !important;
       }
 
-      .hero-inner {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr);
-        gap: 2rem;
-        align-items: end;
-        max-width: 760px;
+      /* HERO */
+      .hero {
+        padding: 6rem 1.5rem 4.5rem;
+        max-width: 960px;
         margin: 0 auto;
-        text-align: center;
+        text-align: center
       }
 
       .hero-eyebrow {
@@ -239,16 +234,16 @@
         color: var(--indigo);
         letter-spacing: .07em;
         text-transform: uppercase;
-        margin-bottom: 1rem;
+        margin-bottom: 1.4rem;
       }
 
       .hero-h {
         font-family: 'Noto Serif SC', serif;
-        font-size: clamp(2.15rem, 4.4vw, 4.2rem);
+        font-size: clamp(2rem, 5.5vw, 3.8rem);
         font-weight: 700;
         line-height: 1.12;
         letter-spacing: -.03em;
-        margin-bottom: .85rem;
+        margin-bottom: 1.1rem;
       }
 
       .hero-h .gl {
@@ -261,26 +256,21 @@
       .hero-p {
         font-size: .98rem;
         color: var(--slate-500);
-        line-height: 1.85;
-        margin-bottom: 1.35rem;
-        max-width: 640px;
-        margin-left: auto;
-        margin-right: auto;
+        line-height: 1.95;
+        margin-bottom: 2.2rem
       }
 
       .hero-kv {
-        display: grid;
-        grid-template-columns: repeat(5, minmax(86px, 1fr));
+        display: inline-flex;
         background: #fff;
         border: 1px solid var(--slate-200);
-        border-radius: 16px;
+        border-radius: 18px;
         box-shadow: 0 3px 20px rgba(79, 70, 229, .08);
         overflow: hidden;
-        max-width: 660px;
       }
 
       .kv-item {
-        padding: .75rem .95rem;
+        padding: .85rem 1.6rem;
         text-align: center;
         border-right: 1px solid var(--slate-200)
       }
@@ -290,7 +280,7 @@
       }
 
       .kv-v {
-        font-size: 1.35rem;
+        font-size: 1.65rem;
         font-weight: 800;
         line-height: 1;
         font-family: 'Noto Serif SC', serif
@@ -302,23 +292,6 @@
         margin-top: .22rem;
         text-transform: uppercase;
         letter-spacing: .07em
-      }
-
-      .hero-note {
-        background: rgba(255, 251, 235, .92);
-        border: 1px solid #fde68a;
-        border-radius: 16px;
-        padding: 1.15rem 1.25rem;
-        box-shadow: 0 14px 36px rgba(217, 119, 6, .09);
-      }
-
-      .hero-note .warn-title {
-        margin-bottom: .6rem;
-      }
-
-      .hero-note .warn-body {
-        font-size: .82rem;
-        line-height: 1.75;
       }
 
       /* WARN */
@@ -802,28 +775,6 @@
         padding: 1.2rem 1.3rem
       }
 
-      /* SCOREBOX */
-      .sbox {
-        background: var(--slate-50);
-        border: 1px solid var(--slate-200);
-        border-radius: 9px;
-        padding: .5rem .85rem;
-        text-align: center
-      }
-
-      .sbox-v {
-        font-size: 1.3rem;
-        font-weight: 800;
-        line-height: 1;
-        font-family: 'Noto Serif SC', serif
-      }
-
-      .sbox-l {
-        font-size: .58rem;
-        color: var(--slate-400);
-        margin-top: .18rem
-      }
-
       /* TABLE */
       .dt {
         width: 100%;
@@ -1237,367 +1188,630 @@
         border-right: none
       }
 
-      /* PRESENTATION READABILITY */
-      body {
-        font-size: 17px;
-      }
-
-      .hdr {
-        height: 64px;
-      }
-
-      .logo-text {
-        font-size: 1.08rem;
-      }
-
-      .nb {
-        font-size: .78rem;
-        padding: .38rem .86rem;
-      }
-
-      .hbadge {
-        font-size: .7rem;
-      }
-
-      .hero-p {
-        font-size: 1.08rem;
-      }
-
-      .sec {
-        max-width: 1280px;
-      }
-
-      .sec-title {
-        font-size: 1.62rem;
-      }
-
-      .sec-desc {
-        font-size: .88rem;
-      }
-
-      .tag,
-      .auth-ok,
-      .pri {
-        font-size: .78rem !important;
-      }
-
-      .auth-lbl,
-      .kv-l {
-        font-size: .72rem;
-      }
-
-      .auth-val,
-      .io-body,
-      .tab-pane {
-        font-size: .94rem;
-      }
-
-      .io-prompt {
-        font-size: .96rem;
-      }
-
-      .dt,
-      .ct,
-      .org-tbl {
-        font-size: .92rem;
-      }
-
-      .dt th,
-      .ct th,
-      .org-tbl th {
-        font-size: .75rem;
-      }
-
-      .dt td,
-      .ct td,
-      .org-tbl td {
-        font-size: .88rem;
-        line-height: 1.55;
-      }
-
-      .text-xs {
-        font-size: .82rem !important;
-        line-height: 1.5;
-      }
-
-      .text-sm {
-        font-size: .94rem !important;
-        line-height: 1.55;
-      }
-
-      .stat-l {
-        font-size: .74rem;
-      }
-
-      .phase-seg {
-        font-size: .82rem;
-      }
-
-      .diag-output {
-        border-radius: 18px;
-        border: 1px solid var(--slate-200);
+      /* ─── 个人发展报告专用样式 ─── */
+      /* 报告外框 */
+      .report-wrap {
         background: #fff;
-        box-shadow: 0 12px 32px rgba(15, 23, 42, .06);
+        border: 1px solid var(--slate-200);
+        border-radius: 20px;
         overflow: hidden;
+        box-shadow: 0 4px 24px rgba(79, 70, 229, .08);
       }
 
-      .diag-top {
+      /* 报告顶部 banner */
+      .report-banner {
+        padding: 1.6rem 2rem 1.4rem;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: space-between;
-        gap: 1rem;
-        padding: 1rem 1.2rem;
-        background: linear-gradient(135deg, #f8fafc, #eef2ff);
-        border-bottom: 1px solid var(--slate-200);
+        gap: 1.2rem;
+        flex-wrap: wrap;
       }
 
-      .diag-title {
-        font-weight: 900;
-        color: var(--slate-900);
-        font-size: 1.05rem;
+      .report-banner-a {
+        background: linear-gradient(135deg, #eef2ff 0%, #f0f9ff 100%);
+        border-bottom: 1px solid #c7d2fe
       }
 
-      .diag-sub {
-        margin-top: .25rem;
-        color: var(--slate-500);
-        font-size: .86rem;
+      .report-banner-b {
+        background: linear-gradient(135deg, #fffbeb 0%, #fdf4ff 100%);
+        border-bottom: 1px solid #fde68a
       }
 
-      .diag-pre {
-        display: none;
-        margin: 0;
-        padding: 1.35rem 1.45rem 1.55rem;
-        max-height: 760px;
-        overflow: auto;
-        white-space: pre-wrap;
-        word-break: break-word;
-        font-family: "SFMono-Regular", "Menlo", "Consolas", "PingFang SC", monospace;
-        font-size: .92rem;
-        line-height: 1.72;
-        color: var(--slate-800);
-        background:
-          linear-gradient(#fff, #fff) padding-box,
-          linear-gradient(180deg, rgba(79, 70, 229, .08), rgba(2, 132, 199, .05)) border-box;
-      }
-
-      .growth-report {
-        padding: 1.25rem;
-        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-      }
-
-      .report-hero {
-        display: grid;
-        grid-template-columns: minmax(0, 1.1fr) minmax(280px, .9fr);
-        gap: 1rem;
-        margin-bottom: 1rem;
-      }
-
-      .profile-card,
-      .report-card,
-      .coach-note {
-        border: 1px solid var(--slate-200);
-        background: rgba(255, 255, 255, .92);
-        border-radius: 16px;
-        padding: 1rem;
-        box-shadow: 0 10px 26px rgba(15, 23, 42, .045);
-      }
-
-      .profile-card {
-        display: grid;
-        grid-template-columns: 72px 1fr;
-        gap: 1rem;
-        align-items: center;
-        background:
-          radial-gradient(circle at 90% 0%, rgba(52, 211, 153, .18), transparent 32%),
-          linear-gradient(135deg, #f8fafc, #ffffff);
-      }
-
-      .avatar {
-        width: 72px;
-        height: 72px;
-        border-radius: 18px;
-        display: grid;
-        place-items: center;
-        color: #fff;
-        font-size: 1.6rem;
-        font-weight: 900;
-        background: linear-gradient(135deg, #059669, #34d399);
-      }
-
-      .profile-card.amber .avatar {
-        background: linear-gradient(135deg, #d97706, #fbbf24);
-      }
-
-      .profile-name {
-        font-size: 1.25rem;
-        font-weight: 900;
-        color: var(--slate-900);
-      }
-
-      .profile-meta {
-        margin-top: .35rem;
-        color: var(--slate-500);
-        line-height: 1.65;
-        font-size: .9rem;
-      }
-
-      .level-bridge {
-        display: grid;
-        grid-template-columns: 1fr auto 1fr;
-        align-items: center;
-        gap: .75rem;
-        height: 100%;
-      }
-
-      .level-box {
-        border-radius: 14px;
-        padding: .9rem;
-        background: var(--slate-50);
-        border: 1px solid var(--slate-200);
-      }
-
-      .level-box strong {
-        display: block;
-        font-size: 1.35rem;
-        color: var(--slate-900);
+      .report-title {
         font-family: 'Noto Serif SC', serif;
-      }
-
-      .level-box span {
-        color: var(--slate-500);
-        font-size: .85rem;
-      }
-
-      .bridge-arrow {
-        color: var(--emerald);
-        font-weight: 900;
-      }
-
-      .report-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
-        margin-bottom: 1rem;
-      }
-
-      .report-card h4,
-      .coach-note h4 {
-        margin: 0 0 .75rem;
-        color: var(--slate-900);
-        font-size: 1rem;
-        font-weight: 900;
-      }
-
-      .report-card ul,
-      .coach-note ul {
-        margin: 0;
-        padding-left: 1.05rem;
-        color: var(--slate-600);
-        line-height: 1.72;
-      }
-
-      .report-card li + li,
-      .coach-note li + li {
-        margin-top: .35rem;
-      }
-
-      .compare-card {
-        grid-column: span 2;
-      }
-
-      .compare-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: .75rem;
-      }
-
-      .compare-row div {
-        border-radius: 12px;
-        padding: .85rem;
-        background: #f8fafc;
-        border: 1px solid var(--slate-200);
-      }
-
-      .compare-row b {
-        display: block;
-        color: var(--slate-900);
-        margin-bottom: .45rem;
-      }
-
-      .aha-line {
-        margin-top: .75rem;
-        padding: .85rem 1rem;
-        border-radius: 14px;
-        background: #ecfdf5;
-        border: 1px solid #a7f3d0;
-        color: #047857;
-        font-weight: 900;
-      }
-
-      .action-timeline {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: .75rem;
-      }
-
-      .action-step {
-        border-radius: 14px;
-        padding: .9rem;
-        background: #ffffff;
-        border: 1px solid var(--slate-200);
-      }
-
-      .action-step span {
-        display: inline-flex;
-        margin-bottom: .45rem;
-        color: var(--indigo);
-        font-size: .78rem;
-        font-weight: 900;
-      }
-
-      .action-step b {
-        display: block;
-        color: var(--slate-900);
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: -.02em;
         margin-bottom: .35rem;
       }
 
-      .action-step p {
-        margin: 0;
+      .report-meta {
+        font-size: .72rem;
+        color: var(--slate-500);
+        line-height: 1.8
+      }
+
+      .report-kv-row {
+        display: flex;
+        gap: .65rem;
+        flex-wrap: wrap;
+        margin-top: .6rem
+      }
+
+      .report-kv-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: .32rem;
+        padding: .22rem .75rem;
+        border-radius: 999px;
+        font-size: .65rem;
+        font-weight: 700;
+      }
+
+      /* 报告章节 */
+      .rpt-section {
+        border-bottom: 1px solid var(--slate-200)
+      }
+
+      .rpt-section:last-child {
+        border-bottom: none
+      }
+
+      .rpt-sec-hdr {
+        display: flex;
+        align-items: center;
+        gap: .7rem;
+        padding: .9rem 1.6rem;
+        cursor: pointer;
+        user-select: none;
+        transition: background .2s;
+      }
+
+      .rpt-sec-hdr:hover {
+        background: var(--slate-50)
+      }
+
+      .rpt-sec-hdr-a:hover {
+        background: #f5f7ff
+      }
+
+      .rpt-sec-hdr-b:hover {
+        background: #fffdf5
+      }
+
+      .rpt-sec-icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 9px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: .8rem;
+        color: #fff;
+        flex-shrink: 0;
+      }
+
+      .rpt-sec-label {
+        font-weight: 700;
+        font-size: .82rem;
+        flex: 1;
+        font-family: 'Noto Serif SC', serif;
+      }
+
+      .rpt-chevron {
+        font-size: .7rem;
+        color: var(--slate-400);
+        transition: transform .3s;
+        flex-shrink: 0
+      }
+
+      .rpt-chevron.open {
+        transform: rotate(180deg)
+      }
+
+      .rpt-sec-body {
+        padding: 0 1.6rem 1.4rem;
+        display: none;
+      }
+
+      .rpt-sec-body.open {
+        display: block
+      }
+
+      /* 项目卡片 */
+      .proj-entry {
+        background: var(--slate-50);
+        border: 1px solid var(--slate-200);
+        border-radius: 12px;
+        padding: 1rem 1.1rem;
+        margin-bottom: .75rem;
+      }
+
+      .proj-entry:last-child {
+        margin-bottom: 0
+      }
+
+      .proj-entry-title {
+        font-weight: 700;
+        font-size: .82rem;
+        color: var(--slate-800);
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        margin-bottom: .6rem;
+      }
+
+      .proj-bullet {
+        font-size: .77rem;
         color: var(--slate-600);
-        line-height: 1.6;
-        font-size: .86rem;
+        line-height: 1.8;
+        padding-left: .1rem;
       }
 
-      .coach-note {
-        margin-top: 1rem;
-        background: linear-gradient(135deg, #0f172a, #1e1b4b);
-        color: #fff;
+      .proj-bullet li {
+        list-style: none;
+        padding-left: 1rem;
+        position: relative;
+        margin-bottom: .15rem
       }
 
-      .coach-note h4 {
-        color: #fff;
+      .proj-bullet li::before {
+        content: '—';
+        position: absolute;
+        left: 0;
+        color: var(--slate-400)
       }
 
-      .coach-note p {
-        margin: 0;
-        color: #cbd5e1;
+      /* 能力对比块 */
+      .level-compare {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: .8rem;
+      }
+
+      .lv-box {
+        border-radius: 14px;
+        padding: 1rem 1.1rem
+      }
+
+      .lv-box-cur {
+        background: var(--emerald-light);
+        border: 1px solid #a7f3d0
+      }
+
+      .lv-box-tgt {
+        background: var(--indigo-ultra);
+        border: 1px solid #c7d2fe
+      }
+
+      .lv-box-tgt-b {
+        background: var(--violet-light);
+        border: 1px solid #d8b4fe
+      }
+
+      .lv-box-arch {
+        background: linear-gradient(135deg, #fdf4ff, #eef2ff);
+        border: 1px solid #d8b4fe
+      }
+
+      .lv-box-hdr {
+        font-weight: 700;
+        font-size: .78rem;
+        margin-bottom: .6rem;
+        display: flex;
+        align-items: center;
+        gap: .4rem
+      }
+
+      .lv-item {
+        font-size: .75rem;
+        color: var(--slate-600);
         line-height: 1.85;
+        padding-left: .2rem;
+        display: flex;
+        align-items: flex-start;
+        gap: .4rem;
+        margin-bottom: .1rem
       }
 
-      @media(max-width:900px) {
-        .report-hero,
-        .report-grid,
-        .action-timeline {
-          grid-template-columns: 1fr;
-        }
+      /* 差异高亮 */
+      .diff-box {
+        background: linear-gradient(90deg, #fef9c3, #fefce8);
+        border: 1px solid #fef08a;
+        border-radius: 12px;
+        padding: .85rem 1.1rem;
+        margin-top: .8rem;
+      }
 
-        .compare-card {
-          grid-column: auto;
-        }
+      .diff-box-title {
+        font-size: .7rem;
+        font-weight: 700;
+        color: #713f12;
+        margin-bottom: .55rem;
+        display: flex;
+        align-items: center;
+        gap: .35rem
+      }
 
-        .compare-row {
-          grid-template-columns: 1fr;
-        }
+      .diff-row {
+        display: flex;
+        align-items: center;
+        gap: .6rem;
+        margin-bottom: .3rem;
+        font-size: .77rem
+      }
+
+      /* 反馈块 */
+      .feedback-advantage {
+        background: var(--emerald-light);
+        border: 1px solid #6ee7b7;
+        border-radius: 14px;
+        padding: 1rem 1.1rem;
+        margin-bottom: .8rem;
+      }
+
+      .feedback-develop {
+        background: #fffbeb;
+        border: 1px solid #fde68a;
+        border-radius: 14px;
+        padding: 1rem 1.1rem;
+        margin-bottom: .8rem;
+      }
+
+      .feedback-expect {
+        background: var(--indigo-ultra);
+        border: 1px solid #c7d2fe;
+        border-radius: 14px;
+        padding: 1rem 1.1rem;
+      }
+
+      .fb-hdr {
+        font-weight: 700;
+        font-size: .78rem;
+        margin-bottom: .75rem;
+        display: flex;
+        align-items: center;
+        gap: .45rem
+      }
+
+      .fb-item {
+        margin-bottom: .9rem
+      }
+
+      .fb-item:last-child {
+        margin-bottom: 0
+      }
+
+      .fb-item-title {
+        font-weight: 700;
+        font-size: .78rem;
+        margin-bottom: .3rem;
+        display: flex;
+        align-items: center;
+        gap: .35rem
+      }
+
+      .fb-item-body {
+        font-size: .75rem;
+        color: var(--slate-600);
+        line-height: 1.82;
+        padding-left: 1.1rem
+      }
+
+      .fb-quote {
+        background: rgba(255, 255, 255, .7);
+        border-radius: 8px;
+        padding: .35rem .7rem;
+        margin-top: .35rem;
+        font-size: .71rem;
+        color: var(--slate-500);
+        border-left: 3px solid #6ee7b7;
+      }
+
+      .fb-quote-amber {
+        border-left-color: #fbbf24
+      }
+
+      .fb-sugg {
+        font-size: .72rem;
+        color: var(--indigo);
+        font-weight: 600;
+        margin-top: .28rem;
+        padding-left: 1.1rem;
+        display: flex;
+        align-items: flex-start;
+        gap: .35rem;
+      }
+
+      /* 行动计划周 */
+      .action-week {
+        border-radius: 14px;
+        overflow: hidden;
+        margin-bottom: .75rem;
+        border: 1px solid var(--slate-200);
+        box-shadow: 0 1px 6px rgba(79, 70, 229, .04);
+      }
+
+      .action-week:last-child {
+        margin-bottom: 0
+      }
+
+      .aw-hdr {
+        padding: .65rem 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: .7rem;
+        font-weight: 700;
+        font-size: .8rem;
+      }
+
+      .aw-badge {
+        padding: .15rem .55rem;
+        border-radius: 999px;
+        font-size: .6rem;
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+
+      .aw-body {
+        background: #fff;
+        padding: 1rem 1.1rem
+      }
+
+      .aw-task {
+        display: flex;
+        align-items: flex-start;
+        gap: .55rem;
+        font-size: .77rem;
+        color: var(--slate-600);
+        line-height: 1.72;
+        margin-bottom: .45rem;
+      }
+
+      .aw-task:last-child {
+        margin-bottom: 0
+      }
+
+      .aw-task-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        margin-top: .32rem;
+      }
+
+      .aw-outcome {
+        margin-top: .75rem;
+        padding: .55rem .8rem;
+        border-radius: 9px;
+        font-size: .72rem;
+        font-weight: 600;
+        background: var(--emerald-light);
+        border: 1px solid #6ee7b7;
+        color: var(--emerald);
+        display: flex;
+        align-items: center;
+        gap: .4rem;
+      }
+
+      /* 18月路径 */
+      .phase-timeline {
+        display: flex;
+        gap: .6rem;
+        margin: .8rem 0;
+        flex-wrap: wrap
+      }
+
+      .pt-card {
+        flex: 1;
+        min-width: 160px;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid var(--slate-200);
+      }
+
+      .ptc-hdr {
+        padding: .6rem .9rem;
+        font-size: .72rem;
+        font-weight: 700
+      }
+
+      .ptc-body {
+        background: #fff;
+        padding: .8rem .9rem;
+        font-size: .73rem;
+        color: var(--slate-600);
+        line-height: 1.8
+      }
+
+      .ptc-body li {
+        list-style: none;
+        padding-left: .8rem;
+        position: relative;
+        margin-bottom: .12rem
+      }
+
+      .ptc-body li::before {
+        content: '•';
+        position: absolute;
+        left: 0;
+        font-weight: 700
+      }
+
+      /* 隐藏优势 */
+      .hidden-adv {
+        background: linear-gradient(135deg, #fdf4ff, #f0f9ff);
+        border: 1px solid #d8b4fe;
+        border-radius: 16px;
+        padding: 1.2rem 1.4rem;
+      }
+
+      .ha-hdr {
+        font-weight: 700;
+        font-size: .86rem;
+        margin-bottom: .85rem;
+        display: flex;
+        align-items: center;
+        gap: .5rem
+      }
+
+      .ha-metric-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: .75rem;
+        margin-bottom: .9rem
+      }
+
+      .ha-metric {
+        background: rgba(255, 255, 255, .8);
+        border: 1px solid #d8b4fe;
+        border-radius: 10px;
+        padding: .7rem .9rem;
+        text-align: center
+      }
+
+      .ha-metric-v {
+        font-size: 1.5rem;
+        font-weight: 800;
+        font-family: 'Noto Serif SC', serif;
+        line-height: 1;
+        margin-bottom: .2rem
+      }
+
+      .ha-metric-l {
+        font-size: .62rem;
+        color: var(--slate-500)
+      }
+
+      /* 结语卡片 */
+      .closing-card {
+        background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 60%, #0c1a3a 100%);
+        border-radius: 18px;
+        padding: 1.75rem 2rem;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .closing-card::before {
+        content: '';
+        position: absolute;
+        right: -40px;
+        top: -40px;
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(99, 102, 241, .2), transparent);
+      }
+
+      .closing-name {
+        font-family: 'Noto Serif SC', serif;
+        font-size: 1rem;
+        font-weight: 700;
+        color: #e0e7ff;
+        margin-bottom: .75rem
+      }
+
+      .closing-body {
+        font-size: .8rem;
+        color: #cbd5e1;
+        line-height: 1.95
+      }
+
+      .closing-highlight {
+        color: #fbbf24;
+        font-weight: 700
+      }
+
+      .closing-cta {
+        color: #34d399;
+        font-weight: 700
+      }
+
+      .closing-step {
+        background: rgba(99, 102, 241, .18);
+        border: 1px solid rgba(99, 102, 241, .3);
+        border-radius: 10px;
+        padding: .7rem 1rem;
+        margin: .85rem 0;
+        font-size: .79rem;
+        color: #e0e7ff;
+        line-height: 1.9
+      }
+
+      .closing-footer {
+        font-size: .75rem;
+        color: #94a3b8;
+        margin-top: .9rem;
+        display: flex;
+        align-items: center;
+        gap: .4rem
+      }
+
+      /* 能力分析条 */
+      .cap-gap-row {
+        display: flex;
+        align-items: center;
+        gap: .7rem;
+        margin-bottom: 1.1rem
+      }
+
+      .cap-gap-label {
+        width: 90px;
+        font-size: .72rem;
+        font-weight: 700;
+        flex-shrink: 0
+      }
+
+      .cap-gap-track {
+        flex: 1
+      }
+
+      .cap-gap-bars {
+        position: relative;
+        height: 18px;
+        background: #f1f5f9;
+        border-radius: 9px;
+        overflow: hidden;
+        margin-bottom: 2px
+      }
+
+      .cap-gap-cur {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        border-radius: 9px 0 0 9px;
+        display: flex;
+        align-items: center;
+        padding-left: 8px
+      }
+
+      .cap-gap-std {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        background: rgba(0, 0, 0, .06);
+        border-right: 2px dashed rgba(0, 0, 0, .15)
+      }
+
+      .cap-gap-label2 {
+        font-size: .6rem;
+        color: var(--slate-400);
+        display: flex;
+        gap: .7rem
+      }
+
+      .cap-gap-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: .2rem;
+        padding: .12rem .42rem;
+        border-radius: 5px;
+        font-size: .62rem;
+        font-weight: 700;
+        flex-shrink: 0
       }
 
       @media(max-width:900px) {
@@ -1612,6 +1826,18 @@
         .perm-grid {
           grid-template-columns: 1fr
         }
+
+        .level-compare {
+          grid-template-columns: 1fr
+        }
+
+        .ha-metric-row {
+          grid-template-columns: 1fr
+        }
+
+        .report-banner {
+          flex-direction: column
+        }
       }
 
       @media(max-width:640px) {
@@ -1624,27 +1850,27 @@
         }
 
         .hero {
-          padding: 3rem 1rem 2rem;
-          text-align: center
-        }
-
-        .hero-inner {
-          grid-template-columns: 1fr;
-          gap: 1.25rem;
-        }
-
-        .hero-p {
-          margin-left: auto;
-          margin-right: auto;
-        }
-
-        .hero-kv {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          max-width: none;
+          padding: 4.5rem 1rem 3rem
         }
 
         .kv-item {
           padding: .7rem 1.1rem
+        }
+
+        .rpt-sec-hdr {
+          padding: .8rem 1rem
+        }
+
+        .rpt-sec-body {
+          padding: 0 1rem 1.2rem
+        }
+
+        .report-banner {
+          padding: 1.2rem 1rem
+        }
+
+        .action-week .aw-hdr {
+          padding: .6rem .9rem
         }
       }
     </style>
@@ -1653,7 +1879,7 @@
     <div class="bg-dots"></div>
     <div class="bg-glow"></div>
 
-    <!-- HEADER -->
+    <!-- ══ HEADER ══ -->
     <header class="hdr z1">
       <div class="logo-pill">
         <div class="logo-icon"><i class="fa-solid fa-rocket"></i></div>
@@ -1668,26 +1894,54 @@
         <a href="#summary" class="nb"><i class="fa-solid fa-stars mr-1"></i>总结</a>
       </nav>
       <div class="hdr-badges">
-        <span class="hbadge hb-v">v5</span>
+        <span class="hbadge hb-v">v6</span>
         <span class="hbadge hb-f"><i class="fa-solid fa-trophy mr-1"></i>决赛</span>
       </div>
     </header>
 
     <div class="z1">
 
-      <!-- HERO -->
+      <!-- ══ HERO ══ -->
       <section class="hero fi">
-        <div class="hero-inner">
-          <div>
-            <div class="hero-eyebrow"><i class="fa-solid fa-circle-dot"></i>5场景全景演示 · 决赛路演</div>
-            <h1 class="hero-h">Talent-Pilot<br><span class="gl">智能人才管理系统</span></h1>
-            <p class="hero-p">
-              行为数据驱动 · 全栈权限设计 · 异常提前预警 · 项目智能匹配<br>
-              从“数据展示”到“决策辅助”的质变升级
-            </p>
+        <div class="hero-eyebrow"><i class="fa-solid fa-circle-dot"></i>超详实版 · 5场景全景演示 · 决赛路演</div>
+        <h1 class="hero-h">Talent-Pilot<br><span class="gl">智能人才管理系统</span></h1>
+        <p class="hero-p">
+          行为数据驱动 · 全栈权限设计 · 异常提前预警 · 项目智能匹配<br>
+          从"数据展示"到"决策辅助"的质变升级
+        </p>
+        <div class="hero-kv">
+          <div class="kv-item">
+            <div class="kv-v ci">5</div>
+            <div class="kv-l">演示场景</div>
+          </div>
+          <div class="kv-item">
+            <div class="kv-v cs">86</div>
+            <div class="kv-l">事业部人数</div>
+          </div>
+          <div class="kv-item">
+            <div class="kv-v cg">18</div>
+            <div class="kv-l">核心团队</div>
+          </div>
+          <div class="kv-item">
+            <div class="kv-v ca">3周</div>
+            <div class="kv-l">提前预警</div>
+          </div>
+          <div class="kv-item">
+            <div class="kv-v cv">100%</div>
+            <div class="kv-l">数据脱敏</div>
           </div>
         </div>
       </section>
+
+      <!-- ══ WARN ══ -->
+      <div id="warn" class="sec" style="padding-bottom:2rem">
+        <div class="warn-box fi">
+          <div class="warn-title"><i class="fa-solid fa-triangle-exclamation text-yellow-500"></i>演示前必说 · 强制话术</div>
+          <div class="warn-body">
+            "老师，接下来我将进行演示效果展示。为了强化呈现效果，<strong>以下数据为模拟生成</strong>，旨在展示系统在实际拥有数据时的洞察能力。真实场景中，系统严格基于实际行为数据进行分析，不会呈现未获取的数据维度。"
+          </div>
+        </div>
+      </div>
 
       <div class="gdiv"></div>
 
@@ -1710,7 +1964,7 @@
           <button class="stab" onclick="showLayer('mgr','s1',event)">👥 团队负责人 · 作战层</button>
         </div>
 
-        <!-- GM LAYER -->
+        <!-- VP LAYER -->
         <div id="lyr-vp" class="scene-panel active">
           <div class="io-wrap fi">
             <div class="io-header io-in-hdr"><i class="fa-solid fa-terminal"></i>身份验证 · VP视角</div>
@@ -1745,8 +1999,6 @@
                 <div style="font-size:.7rem;color:var(--slate-400)">5个团队 · 86人 · 2026年Q2 · 战略视角</div>
               </div>
             </div>
-
-            <!-- Org Table -->
             <div class="overflow-x-auto rounded-2xl mb-4" style="border:1px solid var(--slate-200)">
               <table class="org-tbl">
                 <thead>
@@ -1772,8 +2024,7 @@
                       <div style="display:flex;align-items:center;gap:.4rem">
                         <div style="flex:1;height:6px;background:#f1f5f9;border-radius:3px;overflow:hidden">
                           <div style="width:88%;height:100%;background:linear-gradient(90deg,#059669,#34d399);border-radius:3px"></div>
-                        </div>
-                        <span class="font-bold cg text-xs">88</span>
+                        </div><span class="font-bold cg text-xs">88</span>
                       </div>
                     </td>
                   </tr>
@@ -1788,8 +2039,7 @@
                       <div style="display:flex;align-items:center;gap:.4rem">
                         <div style="flex:1;height:6px;background:#f1f5f9;border-radius:3px;overflow:hidden">
                           <div style="width:82%;height:100%;background:linear-gradient(90deg,#0284c7,#38bdf8);border-radius:3px"></div>
-                        </div>
-                        <span class="font-bold cs text-xs">82</span>
+                        </div><span class="font-bold cs text-xs">82</span>
                       </div>
                     </td>
                   </tr>
@@ -1804,8 +2054,7 @@
                       <div style="display:flex;align-items:center;gap:.4rem">
                         <div style="flex:1;height:6px;background:#f1f5f9;border-radius:3px;overflow:hidden">
                           <div style="width:73%;height:100%;background:linear-gradient(90deg,#7c3aed,#a78bfa);border-radius:3px"></div>
-                        </div>
-                        <span class="font-bold cv text-xs">73</span>
+                        </div><span class="font-bold cv text-xs">73</span>
                       </div>
                     </td>
                   </tr>
@@ -1820,8 +2069,7 @@
                       <div style="display:flex;align-items:center;gap:.4rem">
                         <div style="flex:1;height:6px;background:#f1f5f9;border-radius:3px;overflow:hidden">
                           <div style="width:62%;height:100%;background:linear-gradient(90deg,#d97706,#fbbf24);border-radius:3px"></div>
-                        </div>
-                        <span class="font-bold ca text-xs">62</span>
+                        </div><span class="font-bold ca text-xs">62</span>
                       </div>
                     </td>
                   </tr>
@@ -1836,8 +2084,7 @@
                       <div style="display:flex;align-items:center;gap:.4rem">
                         <div style="flex:1;height:6px;background:#f1f5f9;border-radius:3px;overflow:hidden">
                           <div style="width:78%;height:100%;background:linear-gradient(90deg,#0ea5e9,#38bdf8);border-radius:3px"></div>
-                        </div>
-                        <span class="font-bold cs text-xs">78</span>
+                        </div><span class="font-bold cs text-xs">78</span>
                       </div>
                     </td>
                   </tr>
@@ -1853,31 +2100,6 @@
                 </tbody>
               </table>
             </div>
-
-            <!-- Ladder Scenarios -->
-            <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--slate-400);margin-bottom:.75rem"><i class="fa-solid fa-chart-line mr-1 ci"></i>梯队预测 · 6个月情景对比</div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
-              <div class="inner-card">
-                <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--slate-400);margin-bottom:.85rem"><i class="fa-solid fa-timeline mr-1 cr"></i>情景A：无干预（6个月后）</div>
-                <div class="space-y-2 text-xs">
-                  <div class="flex items-center gap-2 p-2 rounded-xl" style="background:#fff1f2;border:1px solid #fecdd3"><i class="fa-solid fa-arrow-trend-down cr text-xs"></i><span style="color:var(--slate-600)">Level 3专家：<strong class="cr">5人</strong>（+2晋升 -1流失）</span></div>
-                  <div class="flex items-center gap-2 p-2 rounded-xl" style="background:#fffbeb;border:1px solid #fde68a"><i class="fa-solid fa-triangle-exclamation ca text-xs"></i><span style="color:var(--slate-600)">Level 2骨干：<strong class="ca">16人</strong>（晋升+5但流失+淘汰-8）</span></div>
-                  <div class="flex items-center gap-2 p-2 rounded-xl" style="background:var(--slate-50);border:1px solid var(--slate-200)"><i class="fa-solid fa-users ci text-xs"></i><span style="color:var(--slate-600)">Level 1一线：<strong>62人</strong>（自然流动）</span></div>
-                  <div class="mt-1 text-xs font-semibold cr">→ 勉强维持，Level 2断层风险加剧</div>
-                </div>
-              </div>
-              <div class="inner-card">
-                <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--slate-400);margin-bottom:.85rem"><i class="fa-solid fa-check-double mr-1 cg"></i>情景B：有干预（6个月后）✅推荐</div>
-                <div class="space-y-2 text-xs">
-                  <div class="flex items-center gap-2 p-2 rounded-xl" style="background:var(--emerald-light);border:1px solid #6ee7b7"><i class="fa-solid fa-circle-check cg text-xs"></i><span style="color:var(--slate-600)">Level 3专家：<strong class="cg">8人</strong>（晋升3+外引2）</span></div>
-                  <div class="flex items-center gap-2 p-2 rounded-xl" style="background:var(--emerald-light);border:1px solid #6ee7b7"><i class="fa-solid fa-circle-check cg text-xs"></i><span style="color:var(--slate-600)">Level 2骨干：<strong class="cg">22人</strong>（晋升8+外引4+保留）</span></div>
-                  <div class="flex items-center gap-2 p-2 rounded-xl" style="background:var(--emerald-light);border:1px solid #6ee7b7"><i class="fa-solid fa-circle-check cg text-xs"></i><span style="color:var(--slate-600)">Level 1一线：<strong class="cg">52人</strong>（正常流动）</span></div>
-                  <div class="mt-1 text-xs font-semibold cg">→ 梯队健康，可支撑业务扩张30%</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Strategic Actions -->
             <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--slate-400);margin-bottom:.75rem"><i class="fa-solid fa-list-check mr-1 ci"></i>战略资源压强建议（下半年）</div>
             <div class="overflow-x-auto rounded-2xl mb-4" style="border:1px solid var(--slate-200)">
               <table class="dt">
@@ -1898,34 +2120,25 @@
                   </tr>
                   <tr>
                     <td><span class="pri p0">P0</span></td>
-                    <td>数据中台：建立新人保护机制（4人活跃度下降）</td>
+                    <td>数据中台：建立新人保护机制</td>
                     <td class="text-xs" style="color:var(--slate-500)">影响下游所有团队数据pipeline</td>
                     <td><span class="cr font-semibold text-xs">本周</span></td>
                   </tr>
                   <tr>
                     <td><span class="pri p1">P1</span></td>
-                    <td>全事业部：建立跨团队人才流动机制（3名高潜转岗意向）</td>
+                    <td>全事业部：建立跨团队人才流动机制</td>
                     <td class="text-xs" style="color:var(--slate-500)">降低离职率，激活内部流动</td>
                     <td>本季度</td>
                   </tr>
                   <tr>
-                    <td><span class="pri p1">P1</span></td>
-                    <td>智能答疑：技术深度补强（与算法引擎联合项目）</td>
-                    <td class="text-xs" style="color:var(--slate-500)">业务理解强+9，但技术弱-4</td>
-                    <td>本季度</td>
-                  </tr>
-                  <tr>
                     <td><span class="pri p2">P2</span></td>
-                    <td>组织层面：建立后备干部梯队（5名高潜2.2级）</td>
+                    <td>组织层面：建立后备干部梯队</td>
                     <td class="text-xs" style="color:var(--slate-500)">团队负责人平均任职2.3年，需储备</td>
                     <td>下半年</td>
                   </tr>
                 </tbody>
               </table>
             </div>
-
-            <!-- Cross-team Risk -->
-            <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--slate-400);margin-bottom:.75rem"><i class="fa-solid fa-radar mr-1 cr"></i>跨团队风险预警</div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
               <div class="inner-card text-xs">
                 <div class="font-bold cr mb-2"><i class="fa-solid fa-user-minus mr-1"></i>高潜转岗风险</div>
@@ -1969,7 +2182,6 @@
               </div>
             </div>
           </div>
-
           <div class="card fi">
             <div class="flex items-center gap-3 mb-4">
               <div style="width:42px;height:42px;background:var(--sky-light);border-radius:11px;display:flex;align-items:center;justify-content:center;color:var(--sky);font-size:1rem"><i class="fa-solid fa-map"></i></div>
@@ -1979,7 +2191,6 @@
               </div>
               <div class="ml-auto"><span class="tag t-emerald"><i class="fa-solid fa-medal mr-1"></i>事业部健康度第1</span></div>
             </div>
-
             <div class="stat-grid">
               <div class="stat-card">
                 <div class="stat-v ci">18</div>
@@ -1993,7 +2204,6 @@
               <div class="stat-card">
                 <div class="stat-v cg">+4.6%</div>
                 <div class="stat-l">高于组织均值</div>
-                <div class="stat-s" style="color:var(--slate-400)">均值71.2分</div>
               </div>
               <div class="stat-card">
                 <div class="stat-v ca">2人</div>
@@ -2001,71 +2211,14 @@
                 <div class="stat-s cr">+2人流失风险</div>
               </div>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-              <!-- Level dist -->
-              <div class="inner-card">
-                <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--slate-400);margin-bottom:.85rem"><i class="fa-solid fa-layer-group mr-1 ci"></i>职级分布 · 金字塔型</div>
-                <div class="lvl-row"><span class="lvl-name" style="color:#059669">1.1 初级</span>
-                  <div class="lvl-track">
-                    <div class="lvl-fill" style="background:linear-gradient(90deg,#34d399,#6ee7b7);width:22.2%"><span class="lvl-txt">4人</span></div>
-                  </div><span class="lvl-meta">22.2% ⚠️</span>
-                </div>
-                <div class="lvl-row"><span class="lvl-name" style="color:#0284c7">1.2 成长</span>
-                  <div class="lvl-track">
-                    <div class="lvl-fill" style="background:linear-gradient(90deg,#38bdf8,#7dd3fc);width:33.3%"><span class="lvl-txt">6人</span></div>
-                  </div><span class="lvl-meta">33.3%</span>
-                </div>
-                <div class="lvl-row"><span class="lvl-name" style="color:#6366f1">1.3 熟练</span>
-                  <div class="lvl-track">
-                    <div class="lvl-fill" style="background:linear-gradient(90deg,#818cf8,#a5b4fc);width:16.7%"><span class="lvl-txt">3人</span></div>
-                  </div><span class="lvl-meta">16.7%</span>
-                </div>
-                <div class="lvl-row"><span class="lvl-name" style="color:#7c3aed">2.1 骨干</span>
-                  <div class="lvl-track">
-                    <div class="lvl-fill" style="background:linear-gradient(90deg,#7c3aed,#a78bfa);width:11.1%"><span class="lvl-txt">2人</span></div>
-                  </div><span class="lvl-meta">11.1%</span>
-                </div>
-                <div class="lvl-row"><span class="lvl-name" style="color:#d97706">2.2 资深</span>
-                  <div class="lvl-track">
-                    <div class="lvl-fill" style="background:linear-gradient(90deg,#d97706,#fbbf24);width:11.1%"><span class="lvl-txt">2人</span></div>
-                  </div><span class="lvl-meta">11.1%</span>
-                </div>
-                <div class="lvl-row"><span class="lvl-name" style="color:#e11d48">2.3 专家</span>
-                  <div class="lvl-track">
-                    <div class="lvl-fill" style="background:linear-gradient(90deg,#e11d48,#fb7185);width:5.6%;min-width:32px"><span class="lvl-txt">1人</span></div>
-                  </div><span class="lvl-meta cr">5.6% ⚠️</span>
-                </div>
-                <div class="mt-2 p-2 rounded-xl text-xs" style="background:#eef2ff;border:1px solid #c7d2fe;color:#3730a3"><i class="fa-solid fa-lightbulb mr-1 ca"></i>2.3级仅1人，单点风险！1.1级22%，新人培养是重点</div>
-              </div>
-              <!-- Readiness -->
-              <div class="inner-card">
-                <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--slate-400);margin-bottom:.85rem"><i class="fa-solid fa-gauge-high mr-1 ca"></i>准备度分布</div>
-                <div class="dist-bar">
-                  <div class="dist-seg" style="width:11%;background:linear-gradient(90deg,#4f46e5,#818cf8);border-radius:7px 0 0 7px">🔥 11%</div>
-                  <div class="dist-seg" style="width:44%;background:linear-gradient(90deg,#0284c7,#38bdf8)">⚡ 44%</div>
-                  <div class="dist-seg" style="width:33%;background:linear-gradient(90deg,#059669,#34d399)">📈 33%</div>
-                  <div class="dist-seg" style="width:12%;background:linear-gradient(90deg,#e11d48,#fb7185);border-radius:0 7px 7px 0">⚠ 11%</div>
-                </div>
-                <div class="space-y-1.5 mt-3">
-                  <div class="flex items-center justify-between p-1.5 rounded-lg text-xs" style="background:#eef2ff;border:1px solid #c7d2fe"><span class="font-semibold ci">🔥 高准备度 90-100分</span><span class="font-bold ci">2人</span><span class="tag t-emerald" style="font-size:.6rem">立即晋升</span></div>
-                  <div class="flex items-center justify-between p-1.5 rounded-lg text-xs" style="background:#e0f2fe;border:1px solid #bae6fd"><span class="font-semibold cs">⚡ 中准备度 75-89分</span><span class="font-bold cs">8人</span><span class="tag t-sky" style="font-size:.6rem">3-6月可达</span></div>
-                  <div class="flex items-center justify-between p-1.5 rounded-lg text-xs" style="background:var(--emerald-light);border:1px solid #6ee7b7"><span class="font-semibold cg">📈 需培养 60-74分</span><span class="font-bold cg">6人</span><span class="tag t-amber" style="font-size:.6rem">制定IDP</span></div>
-                  <div class="flex items-center justify-between p-1.5 rounded-lg text-xs" style="background:var(--rose-light);border:1px solid #fda4af"><span class="font-semibold cr">⚠️ 风险关注 &lt;60分</span><span class="font-bold cr">2人</span><span class="tag t-rose" style="font-size:.6rem">立即干预</span></div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Key Talents Table -->
             <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--slate-400);margin-bottom:.75rem"><i class="fa-solid fa-users-gear mr-1 ca"></i>关键人才识别</div>
-            <div class="overflow-x-auto rounded-2xl mb-4" style="border:1px solid var(--slate-200)">
+            <div class="overflow-x-auto rounded-2xl" style="border:1px solid var(--slate-200)">
               <table class="dt">
                 <thead>
                   <tr>
                     <th>姓名</th>
                     <th>当前</th>
                     <th>目标</th>
-                    <th>准备度</th>
                     <th>核心亮点</th>
                     <th>建议</th>
                   </tr>
@@ -2075,120 +2228,25 @@
                     <td class="font-bold" style="color:var(--slate-800)">张*</td>
                     <td><span class="tag t-indigo">1.3</span></td>
                     <td><span class="tag t-violet">2.1</span></td>
-                    <td><span class="font-bold cg text-base">96分</span></td>
-                    <td class="text-xs" style="color:var(--slate-500)">代码质量97分(Top 3%) · 推荐准确率提升12% · 0故障上线</td>
+                    <td class="text-xs" style="color:var(--slate-500)">代码质量Top 3% · 推荐准确率+12% · 0故障上线</td>
                     <td><span class="pri p0">跨级晋升</span></td>
                   </tr>
                   <tr>
                     <td class="font-bold" style="color:var(--slate-800)">李*</td>
                     <td><span class="tag t-violet">2.2</span></td>
                     <td><span class="tag t-amber">2.3</span></td>
-                    <td><span class="font-bold cg text-base">93分</span></td>
-                    <td class="text-xs" style="color:var(--slate-500)">技术影响力强 · 业务理解91分 · 用户满意度提升15%</td>
+                    <td class="text-xs" style="color:var(--slate-500)">技术影响力强 · 业务理解91分 · 满意度+15%</td>
                     <td><span class="pri p0">档内晋升</span></td>
-                  </tr>
-                  <tr>
-                    <td class="font-bold" style="color:var(--slate-800)">王*</td>
-                    <td><span class="tag t-sky">1.2</span></td>
-                    <td><span class="tag t-indigo">1.3</span></td>
-                    <td><span class="font-bold cs">85分</span></td>
-                    <td class="text-xs" style="color:var(--slate-500)">技术扎实(86分)，文档待提升(72分)</td>
-                    <td><span class="pri p1">6-8周冲刺</span></td>
-                  </tr>
-                  <tr>
-                    <td class="font-bold" style="color:var(--slate-800)">赵*</td>
-                    <td><span class="tag t-emerald">1.2</span></td>
-                    <td>—</td>
-                    <td><span class="font-bold ca">68分</span></td>
-                    <td class="text-xs cr">绩效持续下滑(78→65) · 提交量下降 · 日报遗漏</td>
-                    <td><span class="pri p0">2周面谈</span></td>
                   </tr>
                   <tr>
                     <td class="font-bold" style="color:var(--slate-800)">孙*</td>
                     <td><span class="tag t-violet">2.1</span></td>
                     <td>—</td>
-                    <td><span class="font-bold cr">58分</span></td>
                     <td class="text-xs cr">历史85→58骤降 · 脉脉活跃+300% · 流失概率65%</td>
                     <td><span class="pri p0">48h面谈</span></td>
                   </tr>
                 </tbody>
               </table>
-            </div>
-
-            <!-- Capability Heatmap -->
-            <div class="inner-card mb-4 fi">
-              <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--slate-400);margin-bottom:.85rem"><i class="fa-solid fa-fire mr-1 cr"></i>能力维度热力图 · 团队 vs 组织均值</div>
-              <div style="height:200px"><canvas id="capBar"></canvas></div>
-            </div>
-
-            <!-- Action Plan -->
-            <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--slate-400);margin-bottom:.75rem"><i class="fa-solid fa-calendar-check mr-1 ci"></i>可执行行动清单</div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-              <div class="inner-card">
-                <div class="font-bold cr text-xs mb-2"><i class="fa-solid fa-bolt mr-1"></i>P0 · 48小时内</div>
-                <div class="act-row">
-                  <div class="act-num">1</div>
-                  <div>
-                    <div class="act-title">启动张*跨级晋升流程</div>
-                    <div class="act-sub">准备材料，预约晋升委员会 · 周五前</div>
-                  </div>
-                </div>
-                <div class="act-row">
-                  <div class="act-num">2</div>
-                  <div>
-                    <div class="act-title">孙**retention面谈</div>
-                    <div class="act-sub">部长亲谈，提供AI生成课程项目 · 明天</div>
-                  </div>
-                </div>
-                <div class="act-row" style="border:none">
-                  <div class="act-num">3</div>
-                  <div>
-                    <div class="act-title">赵**改进计划制定</div>
-                    <div class="act-sub">明确指标，设4周观察期 · 周三前</div>
-                  </div>
-                </div>
-              </div>
-              <div class="inner-card">
-                <div class="font-bold ca text-xs mb-2"><i class="fa-solid fa-calendar mr-1"></i>P1 · 本月内</div>
-                <div class="act-row">
-                  <div class="act-num">4</div>
-                  <div>
-                    <div class="act-title">梯队补强方案落地</div>
-                    <div class="act-sub">推荐方案C：内部培养+外部引入</div>
-                  </div>
-                </div>
-                <div class="act-row">
-                  <div class="act-num">5</div>
-                  <div>
-                    <div class="act-title">团队协作能力提升</div>
-                    <div class="act-sub">组织2次跨团队分享+建立Code Review</div>
-                  </div>
-                </div>
-                <div class="act-row" style="border:none">
-                  <div class="act-num">6</div>
-                  <div>
-                    <div class="act-title">3名中准备度IDP制定</div>
-                    <div class="act-sub">每人明确3个月目标和资源</div>
-                  </div>
-                </div>
-              </div>
-              <div class="inner-card">
-                <div class="font-bold ci text-xs mb-2"><i class="fa-solid fa-flag mr-1"></i>P2 · 本季度</div>
-                <div class="act-row">
-                  <div class="act-num">7</div>
-                  <div>
-                    <div class="act-title">团队能力标签打造</div>
-                    <div class="act-sub">突出"技术+业务双强"差异化特色</div>
-                  </div>
-                </div>
-                <div class="act-row" style="border:none">
-                  <div class="act-num">8</div>
-                  <div>
-                    <div class="act-title">建立人才预警机制</div>
-                    <div class="act-sub">每月系统扫描异常信号，提前干预</div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -2196,591 +2254,13 @@
 
       <div class="gdiv"></div>
 
-      <!-- ══════════ SCENE 2 ══════════ -->
+      <!-- ══════════ SCENE 2 · 个人晋升诊断 ══════════ -->
       <section id="s2" class="sec">
         <div class="sec-header fi">
           <div class="sec-icon" style="background:linear-gradient(135deg,#059669,#34d399)"><i class="fa-solid fa-user-graduate"></i></div>
           <div>
             <div class="sec-title">场景二：个人晋升诊断</div>
-            <div class="sec-desc">员工个人视角 · 1.2级算法工程师 vs 2.2级高级算法工程师 · 从准备度到发展路径</div>
-          </div>
-          <div class="ml-auto"><span class="tag t-emerald"><i class="fa-solid fa-user mr-1"></i>个人权限</span></div>
-        </div>
-
-        <div class="scene-tabs fi">
-          <button class="stab on" onclick="showLayer('empA','s2',event)">📗 员工A · 1.2级 → 1.3</button>
-          <button class="stab" onclick="showLayer('empB','s2',event)">📕 员工B · 2.2级 → 2.3</button>
-        </div>
-
-        <div id="lyr-empA" class="scene-panel active">
-          <div class="io-wrap fi">
-            <div class="io-header io-in-hdr"><i class="fa-solid fa-terminal"></i>用户输入</div>
-            <div class="io-body">
-              <div class="auth-grid">
-                <div class="auth-cell">
-                  <div class="auth-lbl">工号</div>
-                  <div class="auth-val">200001</div>
-                </div>
-                <div class="auth-cell">
-                  <div class="auth-lbl">识别角色</div>
-                  <div class="auth-val">1.2级算法工程师</div>
-                </div>
-                <div class="auth-cell">
-                  <div class="auth-lbl">触发意图</div>
-                  <div class="auth-val">晋升准备度 / 个人诊断 / 1.3级</div>
-                </div>
-              </div>
-              <div class="flex items-center gap-3 flex-wrap">
-                <span class="auth-ok"><i class="fa-solid fa-circle-check"></i>验证通过</span>
-                <span class="tag t-emerald">仅可查看个人数据</span>
-                <span class="ml-auto io-prompt">"帮我看看晋升1.3的准备度"</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="diag-output fi">
-            <div class="diag-top">
-              <div>
-                <div class="diag-title">系统完整输出 · 员工A</div>
-                <div class="diag-sub">从工作回顾、职级要求、上级反馈到 6 周行动计划</div>
-              </div>
-              <span class="tag t-emerald">一线员工视角</span>
-            </div>
-            <div class="growth-report">
-              <div class="report-hero">
-                <div class="profile-card">
-                  <div class="avatar">陈</div>
-                  <div>
-                    <div class="profile-name">陈**｜1.2级算法工程师</div>
-                    <div class="profile-meta">工号 200001 · 入职 11 个月 · 智能教学产品部-推荐算法组<br>请求：看看晋升准备度 / 个人诊断 / 1.3级</div>
-                  </div>
-                </div>
-                <div class="profile-card">
-                  <div class="level-bridge">
-                    <div class="level-box"><strong>1.2</strong><span>成长级<br>执行者</span></div>
-                    <div class="bridge-arrow">→</div>
-                    <div class="level-box"><strong>1.3</strong><span>熟练级<br>独立贡献者</span></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="report-grid">
-                <div class="report-card">
-                  <h4>工作证据</h4>
-                  <ul>
-                    <li>AI课程推荐模型优化：负责特征工程模块，3个核心特征独立完成。</li>
-                    <li>推荐系统性能调优：协助诊断2个性能瓶颈。</li>
-                    <li>连续4个 sprint 按时交付，代码质量稳定。</li>
-                  </ul>
-                </div>
-                <div class="report-card">
-                  <h4>优势区</h4>
-                  <ul>
-                    <li>代码能力扎实，逻辑清晰，Bug率低。</li>
-                    <li>学习能力强，Transformer 架构 2 周掌握。</li>
-                    <li>责任心强，任务交付稳定。</li>
-                  </ul>
-                </div>
-                <div class="report-card">
-                  <h4>晋升突破点</h4>
-                  <ul>
-                    <li>主动性：从等安排到主动 owner 小优化。</li>
-                    <li>技术表达：文档要让测试和产品也能看懂。</li>
-                    <li>跨团队协作：主动承担对接人角色。</li>
-                  </ul>
-                </div>
-                <div class="report-card compare-card">
-                  <h4>职级差异拆解</h4>
-                  <div class="compare-row">
-                    <div><b>1.2级：把任务做好</b><ul><li>能独立完成分配任务</li><li>代码质量达标</li><li>学习能力良好</li><li>按时交付</li></ul></div>
-                    <div><b>1.3级：主动推动问题解决</b><ul><li>主动发现并解决问题</li><li>独立 owner 小模块</li><li>方案能被理解和复用</li><li>能跨团队有效协作</li></ul></div>
-                  </div>
-                  <div class="aha-line">核心判断：不是技术考试，而是职业成熟度跃迁。</div>
-                </div>
-                <div class="report-card">
-                  <h4>上级期待</h4>
-                  <ul>
-                    <li>主动 owner 一个小项目，哪怕是优化类。</li>
-                    <li>写一篇让非技术同事也能看懂的技术文档。</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="report-card">
-                <h4>6周行动计划</h4>
-                <div class="action-timeline">
-                  <div class="action-step"><span>Week 1-2</span><b>提升主动性</b><p>主动发现1个可优化点，写1页方案，找上级讨论争取 owner。</p></div>
-                  <div class="action-step"><span>Week 3-4</span><b>提升协作能见度</b><p>参与搜索算法组特征对接，主动承担对接人，做10分钟分享。</p></div>
-                  <div class="action-step"><span>Week 5-6</span><b>补齐文档短板</b><p>重写一个功能文档，让测试和产品同学试读到“看懂”。</p></div>
-                </div>
-              </div>
-
-              <div class="coach-note">
-                <h4>给陈同学的话</h4>
-                <p>你的技术底子很好，过去11个月也证明了你的能力。从1.2到1.3，不只是“完成任务”，而是“主动发现问题、让别人理解、推动事情发生”。按照6周计划一步步来，1.3级是水到渠成的事。</p>
-              </div>
-            </div>
-            <pre class="diag-pre">🔐 身份验证通过
-用户：陈**（工号：200001）
-角色：一线员工
-═══════════════════════════════════════════════════════════════════
-
-【个人发展报告】
-当前职级：1.2（成长级）
-目标职级：1.3（熟练级）
-入职时长：11个月
-所在团队：智能教学产品部-推荐算法组
-
-═══════════════════════════════════════════════════════════════════
-【一、工作回顾与项目总结】
-═══════════════════════════════════════════════════════════════════
-
-过去11个月，系统记录到你的主要工作：
-
-项目参与：
-  • AI课程推荐模型优化（Q2）
-    - 负责特征工程模块
-    - 独立完成3个核心特征的提取与验证
-    - 代码一次通过测试，零Bug上线
-
-  • 推荐系统性能调优（Q1-Q2）
-    - 参与推荐延迟优化专项
-    - 协助完成2个性能瓶颈的诊断
-    - 学习并应用Transformer架构（2周掌握，速度快于同期同学）
-
-日常工作：
-  • 代码提交：质量稳定，Bug率团队较低水平
-  • 任务交付：连续4个sprint按时交付，无延期记录
-  • 技术学习：主动学习新算法，上手速度快
-
-═══════════════════════════════════════════════════════════════════
-【二、1.3级能力要求拆解】
-═══════════════════════════════════════════════════════════════════
-
-从1.2级到1.3级，核心变化是从"执行者"到"独立贡献者"：
-
-1.2级（当前）的核心要求：
-  ✅ 能独立完成分配的任务
-  ✅ 代码质量达标
-  ✅ 学习能力良好
-  ✅ 按时交付
-
-1.3级（目标）的核心要求：
-  📍 能主动发现并解决问题
-  📍 能独立owner一个小模块/项目
-  📍 技术方案能让他人理解和复用
-  📍 能与其他团队有效协作
-
-关键区别：
-  • 1.2级："上级告诉我做什么，我做好"
-  • 1.3级："我看到问题，主动推动解决"
-
-═══════════════════════════════════════════════════════════════════
-【三、直线上级反馈 - 你的优势与待发展项】
-═══════════════════════════════════════════════════════════════════
-
-💬 王经理（你的直线上级）反馈：
-
-【优势区 - 继续保持】
-
-✓ 代码能力扎实
-  具体表现：代码逻辑清晰，Bug率低。上个月推荐模型优化的代码一次通过测试。
-  建议：继续保持，这是你扎实的技术底子。
-
-✓ 学习能力强
-  具体表现：新算法上手快，Transformer架构2周掌握（同期平均4周）。
-  建议：继续保持好奇心，多了解业务场景。
-
-✓ 责任心强
-  具体表现：安排的任务都能按时完成，连续4个sprint无延期。
-  建议：这是很好的职业习惯，继续保持。
-
-【待发展区 - 晋升突破点】
-
-△ 主动性待加强
-  具体表现：习惯等安排，较少主动发现问题并推动解决。
-  举例：推荐系统延迟问题，你发现了但没有主动推动优化，后来是测试同学反馈后才开始处理。
-  发展建议：尝试主动owner一个小优化，从发现问题到推动落地。
-
-△ 技术表达待提升
-  具体表现：文档写得不够清楚，非技术人员理解困难。
-  举例：上个月的特征工程文档，测试同学看了3遍才理解，导致联调时间延长。
-  发展建议：写文档时假设读者不熟悉技术细节，多用图表和示例说明。
-
-△ 跨团队协作少
-  具体表现：与其他组同学的互动不多，协作中较少主动沟通。
-  举例：搜索算法组想复用你们的特征，对接过程不顺畅，对方反馈"沟通成本高"。
-  发展建议：主动参与跨团队项目，承担对接人角色。
-
-【上级期待】
-
-如果能在以下2点有突破，1.3级就水到渠成了：
-  1. 主动owner一个小项目（哪怕是优化类）
-  2. 写1篇让非技术同事也能看懂的技术文档
-
-═══════════════════════════════════════════════════════════════════
-【四、个人发展建议 - 下一步行动计划】
-═══════════════════════════════════════════════════════════════════
-
-建议周期：6周
-
-Week 1-2：提升主动性
-  • 主动发现1个可优化点（推荐延迟、特征缺失等均可）
-  • 写一份简要方案（1页纸即可）
-  • 找上级讨论，争取owner这个小优化
-  预期成果：完成1次从"发现问题"到"推动解决"的闭环
-
-Week 3-4：提升协作能见度
-  • 参与搜索算法组的特征对接（已有需求）
-  • 主动承担对接人角色（而非"被拉进群"）
-  • 在组内分享对接经验（10分钟闪电分享即可）
-  预期成果：建立跨团队协作的实战经验
-
-Week 5-6：补齐文档短板
-  • 选择你做过的一个功能，重写技术文档
-  • 找1名测试同学和1名产品同学试读
-  • 根据反馈修改，直到他们说"看懂了"
-  预期成果：产出1篇他人能看懂的技术文档
-
-第7周：与上级1对1沟通
-  • 回顾6周的成长
-  • 讨论是否符合1.3级标准
-  • 确定下一步计划
-
-═══════════════════════════════════════════════════════════════════
-【五、给你的话】
-═══════════════════════════════════════════════════════════════════
-
-陈同学，你的技术底子很好，这是团队公认的。过去11个月的工作也证明了你的能力。
-
-从1.2到1.3，本质不是"技术考试"，而是"职业成熟度"的跃迁：
-
-  • 不只是"完成任务"，而是"主动发现问题"
-  • 不只是"自己会做"，而是"能让别人理解"
-  • 不只是"技术好"，而是"能推动事情发生"
-
-你现在技术能力已经达到1.3级水平，只需要在"主动性"和"协作"上稍微突破。
-
-按照上面的6周计划，一步步来，1.3级是水到渠成的事。
-
-有任何疑问随时找上级聊聊，也欢迎随时找我复盘进展～
-
-加油！
-═══════════════════════════════════════════════════════════════════</pre>
-          </div>
-        </div>
-
-        <div id="lyr-empB" class="scene-panel">
-          <div class="io-wrap fi">
-            <div class="io-header io-in-hdr"><i class="fa-solid fa-terminal"></i>用户输入</div>
-            <div class="io-body">
-              <div class="auth-grid">
-                <div class="auth-cell">
-                  <div class="auth-lbl">工号</div>
-                  <div class="auth-val">200002</div>
-                </div>
-                <div class="auth-cell">
-                  <div class="auth-lbl">识别角色</div>
-                  <div class="auth-val">2.2级高级算法工程师</div>
-                </div>
-                <div class="auth-cell">
-                  <div class="auth-lbl">触发意图</div>
-                  <div class="auth-val">晋升2.3准备度 / 架构师路径 / 发展规划</div>
-                </div>
-              </div>
-              <div class="flex items-center gap-3 flex-wrap">
-                <span class="auth-ok"><i class="fa-solid fa-circle-check"></i>验证通过</span>
-                <span class="tag t-amber">仅可查看个人数据</span>
-                <span class="ml-auto io-prompt">"帮我看看晋升2.3准备度和架构师路径"</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="diag-output fi">
-            <div class="diag-top">
-              <div>
-                <div class="diag-title">系统完整输出 · 员工B</div>
-                <div class="diag-sub">从 2.3 准备度延展到 3.1 架构师长期发展路径</div>
-              </div>
-              <span class="tag t-amber">骨干员工视角</span>
-            </div>
-            <div class="growth-report">
-              <div class="report-hero">
-                <div class="profile-card amber">
-                  <div class="avatar">李</div>
-                  <div>
-                    <div class="profile-name">李**｜2.2级高级算法工程师</div>
-                    <div class="profile-meta">工号 200002 · 入职 3.5 年 · 智能教学产品部-推荐算法组<br>请求：晋升2.3准备度 / 架构师路径 / 发展规划</div>
-                  </div>
-                </div>
-                <div class="profile-card amber">
-                  <div class="level-bridge">
-                    <div class="level-box"><strong>2.2</strong><span>资深级<br>个人技术强</span></div>
-                    <div class="bridge-arrow" style="color:var(--amber)">→</div>
-                    <div class="level-box"><strong>2.3</strong><span>专家级<br>带动他人</span></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="report-grid">
-                <div class="report-card">
-                  <h4>核心贡献</h4>
-                  <ul>
-                    <li>AI课程推荐系统核心模块持续2年 owner，稳定性好。</li>
-                    <li>智能答疑算法项目从0到1主导，方案被产品采纳。</li>
-                    <li>推荐系统性能调优专项，主导瓶颈诊断与优化。</li>
-                  </ul>
-                </div>
-                <div class="report-card">
-                  <h4>优势区</h4>
-                  <ul>
-                    <li>技术深度强，推荐算法领域团队 Top 2。</li>
-                    <li>业务敏感度高，能站在产品角度思考。</li>
-                    <li>项目交付稳定，负责模块质量高。</li>
-                  </ul>
-                </div>
-                <div class="report-card">
-                  <h4>晋升突破点</h4>
-                  <ul>
-                    <li>人才培养：从自己做得好，到让新人能独立做。</li>
-                    <li>技术推广：把好方案沉淀成团队可复用标准。</li>
-                    <li>跨团队影响：让搜索、广告、数据中台也知道你。</li>
-                  </ul>
-                </div>
-                <div class="report-card compare-card">
-                  <h4>2.3 与 3.1 的能力台阶</h4>
-                  <div class="compare-row">
-                    <div><b>2.3级：扩大技术影响力</b><ul><li>能带人</li><li>能推广方案</li><li>能跨团队影响</li></ul></div>
-                    <div><b>3.1级：系统级架构师</b><ul><li>跨领域技术广度</li><li>系统级架构设计</li><li>带小团队并推动业务</li></ul></div>
-                  </div>
-                  <div class="aha-line" style="background:#fffbeb;border-color:#fde68a;color:#92400e">核心判断：技术能力已经够，下一步关键是“带人、推广、跨团队影响”。</div>
-                </div>
-                <div class="report-card">
-                  <h4>隐藏优势</h4>
-                  <ul>
-                    <li>系统发现你的“技术-业务转化率”很突出。</li>
-                    <li>方案不仅讲实现，也讲业务影响和投入产出。</li>
-                    <li>这是未来架构师路径的关键潜质。</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="report-card">
-                <h4>18个月发展路径</h4>
-                <div class="action-timeline">
-                  <div class="action-step"><span>0-6个月</span><b>冲刺2.3级</b><p>培养1名1.3级同学，做1次跨团队分享，写1篇团队标准方案。</p></div>
-                  <div class="action-step"><span>6-12个月</span><b>扩展技术广度</b><p>主动了解搜索、广告算法，参与跨系统架构设计，开始带2-3人。</p></div>
-                  <div class="action-step"><span>12-18个月</span><b>建立业务影响力</b><p>主导业务级技术方案，做部门级分享，培养1名2.1级到2.3级。</p></div>
-                </div>
-              </div>
-
-              <div class="coach-note">
-                <h4>给李同学的话</h4>
-                <p>你的状态很好，个人技术能力已经超过2.3级标准。从2.2到2.3，核心是从“个人贡献”到“带动他人”的转变。如果未来有更高追求，18个月后可以向架构师发展。</p>
-              </div>
-            </div>
-            <pre class="diag-pre">🔐 身份验证通过
-用户：李**（工号：200002）
-═══════════════════════════════════════════════════════════════════
-
-【个人发展报告】
-当前职级：2.2（资深级）
-目标职级：2.3（专家级）
-入职时长：3.5年
-所在团队：智能教学产品部-推荐算法组
-
-═══════════════════════════════════════════════════════════════════
-【一、工作回顾与项目总结】
-═══════════════════════════════════════════════════════════════════
-
-过去3.5年，系统记录到你的主要工作成果：
-
-核心业务贡献：
-  • AI课程推荐系统核心模块（持续2年owner）
-    - 独立负责推荐算法核心架构
-    - 推荐准确率提升12%，性能提升40%
-    - 连续2年0故障运行
-
-  • 智能答疑算法项目（Q2主导）
-    - 从0到1搭建智能答疑模型
-    - 用户满意度提升15%
-    - 技术方案被产品采纳率团队最高
-
-  • 推荐系统性能调优专项
-    - 主导性能瓶颈诊断与优化
-    - 响应时间降低35%
-
-日常工作：
-  • 代码质量：团队Top 2水平，方案设计能力强
-  • 业务理解：能站在产品角度思考，技术方案贴合业务
-  • 项目交付：负责的模块稳定性好，交付准时
-
-═══════════════════════════════════════════════════════════════════
-【二、2.3级与3.1级能力要求拆解】
-═══════════════════════════════════════════════════════════════════
-
-当前2.2级的核心能力：
-  ✅ 能独立负责核心模块
-  ✅ 技术深度团队Top 2
-  ✅ 能处理复杂技术问题
-  ✅ 能站在产品角度思考
-
-2.3级（下一步）的核心要求：
-  📍 能带人（让新人能独立工作）
-  📍 能推广（技术方案能被团队复用）
-  📍 能跨团队影响（在更大范围建立技术影响力）
-
-3.1级（架构师）的核心要求：
-  📍 跨领域技术广度（不只精通推荐，还要了解搜索、广告等）
-  📍 系统级架构设计（从模块到系统的抽象能力）
-  📍 带小团队（不只带1-2人，而是带团队做项目）
-  📍 业务驱动（不只是理解业务，而是能推动业务决策）
-
-关键区别：
-  • 2.2级："个人技术强，能搞定复杂问题"
-  • 2.3级："能带人一起搞定问题，技术影响力大"
-  • 3.1级："能设计系统架构，带团队，推动业务"
-
-═══════════════════════════════════════════════════════════════════
-【三、直线上级反馈 - 你的优势与待发展项】
-═══════════════════════════════════════════════════════════════════
-
-💬 张总监（你的直线上级）反馈：
-
-【优势区 - 继续保持】
-
-✓ 技术深度强
-  具体表现：推荐算法领域团队Top 2，能处理复杂技术问题。
-  具体项目：负责的推荐核心模块0故障，性能提升40%。
-  建议：继续保持技术深耕，同时开始横向扩展。
-
-✓ 业务敏感度高
-  具体表现：能站在产品角度思考，技术方案贴合业务需求。
-  具体项目：智能答疑项目中，主动提出3个业务优化建议，全部被采纳。
-  建议：这是你区别于纯技术同学的核心优势，要放大。
-
-✓ 项目交付能力强
-  具体表现：负责的模块稳定性好，交付准时，质量高。
-  建议：这是职业素养的体现，继续保持。
-
-【待发展区 - 晋升突破点】
-
-△ 人才培养待提升
-  具体表现：目前带的实习生成长较慢，反馈"学不到东西"。
-  原因分析：可能过于专注自己做事，对带人投入不够。
-  发展建议：尝试用"边做边教"的方式，让新人参与核心模块的开发和讨论。
-
-△ 技术推广不足
-  具体表现：技术方案很好，但文档和分享不够，其他同学复用困难。
-  具体案例：你的推荐特征工程方案很棒，但只有你自己能维护，团队其他人接手困难。
-  发展建议：写1篇团队级技术文档，把你的经验沉淀下来。
-
-△ 跨团队影响有限
-  具体表现：在智能教学产品部内有影响力，但其他组（搜索、广告、数据中台）知道你能力的不到30%。
-  发展建议：主动做一次跨团队技术分享，扩大技术影响力。
-
-【上级期待】
-
-如果接下来3个月能做到以下3点，2.3级是水到渠成的事：
-  1. 培养1名1.3级同学到能独立负责子模块
-  2. 做1次跨团队技术分享（让搜索、广告组也知道你）
-  3. 写1篇能沉淀为团队标准的技术方案文档
-
-═══════════════════════════════════════════════════════════════════
-【四、长期发展建议 - 向架构师（3.1级）发展】
-═══════════════════════════════════════════════════════════════════
-
-如果你对未来有更高追求，可以考虑向3.1级架构师发展。
-
-关键能力差距与提升路径：
-
-技术广度（推荐→跨领域）：
-  当前：推荐算法领域专家
-  目标：了解搜索、广告、NLP等技术栈
-  行动：主动参与跨系统架构设计，阅读相关技术文档
-
-架构能力（模块→系统）：
-  当前：能设计模块级方案
-  目标：能设计系统级架构
-  行动：参与更大范围的技术方案评审，学习架构设计方法论
-
-带人能力（1-2人→小团队）：
-  当前：带实习生经验不足
-  目标：能带2-3人小团队做项目
-  行动：先做好2.3级的带人要求，逐步扩展
-
-业务影响力（理解→驱动）：
-  当前：能站在产品角度思考
-  目标：能用技术驱动业务决策
-  行动：主动提出业务优化建议，用数据证明技术价值
-
-【18个月发展路径】
-
-阶段一（现在-6个月）：冲刺2.3级
-  目标：完成上级说的3件事，晋升2.3
-
-阶段二（6-12个月）：扩展技术广度
-  • 主动了解搜索、广告算法
-  • 参与跨系统架构设计
-  • 开始带2-3人小团队
-
-阶段三（12-18个月）：建立业务影响力
-  • 主导1个业务级别的技术方案（影响DAU/收入）
-  • 在部门级技术分享
-  • 培养1名2.1级同学到2.3级
-
-18个月后，可以申请晋升架构师。
-
-═══════════════════════════════════════════════════════════════════
-【五、隐藏优势 - 系统发现】
-═══════════════════════════════════════════════════════════════════
-
-系统分析你的行为数据，发现1个隐藏优势：
-
-你的"技术-业务转化率"是团队最高的。
-
-具体表现：
-  • 你的技术方案被产品采纳率明显高于团队平均水平
-  • 你的方案不仅讲技术实现，还讲业务影响和投入产出
-  • 产品经理对你的方案满意度很高
-
-这是架构师的核心能力！
-很多技术强的同学只关注技术实现，缺乏业务视角。
-你天然具备这个优势，要在未来的发展中放大它。
-
-建议：在晋升答辩和未来发展中，重点突出这个差异化优势。
-
-═══════════════════════════════════════════════════════════════════
-【六、给你的话】
-═══════════════════════════════════════════════════════════════════
-
-李同学，你的状态很好，这是团队公认的。
-
-过去3.5年，你已经在推荐算法领域建立了深厚的技术积累，
-个人技术能力已经超过2.3级标准。
-
-从2.2到2.3，核心是从"个人贡献"到"带动他人"的转变。
-技术能力已经够用了，关键是提升"软实力"：带人、推广、跨团队影响。
-
-按照上面的3个月计划，一步步来，2.3级是水到渠成的事。
-
-如果对未来有更高追求，18个月后可以向架构师发展。
-你已经具备了核心潜质（尤其是业务敏感度），只需要逐步扩展技术广度和带人能力。
-
-有任何疑问随时找上级聊聊，也欢迎随时找我复盘进展～
-
-加油！
-═══════════════════════════════════════════════════════════════════</pre>
-          </div>
-        </div>
-      </section>
-
-      <section id="s2-old" class="sec" style="display:none">
-        <div class="sec-header fi">
-          <div class="sec-icon" style="background:linear-gradient(135deg,#059669,#34d399)"><i class="fa-solid fa-user-graduate"></i></div>
-          <div>
-            <div class="sec-title">场景二：个人晋升诊断（多职级对比）</div>
-            <div class="sec-desc">同屏对比 · 1.2级员工 vs 2.2级骨干 · 盲区识别 + 长期规划</div>
+            <div class="sec-desc">系统输出完整个人发展报告 · 包含工作回顾、能力分析、上级反馈、行动计划</div>
           </div>
           <div class="ml-auto"><span class="tag t-emerald"><i class="fa-solid fa-user mr-1"></i>个人权限</span></div>
         </div>
@@ -2790,8 +2270,9 @@ Week 5-6：补齐文档短板
           <button class="stab" onclick="showLayer('emp22','s2',event)">📕 员工B · 2.2级 → 2.3</button>
         </div>
 
-        <!-- EMP 1.2 -->
+        <!-- ── 员工A 1.2→1.3 ── -->
         <div id="lyr-emp12" class="scene-panel active">
+          <!-- 身份验证 -->
           <div class="io-wrap fi">
             <div class="io-header io-in-hdr"><i class="fa-solid fa-terminal"></i>身份验证</div>
             <div class="io-body">
@@ -2817,194 +2298,295 @@ Week 5-6：补齐文档短板
             </div>
           </div>
 
-          <div class="card fi">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
-              <!-- Ring -->
-              <div class="inner-card flex flex-col items-center justify-center text-center">
-                <div style="position:relative;width:125px;height:125px;margin:0 auto .85rem">
-                  <canvas id="ring12"></canvas>
+          <!-- 报告主体 -->
+          <div class="report-wrap fi">
+            <!-- Banner -->
+            <div class="report-banner report-banner-a">
+              <div>
+                <div class="report-title ci"><i class="fa-solid fa-file-lines mr-2"></i>个人发展报告</div>
+                <div class="report-meta">
+                  当前职级：<strong>1.2（成长级）</strong> &nbsp;→&nbsp; 目标职级：<strong>1.3（熟练级）</strong><br>
+                  入职时长：<strong>11个月</strong> &nbsp;|&nbsp; 所在团队：<strong>智能教学产品部 · 推荐算法组</strong>
+                </div>
+                <div class="report-kv-row">
+                  <span class="report-kv-pill" style="background:var(--emerald-light);border:1px solid #6ee7b7;color:var(--emerald)"><i class="fa-solid fa-code-branch"></i>代码稳定交付</span>
+                  <span class="report-kv-pill" style="background:var(--indigo-ultra);border:1px solid #c7d2fe;color:var(--indigo)"><i class="fa-solid fa-bolt"></i>学习速度快</span>
+                  <span class="report-kv-pill" style="background:#fffbeb;border:1px solid #fde68a;color:#92400e"><i class="fa-solid fa-triangle-exclamation"></i>协作待突破</span>
+                </div>
+              </div>
+              <!-- 能力进度圈 -->
+              <div style="text-align:center;flex-shrink:0">
+                <div style="position:relative;width:110px;height:110px;margin:0 auto .5rem">
+                  <canvas id="ring12A"></canvas>
                   <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
-                    <div class="text-3xl font-extrabold cg" style="font-family:'Noto Serif SC',serif;line-height:1">76</div>
-                    <div class="text-xs mt-1" style="color:var(--slate-400)">综合准备度</div>
+                    <div style="font-size:1.7rem;font-weight:900;color:var(--emerald);font-family:'Noto Serif SC',serif;line-height:1">76</div>
+                    <div style="font-size:.58rem;color:var(--slate-400)">综合准备度</div>
                   </div>
                 </div>
-                <div class="text-xs space-y-1.5 w-full">
-                  <div class="flex justify-between px-2 py-1 rounded-lg" style="background:var(--slate-50)"><span style="color:var(--slate-400)">目标线</span><span class="font-bold ca">80分</span></div>
-                  <div class="flex justify-between px-2 py-1 rounded-lg" style="background:var(--rose-light)"><span style="color:var(--slate-400)">差距</span><span class="font-bold cr">-4分</span></div>
-                  <div class="flex justify-between px-2 py-1 rounded-lg" style="background:var(--emerald-light)"><span style="color:var(--slate-400)">百分位</span><span class="font-bold cg">前40%</span></div>
-                  <div class="flex justify-between px-2 py-1 rounded-lg" style="background:var(--indigo-ultra)"><span style="color:var(--slate-400)">预计周期</span><span class="font-bold ci">6-8周</span></div>
-                </div>
-              </div>
-              <!-- Radar -->
-              <div class="inner-card">
-                <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--slate-400);margin-bottom:.65rem"><i class="fa-solid fa-chart-line mr-1 cg"></i>能力雷达 vs 1.3标准</div>
-                <div class="radar-wrap"><canvas id="radar12"></canvas></div>
-              </div>
-              <!-- Comparison -->
-              <div class="inner-card">
-                <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--slate-400);margin-bottom:.85rem"><i class="fa-solid fa-scale-balanced mr-1 ca"></i>当前 vs 1.3级标准</div>
-                <div class="prow"><span class="plbl">技术能力</span>
-                  <div class="pbar-wrap">
-                    <div class="pbar" style="background:linear-gradient(90deg,#4f46e5,#818cf8);width:82%"></div>
-                  </div><span class="pval ci">82</span><span class="tag t-emerald" style="font-size:.58rem">+2✅</span>
-                </div>
-                <div class="prow"><span class="plbl">代码质量</span>
-                  <div class="pbar-wrap">
-                    <div class="pbar" style="background:linear-gradient(90deg,#059669,#34d399);width:85%"></div>
-                  </div><span class="pval cg">85</span><span class="tag t-emerald" style="font-size:.58rem">+3🌟</span>
-                </div>
-                <div class="prow"><span class="plbl">业务理解</span>
-                  <div class="pbar-wrap">
-                    <div class="pbar" style="background:linear-gradient(90deg,#0284c7,#38bdf8);width:78%"></div>
-                  </div><span class="pval cs">78</span><span class="tag t-emerald" style="font-size:.58rem">达标✅</span>
-                </div>
-                <div class="prow"><span class="plbl">成长潜力</span>
-                  <div class="pbar-wrap">
-                    <div class="pbar" style="background:linear-gradient(90deg,#d97706,#fbbf24);width:75%"></div>
-                  </div><span class="pval ca">75</span><span class="tag t-amber" style="font-size:.58rem">-3📈</span>
-                </div>
-                <div class="prow"><span class="plbl">协作能力</span>
-                  <div class="pbar-wrap">
-                    <div class="pbar" style="background:linear-gradient(90deg,#e11d48,#fb7185);width:71%"></div>
-                  </div><span class="pval cr">71</span><span class="tag t-rose" style="font-size:.58rem">-4⚠️</span>
-                </div>
-                <div class="prow"><span class="plbl">文档能力</span>
-                  <div class="pbar-wrap">
-                    <div class="pbar" style="background:linear-gradient(90deg,#e11d48,#fb7185);width:68%"></div>
-                  </div><span class="pval cr">68</span><span class="tag t-rose" style="font-size:.58rem">-4⚠️</span>
-                </div>
-                <div class="p-1.5 mt-1 rounded-xl text-xs" style="background:var(--rose-light);border:1px solid #fda4af;color:var(--rose)"><strong>最大障碍不是技术，是协作与文档！</strong></div>
+                <div style="font-size:.62rem;color:var(--slate-400)">目标 <strong style="color:var(--amber)">80分</strong> · 差距 <strong class="cr">-4分</strong></div>
+                <div style="font-size:.62rem;margin-top:.2rem"><span class="tag t-amber" style="font-size:.58rem">⏱ 预计6-8周达标</span></div>
               </div>
             </div>
 
-            <!-- Behavior Gap -->
-            <div class="inner-card mb-4 fi">
-              <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--slate-400);margin-bottom:.85rem"><i class="fa-solid fa-magnifying-glass mr-1 cr"></i>行为数据 · 协作短板详细分析</div>
-              <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
-                <div class="p-2 rounded-xl" style="background:var(--rose-light);border:1px solid #fda4af">
-                  <div class="font-bold cr mb-1">跨团队参与度</div>
-                  <div class="text-2xl font-extrabold cr" style="font-family:'Noto Serif SC',serif">20%</div>
-                  <div style="color:var(--slate-500)">团队均值 <strong>45%</strong></div>
-                </div>
-                <div class="p-2 rounded-xl" style="background:var(--rose-light);border:1px solid #fda4af">
-                  <div class="font-bold cr mb-1">文档贡献</div>
-                  <div class="text-2xl font-extrabold cr" style="font-family:'Noto Serif SC',serif">1篇</div>
-                  <div style="color:var(--slate-500)">均值 <strong>3篇</strong>/月</div>
-                </div>
-                <div class="p-2 rounded-xl" style="background:#fffbeb;border:1px solid #fde68a">
-                  <div class="font-bold ca mb-1">Code Review</div>
-                  <div class="text-2xl font-extrabold ca" style="font-family:'Noto Serif SC',serif">2次</div>
-                  <div style="color:var(--slate-500)">均值 <strong>5次</strong>/周</div>
-                </div>
-                <div class="p-2 rounded-xl" style="background:var(--rose-light);border:1px solid #fda4af">
-                  <div class="font-bold cr mb-1">技术分享</div>
-                  <div class="text-2xl font-extrabold cr" style="font-family:'Noto Serif SC',serif">0次</div>
-                  <div style="color:var(--slate-500)">团队共 <strong>8次</strong></div>
-                </div>
+            <!-- ① 工作回顾 -->
+            <div class="rpt-section">
+              <div class="rpt-sec-hdr" onclick="toggleSection(this)">
+                <div class="rpt-sec-icon" style="background:linear-gradient(135deg,#0284c7,#38bdf8)"><i class="fa-solid fa-briefcase"></i></div>
+                <span class="rpt-sec-label">一、工作回顾与项目总结</span>
+                <span class="rpt-sec-badge tag t-sky" style="font-size:.6rem">11个月记录</span>
+                <i class="fa-solid fa-chevron-down rpt-chevron open ml-auto"></i>
               </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-              <!-- Self vs Manager -->
-              <div class="inner-card">
-                <div style="font-size:.68rem;font-weight:700;margin-bottom:.85rem" class="cr"><i class="fa-solid fa-scale-unbalanced mr-1"></i>自评 vs 上级反馈 · 认知差分析</div>
-                <div class="overflow-x-auto rounded-xl" style="border:1px solid var(--slate-200)">
-                  <table class="ct">
-                    <thead>
-                      <tr>
-                        <th>维度</th>
-                        <th>自评</th>
-                        <th>上级评</th>
-                        <th>差异</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>技术能力</td>
-                        <td class="font-bold ca">88</td>
-                        <td class="font-bold ci">82</td>
-                        <td class="font-bold cr">-6 ⚠️</td>
-                      </tr>
-                      <tr>
-                        <td>协作能力</td>
-                        <td class="font-bold ca">78</td>
-                        <td class="font-bold ci">71</td>
-                        <td class="font-bold cr">-7 ⚠️</td>
-                      </tr>
-                      <tr>
-                        <td>业务理解</td>
-                        <td class="font-bold ca">82</td>
-                        <td class="font-bold ci">78</td>
-                        <td class="font-bold cr">-4</td>
-                      </tr>
-                      <tr>
-                        <td>主动性</td>
-                        <td class="font-bold ca">85</td>
-                        <td class="font-bold ci">70</td>
-                        <td><span class="font-bold cr text-sm">-15 🔴</span></td>
-                      </tr>
-                      <tr>
-                        <td>文档能力</td>
-                        <td class="font-bold ca">80</td>
-                        <td class="font-bold ci">68</td>
-                        <td class="font-bold cr">-12 🔴</td>
-                      </tr>
-                    </tbody>
-                  </table>
+              <div class="rpt-sec-body open">
+                <div class="text-xs font-bold mb-3" style="color:var(--slate-400);text-transform:uppercase;letter-spacing:.06em"><i class="fa-solid fa-folder-open mr-1 cs"></i>项目参与</div>
+                <div class="proj-entry">
+                  <div class="proj-entry-title"><span class="tag t-sky" style="font-size:.6rem">Q2</span>AI课程推荐模型优化</div>
+                  <ul class="proj-bullet">
+                    <li>负责特征工程模块，独立完成3个核心特征的提取与验证</li>
+                    <li>代码一次通过测试，零Bug上线</li>
+                  </ul>
                 </div>
-                <div class="mt-2 p-2 rounded-xl text-xs" style="background:var(--rose-light);border:1px solid #fda4af;color:var(--rose)">
-                  <strong>最大认知差在主动性（-15分）</strong><br>过去3月主动发起任务：2个，同期均值：8个
+                <div class="proj-entry">
+                  <div class="proj-entry-title"><span class="tag t-indigo" style="font-size:.6rem">Q1-Q2</span>推荐系统性能调优</div>
+                  <ul class="proj-bullet">
+                    <li>参与推荐延迟优化专项，协助完成2个性能瓶颈的诊断</li>
+                    <li>学习并应用Transformer架构 <span class="tag t-emerald" style="font-size:.58rem">2周掌握 · 快于同期平均</span></li>
+                  </ul>
                 </div>
-              </div>
-              <!-- Manager Feedback -->
-              <div class="inner-card">
-                <div style="font-size:.68rem;font-weight:700;margin-bottom:.85rem" class="cs"><i class="fa-solid fa-comment-dots mr-1"></i>直线上级（王经理）反馈</div>
-                <div class="space-y-2 text-xs">
-                  <div class="p-2 rounded-xl" style="background:var(--emerald-light);border:1px solid #6ee7b7">
-                    <div class="font-bold cg mb-1">✅ 优势区</div>
-                    <div style="color:var(--slate-600)">代码逻辑清晰，Bug率团队最低 · Transformer从学习到落地仅2周（均值4周）· 连续4个sprint按时交付</div>
+                <div class="text-xs font-bold mb-2 mt-3" style="color:var(--slate-400);text-transform:uppercase;letter-spacing:.06em"><i class="fa-solid fa-clipboard-check mr-1 cg"></i>日常工作亮点</div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+                  <div class="p-2 rounded-xl text-xs" style="background:var(--emerald-light);border:1px solid #6ee7b7"><i class="fa-solid fa-code cg mr-1"></i><span class="font-semibold cg">代码质量</span>
+                    <div style="color:var(--slate-600);margin-top:.2rem">Bug率处于团队较低水平，质量稳定</div>
                   </div>
-                  <div class="p-2 rounded-xl" style="background:#fffbeb;border:1px solid #fde68a">
-                    <div class="font-bold ca mb-1">△ 待提升区</div>
-                    <div style="color:var(--slate-600)">推荐延迟问题发现了但没主动推动 · 特征工程文档测试看3遍才懂，联调延长2天 · 搜索组反馈"沟通成本高"</div>
+                  <div class="p-2 rounded-xl text-xs" style="background:var(--emerald-light);border:1px solid #6ee7b7"><i class="fa-solid fa-calendar-check cg mr-1"></i><span class="font-semibold cg">按时交付</span>
+                    <div style="color:var(--slate-600);margin-top:.2rem">连续4个sprint按时交付，无延期记录</div>
                   </div>
-                  <div class="p-2 rounded-xl" style="background:var(--indigo-ultra);border:1px solid #c7d2fe">
-                    <div class="font-bold ci mb-1">上级期待</div>
-                    <div style="color:var(--slate-600)">① 主动owner一个优化类小项目<br>② 写1篇让非技术同事能看懂的文档</div>
+                  <div class="p-2 rounded-xl text-xs" style="background:var(--emerald-light);border:1px solid #6ee7b7"><i class="fa-solid fa-brain cg mr-1"></i><span class="font-semibold cg">学习能力</span>
+                    <div style="color:var(--slate-600);margin-top:.2rem">主动学习新算法，上手速度快</div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- 6-week plan -->
-            <div class="inner-card fi">
-              <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--slate-400);margin-bottom:.85rem"><i class="fa-solid fa-calendar-days mr-1 ci"></i>🎯 6周晋升冲刺计划</div>
-              <div class="wplan">
-                <div class="wp-item">
-                  <div class="wp-row">
-                    <div class="wp-dot" style="background:#4f46e5"></div><span class="wp-lbl ci">Week 1-2：证明主动性</span>
+            <!-- ② 能力要求拆解 -->
+            <div class="rpt-section">
+              <div class="rpt-sec-hdr" onclick="toggleSection(this)">
+                <div class="rpt-sec-icon" style="background:linear-gradient(135deg,#7c3aed,#a78bfa)"><i class="fa-solid fa-layer-group"></i></div>
+                <span class="rpt-sec-label">二、1.3级能力要求拆解</span>
+                <span class="tag t-violet" style="font-size:.6rem">执行者→独立贡献者</span>
+                <i class="fa-solid fa-chevron-down rpt-chevron open ml-auto"></i>
+              </div>
+              <div class="rpt-sec-body open">
+                <div class="level-compare mb-3">
+                  <div class="lv-box lv-box-cur">
+                    <div class="lv-box-hdr cg"><i class="fa-solid fa-circle-check"></i>1.2级（当前）已具备</div>
+                    <div class="lv-item"><i class="fa-solid fa-check text-xs cg mt-1 flex-shrink-0"></i>能独立完成分配的任务</div>
+                    <div class="lv-item"><i class="fa-solid fa-check text-xs cg mt-1 flex-shrink-0"></i>代码质量达标</div>
+                    <div class="lv-item"><i class="fa-solid fa-check text-xs cg mt-1 flex-shrink-0"></i>学习能力良好</div>
+                    <div class="lv-item"><i class="fa-solid fa-check text-xs cg mt-1 flex-shrink-0"></i>按时交付</div>
                   </div>
-                  <div class="wp-text">主动发现1个可优化点 · 写简要方案（1页纸）· 找上级讨论争取owner<br><span class="cg font-semibold">✅ 主动性评分预计提升到75+</span></div>
+                  <div class="lv-box lv-box-tgt">
+                    <div class="lv-box-hdr ci"><i class="fa-solid fa-arrow-trend-up"></i>1.3级（目标）需达到</div>
+                    <div class="lv-item"><i class="fa-solid fa-map-pin text-xs ci mt-1 flex-shrink-0"></i>能主动发现并解决问题</div>
+                    <div class="lv-item"><i class="fa-solid fa-map-pin text-xs ci mt-1 flex-shrink-0"></i>能独立owner一个小模块/项目</div>
+                    <div class="lv-item"><i class="fa-solid fa-map-pin text-xs ci mt-1 flex-shrink-0"></i>技术方案能让他人理解和复用</div>
+                    <div class="lv-item"><i class="fa-solid fa-map-pin text-xs ci mt-1 flex-shrink-0"></i>能与其他团队有效协作</div>
+                  </div>
                 </div>
-                <div class="wp-item">
-                  <div class="wp-row">
-                    <div class="wp-dot" style="background:#0284c7"></div><span class="wp-lbl cs">Week 3-4：提升协作能见度</span>
-                  </div>
-                  <div class="wp-text">参与搜索算法组特征对接 · 主动承担对接人 · 10分钟闪电分享<br><span class="cg font-semibold">✅ 协作能力评分预计提升到74+</span></div>
-                </div>
-                <div class="wp-item" style="margin-bottom:0">
-                  <div class="wp-row">
-                    <div class="wp-dot" style="background:#059669"></div><span class="wp-lbl cg">Week 5-6：补齐文档短板</span>
-                  </div>
-                  <div class="wp-text">重写一个功能的技术文档 · 找测试+产品同学试读 · 直到说"看懂了"<br><span class="cg font-semibold">✅ 第7周申请晋升，预计80-82分达标！</span></div>
+                <div class="diff-box">
+                  <div class="diff-box-title"><i class="fa-solid fa-lightbulb ca"></i>核心区别 · 一句话总结</div>
+                  <div class="diff-row"><span class="tag t-slate" style="font-size:.62rem;flex-shrink:0">1.2级</span><span style="color:var(--slate-600)">上级告诉我做什么，我做好</span></div>
+                  <div class="diff-row"><span class="tag t-indigo" style="font-size:.62rem;flex-shrink:0">1.3级</span><span style="color:var(--slate-700);font-weight:600">我看到问题，主动推动解决</span></div>
                 </div>
               </div>
             </div>
-          </div>
+
+            <!-- ③ 上级反馈 -->
+            <div class="rpt-section">
+              <div class="rpt-sec-hdr" onclick="toggleSection(this)">
+                <div class="rpt-sec-icon" style="background:linear-gradient(135deg,#d97706,#f59e0b)"><i class="fa-solid fa-comment-dots"></i></div>
+                <span class="rpt-sec-label">三、直线上级反馈</span>
+                <span class="tag t-amber" style="font-size:.6rem">王经理</span>
+                <i class="fa-solid fa-chevron-down rpt-chevron open ml-auto"></i>
+              </div>
+              <div class="rpt-sec-body open">
+                <div class="feedback-advantage">
+                  <div class="fb-hdr cg"><i class="fa-solid fa-star"></i>优势区 · 继续保持</div>
+                  <div class="fb-item">
+                    <div class="fb-item-title cg"><i class="fa-solid fa-circle-check text-xs"></i>代码能力扎实</div>
+                    <div class="fb-item-body">
+                      代码逻辑清晰，Bug率低。上个月推荐模型优化的代码一次通过测试。
+                      <div class="fb-quote">建议：继续保持，这是你扎实的技术底子。</div>
+                    </div>
+                  </div>
+                  <div class="fb-item">
+                    <div class="fb-item-title cg"><i class="fa-solid fa-circle-check text-xs"></i>学习能力强</div>
+                    <div class="fb-item-body">
+                      新算法上手快，Transformer架构<strong>2周掌握</strong>（同期平均4周）。
+                      <div class="fb-quote">建议：继续保持好奇心，多了解业务场景。</div>
+                    </div>
+                  </div>
+                  <div class="fb-item" style="margin-bottom:0">
+                    <div class="fb-item-title cg"><i class="fa-solid fa-circle-check text-xs"></i>责任心强</div>
+                    <div class="fb-item-body">
+                      安排的任务都能按时完成，连续4个sprint无延期。
+                      <div class="fb-quote">建议：这是很好的职业习惯，继续保持。</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="feedback-develop">
+                  <div class="fb-hdr ca"><i class="fa-solid fa-triangle-exclamation"></i>待发展区 · 晋升突破点</div>
+                  <div class="fb-item">
+                    <div class="fb-item-title ca"><i class="fa-solid fa-chevron-up text-xs"></i>主动性待加强</div>
+                    <div class="fb-item-body">
+                      习惯等安排，较少主动发现问题并推动解决。
+                      <div class="fb-quote fb-quote-amber">举例：推荐系统延迟问题，你发现了但没有主动推动优化，后来是测试同学反馈后才开始处理。</div>
+                    </div>
+                    <div class="fb-sugg"><i class="fa-solid fa-arrow-right ci text-xs mt-1 flex-shrink-0"></i>尝试主动owner一个小优化，从发现问题到推动落地。</div>
+                  </div>
+                  <div class="fb-item">
+                    <div class="fb-item-title ca"><i class="fa-solid fa-chevron-up text-xs"></i>技术表达待提升</div>
+                    <div class="fb-item-body">
+                      文档写得不够清楚，非技术人员理解困难。
+                      <div class="fb-quote fb-quote-amber">举例：上个月的特征工程文档，测试同学看了3遍才理解，导致联调时间延长。</div>
+                    </div>
+                    <div class="fb-sugg"><i class="fa-solid fa-arrow-right ci text-xs mt-1 flex-shrink-0"></i>写文档时假设读者不熟悉技术细节，多用图表和示例说明。</div>
+                  </div>
+                  <div class="fb-item" style="margin-bottom:0">
+                    <div class="fb-item-title ca"><i class="fa-solid fa-chevron-up text-xs"></i>跨团队协作少</div>
+                    <div class="fb-item-body">
+                      与其他组同学的互动不多，协作中较少主动沟通。
+                      <div class="fb-quote fb-quote-amber">举例：搜索算法组想复用你们的特征，对接过程不顺畅，对方反馈"沟通成本高"。</div>
+                    </div>
+                    <div class="fb-sugg"><i class="fa-solid fa-arrow-right ci text-xs mt-1 flex-shrink-0"></i>主动参与跨团队项目，承担对接人角色。</div>
+                  </div>
+                </div>
+
+                <div class="feedback-expect">
+                  <div class="fb-hdr ci"><i class="fa-solid fa-flag"></i>上级期待 · 2个突破点</div>
+                  <div class="flex gap-2 flex-wrap text-xs">
+                    <div class="p-2 rounded-xl flex-1" style="background:#fff;border:1px solid #c7d2fe;min-width:180px">
+                      <div class="font-bold ci mb-1"><i class="fa-solid fa-circle-1 mr-1"></i>主动owner一个小项目</div>
+                      <div style="color:var(--slate-600)">哪怕是优化类的小任务，完成从发现到落地的完整闭环</div>
+                    </div>
+                    <div class="p-2 rounded-xl flex-1" style="background:#fff;border:1px solid #c7d2fe;min-width:180px">
+                      <div class="font-bold ci mb-1"><i class="fa-solid fa-circle-2 mr-1"></i>写1篇可读文档</div>
+                      <div style="color:var(--slate-600)">让非技术同事也能看懂的技术文档，通过试读验证</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ④ 行动计划 -->
+            <div class="rpt-section">
+              <div class="rpt-sec-hdr" onclick="toggleSection(this)">
+                <div class="rpt-sec-icon" style="background:linear-gradient(135deg,#4f46e5,#818cf8)"><i class="fa-solid fa-calendar-check"></i></div>
+                <span class="rpt-sec-label">四、个人发展建议 · 下一步行动计划</span>
+                <span class="tag t-indigo" style="font-size:.6rem">6周冲刺</span>
+                <i class="fa-solid fa-chevron-down rpt-chevron open ml-auto"></i>
+              </div>
+              <div class="rpt-sec-body open">
+                <div class="action-week">
+                  <div class="aw-hdr" style="background:linear-gradient(90deg,#eef2ff,#f0f9ff);border-bottom:1px solid #c7d2fe">
+                    <div style="width:28px;height:28px;background:var(--indigo);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.72rem;font-weight:700;flex-shrink:0">1-2</div>
+                    <span class="ci">Week 1-2：提升主动性</span>
+                    <span class="aw-badge" style="background:var(--rose-light);border:1px solid #fda4af;color:var(--rose)">最关键</span>
+                  </div>
+                  <div class="aw-body">
+                    <div class="aw-task">
+                      <div class="aw-task-dot" style="background:var(--indigo)"></div><span>主动发现1个可优化点（推荐延迟、特征缺失等均可）</span>
+                    </div>
+                    <div class="aw-task">
+                      <div class="aw-task-dot" style="background:var(--indigo)"></div><span>写一份简要方案（1页纸即可）</span>
+                    </div>
+                    <div class="aw-task">
+                      <div class="aw-task-dot" style="background:var(--indigo)"></div><span>找上级讨论，争取owner这个小优化</span>
+                    </div>
+                    <div class="aw-outcome"><i class="fa-solid fa-flag-checkered"></i>预期成果：完成1次从"发现问题"到"推动解决"的完整闭环</div>
+                  </div>
+                </div>
+                <div class="action-week">
+                  <div class="aw-hdr" style="background:linear-gradient(90deg,#e0f2fe,#f0f9ff);border-bottom:1px solid #bae6fd">
+                    <div style="width:28px;height:28px;background:var(--sky);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.72rem;font-weight:700;flex-shrink:0">3-4</div>
+                    <span class="cs">Week 3-4：提升协作能见度</span>
+                  </div>
+                  <div class="aw-body">
+                    <div class="aw-task">
+                      <div class="aw-task-dot" style="background:var(--sky)"></div><span>参与搜索算法组的特征对接（已有需求）</span>
+                    </div>
+                    <div class="aw-task">
+                      <div class="aw-task-dot" style="background:var(--sky)"></div><span>主动承担对接人角色（而非"被拉进群"）</span>
+                    </div>
+                    <div class="aw-task">
+                      <div class="aw-task-dot" style="background:var(--sky)"></div><span>在组内分享对接经验（10分钟闪电分享即可）</span>
+                    </div>
+                    <div class="aw-outcome" style="background:var(--sky-light);border-color:#bae6fd;color:var(--sky)"><i class="fa-solid fa-flag-checkered"></i>预期成果：建立跨团队协作的实战经验</div>
+                  </div>
+                </div>
+                <div class="action-week">
+                  <div class="aw-hdr" style="background:linear-gradient(90deg,var(--emerald-light),#f0fdf4);border-bottom:1px solid #6ee7b7">
+                    <div style="width:28px;height:28px;background:var(--emerald);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.72rem;font-weight:700;flex-shrink:0">5-6</div>
+                    <span class="cg">Week 5-6：补齐文档短板</span>
+                  </div>
+                  <div class="aw-body">
+                    <div class="aw-task">
+                      <div class="aw-task-dot" style="background:var(--emerald)"></div><span>选择你做过的一个功能，重写技术文档</span>
+                    </div>
+                    <div class="aw-task">
+                      <div class="aw-task-dot" style="background:var(--emerald)"></div><span>找1名测试同学和1名产品同学试读</span>
+                    </div>
+                    <div class="aw-task">
+                      <div class="aw-task-dot" style="background:var(--emerald)"></div><span>根据反馈修改，直到他们说"看懂了"</span>
+                    </div>
+                    <div class="aw-outcome"><i class="fa-solid fa-flag-checkered"></i>预期成果：产出1篇他人能看懂的技术文档</div>
+                  </div>
+                </div>
+                <div class="p-3 rounded-xl mt-1 text-xs flex items-center gap-3" style="background:var(--indigo-ultra);border:1px solid #c7d2fe">
+                  <i class="fa-solid fa-circle-info ci text-base flex-shrink-0"></i>
+                  <div>
+                    <div class="font-bold ci mb-1">第7周：与上级1对1沟通</div>
+                    <div style="color:var(--slate-600)">回顾6周的成长 · 讨论是否符合1.3级标准 · 确定下一步计划</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ⑤ 给你的话 -->
+            <div class="rpt-section">
+              <div class="rpt-sec-hdr" onclick="toggleSection(this)">
+                <div class="rpt-sec-icon" style="background:linear-gradient(135deg,#e11d48,#fb7185)"><i class="fa-solid fa-heart"></i></div>
+                <span class="rpt-sec-label">五、给你的话</span>
+                <i class="fa-solid fa-chevron-down rpt-chevron open ml-auto"></i>
+              </div>
+              <div class="rpt-sec-body open">
+                <div class="closing-card">
+                  <div class="closing-name"><i class="fa-solid fa-user-graduate mr-2 ca"></i>陈同学，</div>
+                  <div class="closing-body">
+                    你的技术底子很好，这是团队公认的。过去11个月的工作也证明了你的能力。<br><br>
+                    从1.2到1.3，本质不是"技术考试"，而是<span class="closing-highlight">职业成熟度的跃迁</span>：
+                  </div>
+                  <div class="closing-step">
+                    <div class="mb-1">• 不只是"完成任务"，而是 <span class="closing-highlight">主动发现问题</span></div>
+                    <div class="mb-1">• 不只是"自己会做"，而是 <span class="closing-highlight">能让别人理解</span></div>
+                    <div>• 不只是"技术好"，而是 <span class="closing-highlight">能推动事情发生</span></div>
+                  </div>
+                  <div class="closing-body">
+                    你现在技术能力已经达到1.3级水平，只需要在<span class="closing-highlight">"主动性"和"协作"</span>上稍微突破。<br><br>
+                    按照上面的6周计划，一步步来，1.3级是水到渠成的事。<br><br>
+                    有任何疑问随时找上级聊聊，也欢迎随时找我复盘进展～
+                  </div>
+                  <div class="closing-footer"><i class="fa-solid fa-fire ca"></i><span class="closing-cta font-bold text-base">加油！</span></div>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /report-wrap A -->
         </div>
 
-        <!-- EMP 2.2 -->
+        <!-- ── 员工B 2.2→2.3 ── -->
         <div id="lyr-emp22" class="scene-panel">
+          <!-- 身份验证 -->
           <div class="io-wrap fi">
             <div class="io-header io-in-hdr"><i class="fa-solid fa-terminal"></i>身份验证</div>
             <div class="io-body">
@@ -3025,102 +2607,395 @@ Week 5-6：补齐文档短板
               <div class="flex items-center gap-3 flex-wrap">
                 <span class="auth-ok"><i class="fa-solid fa-circle-check"></i>验证通过</span>
                 <span class="tag t-amber">仅可查看个人数据</span>
-                <span class="ml-auto io-prompt">"我想看晋升2.3的准备度，以及向3级发展的路径"</span>
+                <span class="ml-auto io-prompt">"看看晋升2.3准备度 / 架构师路径 / 发展规划"</span>
               </div>
             </div>
           </div>
 
-          <div class="card fi">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
-              <div class="inner-card flex flex-col items-center text-center">
-                <div class="text-xs font-bold mb-1 ca">2.3级准备度</div>
-                <div style="position:relative;width:110px;height:110px;margin:0 auto .7rem">
-                  <canvas id="ring22a"></canvas>
-                  <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
-                    <div class="text-2xl font-extrabold ca" style="font-family:'Noto Serif SC',serif;line-height:1">84</div>
-                    <div class="text-xs" style="color:var(--slate-400)">准备度</div>
-                  </div>
+          <!-- 报告主体 B -->
+          <div class="report-wrap fi">
+            <!-- Banner B -->
+            <div class="report-banner report-banner-b">
+              <div>
+                <div class="report-title ca"><i class="fa-solid fa-file-lines mr-2"></i>个人发展报告</div>
+                <div class="report-meta">
+                  当前职级：<strong>2.2（资深级）</strong> &nbsp;→&nbsp; 目标职级：<strong>2.3（专家级）</strong><br>
+                  入职时长：<strong>3.5年</strong> &nbsp;|&nbsp; 所在团队：<strong>智能教学产品部 · 推荐算法组</strong>
                 </div>
-                <div class="text-xs space-y-1 w-full">
-                  <div class="flex justify-between px-2 py-1 rounded-lg" style="background:#fffbeb"><span style="color:var(--slate-400)">目标线</span><span class="font-bold ca">85分</span></div>
-                  <div class="flex justify-between px-2 py-1 rounded-lg" style="background:var(--emerald-light)"><span style="color:var(--slate-400)">差距</span><span class="font-bold ca">仅-1分</span></div>
-                  <div class="flex justify-between px-2 py-1 rounded-lg" style="background:var(--indigo-ultra)"><span style="color:var(--slate-400)">同级排名</span><span class="font-bold ci">第1/2</span></div>
-                  <div class="flex justify-between px-2 py-1 rounded-lg" style="background:var(--indigo-ultra)"><span style="color:var(--slate-400)">组织排名</span><span class="font-bold ci">前15%</span></div>
+                <div class="report-kv-row">
+                  <span class="report-kv-pill" style="background:var(--emerald-light);border:1px solid #6ee7b7;color:var(--emerald)"><i class="fa-solid fa-crown"></i>技术深度Top 2</span>
+                  <span class="report-kv-pill" style="background:var(--violet-light);border:1px solid #d8b4fe;color:var(--violet)"><i class="fa-solid fa-gem"></i>业务敏感度强</span>
+                  <span class="report-kv-pill" style="background:#fffbeb;border:1px solid #fde68a;color:#92400e"><i class="fa-solid fa-people-arrows"></i>带人待突破</span>
                 </div>
-                <div class="text-xs font-bold mt-2 cs">3.1级准备度</div>
-                <div style="position:relative;width:90px;height:90px;margin:.5rem auto">
-                  <canvas id="ring22b"></canvas>
-                  <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
-                    <div class="text-xl font-extrabold cs" style="font-family:'Noto Serif SC',serif;line-height:1">71</div>
-                    <div class="text-xs" style="color:var(--slate-400)">初阶</div>
-                  </div>
-                </div>
-                <div class="text-xs" style="color:var(--slate-400)">目标90分 · 差距-19分 · 1-2年积累</div>
               </div>
-              <div class="inner-card">
-                <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--slate-400);margin-bottom:.65rem"><i class="fa-solid fa-chart-radar mr-1 ca"></i>能力雷达 vs 2.3标准</div>
-                <div class="radar-wrap"><canvas id="radar22"></canvas></div>
+              <!-- 双环进度 -->
+              <div style="text-align:center;flex-shrink:0">
+                <div class="text-xs font-bold ca mb-1">2.3级准备度</div>
+                <div style="position:relative;width:100px;height:100px;margin:0 auto .3rem">
+                  <canvas id="ring22A"></canvas>
+                  <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+                    <div style="font-size:1.5rem;font-weight:900;color:var(--amber);font-family:'Noto Serif SC',serif;line-height:1">84</div>
+                    <div style="font-size:.56rem;color:var(--slate-400)">目标85分</div>
+                  </div>
+                </div>
+                <div style="font-size:.6rem;color:var(--slate-400)">仅差<strong class="ca">-1分</strong> · 同级排名<strong class="ci">第1/2</strong></div>
+                <div class="text-xs font-bold cs mt-2 mb-1">3.1级准备度</div>
+                <div style="position:relative;width:72px;height:72px;margin:0 auto .2rem">
+                  <canvas id="ring31A"></canvas>
+                  <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+                    <div style="font-size:1.1rem;font-weight:900;color:var(--sky);font-family:'Noto Serif SC',serif;line-height:1">71</div>
+                    <div style="font-size:.52rem;color:var(--slate-400)">初阶</div>
+                  </div>
+                </div>
+                <div style="font-size:.58rem;color:var(--slate-400)">目标90分 · 差距-19分</div>
               </div>
-              <div class="inner-card">
-                <div style="font-size:.68rem;font-weight:700;margin-bottom:.7rem" class="cg"><i class="fa-solid fa-comment-dots mr-1"></i>张总监反馈</div>
-                <div class="space-y-2 text-xs">
-                  <div class="p-2 rounded-xl" style="background:var(--emerald-light);border:1px solid #6ee7b7">
-                    <div class="font-bold cg mb-1">✅ 已达2.3级的</div>
-                    <div style="color:var(--slate-600)">技术深度Top 2 · 模块0故障性能+40% · 站在产品角度思考</div>
+            </div>
+
+            <!-- ① 工作回顾 B -->
+            <div class="rpt-section">
+              <div class="rpt-sec-hdr" onclick="toggleSection(this)">
+                <div class="rpt-sec-icon" style="background:linear-gradient(135deg,#0284c7,#38bdf8)"><i class="fa-solid fa-briefcase"></i></div>
+                <span class="rpt-sec-label">一、工作回顾与项目总结</span>
+                <span class="tag t-sky" style="font-size:.6rem">3.5年成果</span>
+                <i class="fa-solid fa-chevron-down rpt-chevron open ml-auto"></i>
+              </div>
+              <div class="rpt-sec-body open">
+                <div class="text-xs font-bold mb-3" style="color:var(--slate-400);text-transform:uppercase;letter-spacing:.06em"><i class="fa-solid fa-trophy mr-1 ca"></i>核心业务贡献</div>
+                <div class="proj-entry">
+                  <div class="proj-entry-title"><span class="tag t-violet" style="font-size:.6rem">持续2年</span>AI课程推荐系统核心模块</div>
+                  <ul class="proj-bullet">
+                    <li>独立负责推荐算法核心架构，连续2年0故障运行</li>
+                    <li>推荐准确率提升 <span class="tag t-emerald" style="font-size:.58rem">+12%</span>，性能提升 <span class="tag t-emerald" style="font-size:.58rem">+40%</span></li>
+                    <li>技术方案被产品采纳率：团队最高</li>
+                  </ul>
+                </div>
+                <div class="proj-entry">
+                  <div class="proj-entry-title"><span class="tag t-sky" style="font-size:.6rem">Q2主导</span>智能答疑算法项目</div>
+                  <ul class="proj-bullet">
+                    <li>从0到1搭建智能答疑模型，用户满意度提升 <span class="tag t-emerald" style="font-size:.58rem">+15%</span></li>
+                    <li>主动提出3个业务优化建议，全部被产品采纳</li>
+                  </ul>
+                </div>
+                <div class="proj-entry">
+                  <div class="proj-entry-title"><span class="tag t-indigo" style="font-size:.6rem">专项</span>推荐系统性能调优</div>
+                  <ul class="proj-bullet">
+                    <li>主导性能瓶颈诊断与优化，响应时间降低 <span class="tag t-emerald" style="font-size:.58rem">-35%</span></li>
+                  </ul>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mt-1">
+                  <div class="p-2 rounded-xl text-xs" style="background:var(--emerald-light);border:1px solid #6ee7b7"><i class="fa-solid fa-code cg mr-1"></i><span class="font-semibold cg">代码质量 Top 2</span>
+                    <div style="color:var(--slate-600);margin-top:.2rem">方案设计能力强，团队公认</div>
                   </div>
-                  <div class="p-2 rounded-xl" style="background:#fffbeb;border:1px solid #fde68a">
-                    <div class="font-bold ca mb-1">△ 还差一点的</div>
-                    <div style="color:var(--slate-600)">实习生成长慢（反馈"学不到东西"）· 方案难复用 · 跨团队知名度&lt;30%</div>
+                  <div class="p-2 rounded-xl text-xs" style="background:var(--violet-light);border:1px solid #d8b4fe"><i class="fa-solid fa-lightbulb cv mr-1"></i><span class="font-semibold cv">业务敏感度高</span>
+                    <div style="color:var(--slate-600);margin-top:.2rem">能站在产品角度思考，贴合业务</div>
                   </div>
-                  <div class="p-2 rounded-xl" style="background:var(--indigo-ultra);border:1px solid #c7d2fe">
-                    <div class="font-bold ci mb-1">3个月突破建议</div>
-                    <div style="color:var(--slate-600)">① 培养1名1.3级能独立负责子模块<br>② 做1次跨团队技术分享<br>③ 写1篇团队标准技术方案</div>
+                  <div class="p-2 rounded-xl text-xs" style="background:var(--emerald-light);border:1px solid #6ee7b7"><i class="fa-solid fa-calendar-check cg mr-1"></i><span class="font-semibold cg">项目交付稳定</span>
+                    <div style="color:var(--slate-600);margin-top:.2rem">稳定性好，交付准时，质量高</div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Hidden Advantage -->
-            <div class="inner-card mb-4 fi">
-              <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--slate-400);margin-bottom:.85rem"><i class="fa-solid fa-gem mr-1 cv"></i>系统发现的隐藏优势 · 技术-业务转化率</div>
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
-                <div class="p-2 rounded-xl" style="background:var(--violet-light);border:1px solid #d8b4fe">
-                  <div class="font-bold cv mb-1">方案被采纳率</div>
-                  <div class="text-2xl font-extrabold cv" style="font-family:'Noto Serif SC',serif">92%</div>
-                  <div style="color:var(--slate-500)">团队均值 <strong>65%</strong></div>
+            <!-- ② 能力要求拆解 B -->
+            <div class="rpt-section">
+              <div class="rpt-sec-hdr" onclick="toggleSection(this)">
+                <div class="rpt-sec-icon" style="background:linear-gradient(135deg,#7c3aed,#a78bfa)"><i class="fa-solid fa-layer-group"></i></div>
+                <span class="rpt-sec-label">二、2.3级与3.1级能力要求拆解</span>
+                <span class="tag t-violet" style="font-size:.6rem">个人贡献→带动他人</span>
+                <i class="fa-solid fa-chevron-down rpt-chevron open ml-auto"></i>
+              </div>
+              <div class="rpt-sec-body open">
+                <div class="level-compare mb-3">
+                  <div class="lv-box lv-box-cur">
+                    <div class="lv-box-hdr cg"><i class="fa-solid fa-circle-check"></i>2.2级（当前）已具备</div>
+                    <div class="lv-item"><i class="fa-solid fa-check text-xs cg mt-1 flex-shrink-0"></i>能独立负责核心模块</div>
+                    <div class="lv-item"><i class="fa-solid fa-check text-xs cg mt-1 flex-shrink-0"></i>技术深度团队Top 2</div>
+                    <div class="lv-item"><i class="fa-solid fa-check text-xs cg mt-1 flex-shrink-0"></i>能处理复杂技术问题</div>
+                    <div class="lv-item"><i class="fa-solid fa-check text-xs cg mt-1 flex-shrink-0"></i>能站在产品角度思考</div>
+                  </div>
+                  <div class="lv-box lv-box-tgt">
+                    <div class="lv-box-hdr ca"><i class="fa-solid fa-arrow-trend-up"></i>2.3级（目标）需达到</div>
+                    <div class="lv-item"><i class="fa-solid fa-map-pin text-xs ca mt-1 flex-shrink-0"></i>能带人（让新人能独立工作）</div>
+                    <div class="lv-item"><i class="fa-solid fa-map-pin text-xs ca mt-1 flex-shrink-0"></i>能推广（技术方案能被团队复用）</div>
+                    <div class="lv-item"><i class="fa-solid fa-map-pin text-xs ca mt-1 flex-shrink-0"></i>能跨团队影响（更大范围技术影响力）</div>
+                  </div>
                 </div>
-                <div class="p-2 rounded-xl" style="background:var(--violet-light);border:1px solid #d8b4fe">
-                  <div class="font-bold cv mb-1">方案特点</div>
-                  <div style="color:var(--slate-600)">不只讲技术，讲业务指标影响 + A/B测试计划 + 投入产出比</div>
-                </div>
-                <div class="p-2 rounded-xl" style="background:var(--violet-light);border:1px solid #d8b4fe">
-                  <div class="font-bold cv mb-1">战略价值</div>
-                  <div style="color:var(--slate-600)">这是3.1级架构师的核心能力。晋升答辩中要重点突出作为差异化优势！</div>
+                <div class="level-compare mb-2">
+                  <div class="lv-box lv-box-tgt-b">
+                    <div class="lv-box-hdr cv"><i class="fa-solid fa-building-columns"></i>3.1级（架构师）需达到</div>
+                    <div class="lv-item"><i class="fa-solid fa-map-pin text-xs cv mt-1 flex-shrink-0"></i>跨领域技术广度（推荐+搜索+广告等）</div>
+                    <div class="lv-item"><i class="fa-solid fa-map-pin text-xs cv mt-1 flex-shrink-0"></i>系统级架构设计（从模块到系统）</div>
+                    <div class="lv-item"><i class="fa-solid fa-map-pin text-xs cv mt-1 flex-shrink-0"></i>带小团队（2-3人做项目）</div>
+                    <div class="lv-item"><i class="fa-solid fa-map-pin text-xs cv mt-1 flex-shrink-0"></i>业务驱动（技术推动业务决策）</div>
+                  </div>
+                  <div class="diff-box" style="margin-top:0">
+                    <div class="diff-box-title"><i class="fa-solid fa-lightbulb ca"></i>三级区别一句话</div>
+                    <div class="diff-row"><span class="tag t-slate" style="font-size:.62rem;flex-shrink:0">2.2级</span><span style="color:var(--slate-600)">个人技术强，能搞定复杂问题</span></div>
+                    <div class="diff-row"><span class="tag t-amber" style="font-size:.62rem;flex-shrink:0">2.3级</span><span style="color:var(--slate-700);font-weight:600">能带人一起搞定问题，影响力大</span></div>
+                    <div class="diff-row"><span class="tag t-violet" style="font-size:.62rem;flex-shrink:0">3.1级</span><span style="color:var(--slate-700);font-weight:600">设计系统架构，带团队，推动业务</span></div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- 18-month roadmap -->
-            <div class="inner-card fi">
-              <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--slate-400);margin-bottom:.85rem"><i class="fa-solid fa-road mr-1 cv"></i>18个月发展路径 · 向3.1架构师进发</div>
-              <div class="phase-line" style="background:transparent;gap:6px">
-                <div class="phase-seg rounded-xl text-xs" style="background:#fef3c7;border:1px solid #fde68a">
-                  <div class="font-bold ca mb-1">Phase 1 · 0-6个月</div>
-                  <div style="color:var(--slate-600)">完成总监3件事 → 晋升2.3级</div>
+            <!-- ③ 上级反馈 B -->
+            <div class="rpt-section">
+              <div class="rpt-sec-hdr" onclick="toggleSection(this)">
+                <div class="rpt-sec-icon" style="background:linear-gradient(135deg,#d97706,#f59e0b)"><i class="fa-solid fa-comment-dots"></i></div>
+                <span class="rpt-sec-label">三、直线上级反馈</span>
+                <span class="tag t-amber" style="font-size:.6rem">张总监</span>
+                <i class="fa-solid fa-chevron-down rpt-chevron open ml-auto"></i>
+              </div>
+              <div class="rpt-sec-body open">
+                <div class="feedback-advantage">
+                  <div class="fb-hdr cg"><i class="fa-solid fa-star"></i>优势区 · 继续保持</div>
+                  <div class="fb-item">
+                    <div class="fb-item-title cg"><i class="fa-solid fa-circle-check text-xs"></i>技术深度强</div>
+                    <div class="fb-item-body">
+                      推荐算法领域团队Top 2，能处理复杂技术问题。负责的推荐核心模块0故障，性能提升40%。
+                      <div class="fb-quote">建议：继续保持技术深耕，同时开始横向扩展。</div>
+                    </div>
+                  </div>
+                  <div class="fb-item">
+                    <div class="fb-item-title cg"><i class="fa-solid fa-circle-check text-xs"></i>业务敏感度高 <span class="tag t-violet" style="font-size:.58rem">差异化优势</span></div>
+                    <div class="fb-item-body">
+                      能站在产品角度思考，智能答疑项目中主动提出3个业务优化建议，全部被采纳。
+                      <div class="fb-quote">建议：这是你区别于纯技术同学的核心优势，要放大。</div>
+                    </div>
+                  </div>
+                  <div class="fb-item" style="margin-bottom:0">
+                    <div class="fb-item-title cg"><i class="fa-solid fa-circle-check text-xs"></i>项目交付能力强</div>
+                    <div class="fb-item-body">
+                      负责的模块稳定性好，交付准时，质量高。
+                      <div class="fb-quote">建议：这是职业素养的体现，继续保持。</div>
+                    </div>
+                  </div>
                 </div>
-                <div class="phase-seg rounded-xl text-xs" style="background:#e0f2fe;border:1px solid #bae6fd">
-                  <div class="font-bold cs mb-1">Phase 2 · 6-12个月</div>
-                  <div style="color:var(--slate-600)">搜索/广告算法 · 跨系统架构 · 带2-3人</div>
+
+                <div class="feedback-develop">
+                  <div class="fb-hdr ca"><i class="fa-solid fa-triangle-exclamation"></i>待发展区 · 晋升突破点</div>
+                  <div class="fb-item">
+                    <div class="fb-item-title ca"><i class="fa-solid fa-chevron-up text-xs"></i>人才培养待提升</div>
+                    <div class="fb-item-body">
+                      目前带的实习生成长较慢，反馈"学不到东西"。可能过于专注自己做事，对带人投入不够。
+                      <div class="fb-quote fb-quote-amber">原因分析：可能过于专注自己做事，对带人投入不够。</div>
+                    </div>
+                    <div class="fb-sugg"><i class="fa-solid fa-arrow-right ci text-xs mt-1 flex-shrink-0"></i>尝试用"边做边教"的方式，让新人参与核心模块的开发和讨论。</div>
+                  </div>
+                  <div class="fb-item">
+                    <div class="fb-item-title ca"><i class="fa-solid fa-chevron-up text-xs"></i>技术推广不足</div>
+                    <div class="fb-item-body">
+                      技术方案很好，但文档和分享不够，其他同学复用困难。
+                      <div class="fb-quote fb-quote-amber">具体案例：你的推荐特征工程方案很棒，但只有你自己能维护，团队其他人接手困难。</div>
+                    </div>
+                    <div class="fb-sugg"><i class="fa-solid fa-arrow-right ci text-xs mt-1 flex-shrink-0"></i>写1篇团队级技术文档，把你的经验沉淀下来。</div>
+                  </div>
+                  <div class="fb-item" style="margin-bottom:0">
+                    <div class="fb-item-title ca"><i class="fa-solid fa-chevron-up text-xs"></i>跨团队影响有限</div>
+                    <div class="fb-item-body">
+                      在智能教学产品部内有影响力，但其他组（搜索、广告、数据中台）知道你能力的不到30%。
+                    </div>
+                    <div class="fb-sugg"><i class="fa-solid fa-arrow-right ci text-xs mt-1 flex-shrink-0"></i>主动做一次跨团队技术分享，扩大技术影响力。</div>
+                  </div>
                 </div>
-                <div class="phase-seg rounded-xl text-xs" style="background:var(--violet-light);border:1px solid #d8b4fe">
-                  <div class="font-bold cv mb-1">Phase 3 · 12-18个月</div>
-                  <div style="color:var(--slate-600)">主导业务技术方案 · 部门级分享 · 培养2.3级</div>
+
+                <div class="feedback-expect">
+                  <div class="fb-hdr ci"><i class="fa-solid fa-flag"></i>上级期待 · 3个月内完成3件事</div>
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-xs">
+                    <div class="p-2 rounded-xl" style="background:#fff;border:1px solid #c7d2fe">
+                      <div class="font-bold ci mb-1"><i class="fa-solid fa-circle-1 mr-1"></i>培养1名同学独立工作</div>
+                      <div style="color:var(--slate-600)">让1名1.3级同学能独立负责子模块</div>
+                    </div>
+                    <div class="p-2 rounded-xl" style="background:#fff;border:1px solid #c7d2fe">
+                      <div class="font-bold ci mb-1"><i class="fa-solid fa-circle-2 mr-1"></i>跨团队技术分享</div>
+                      <div style="color:var(--slate-600)">让搜索、广告组也知道你的技术能力</div>
+                    </div>
+                    <div class="p-2 rounded-xl" style="background:#fff;border:1px solid #c7d2fe">
+                      <div class="font-bold ci mb-1"><i class="fa-solid fa-circle-3 mr-1"></i>沉淀团队标准文档</div>
+                      <div style="color:var(--slate-600)">写1篇能成为团队标准的技术方案文档</div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="mt-3 p-2 rounded-xl text-xs text-center" style="background:var(--violet-light);border:1px solid #d8b4fe;color:var(--violet)"><strong>18个月后3.1级准备度预计达85+，可申请晋升架构师</strong></div>
             </div>
-          </div>
+
+            <!-- ④ 长期发展 B -->
+            <div class="rpt-section">
+              <div class="rpt-sec-hdr" onclick="toggleSection(this)">
+                <div class="rpt-sec-icon" style="background:linear-gradient(135deg,#7c3aed,#a78bfa)"><i class="fa-solid fa-road"></i></div>
+                <span class="rpt-sec-label">四、长期发展建议 · 向架构师（3.1级）发展</span>
+                <span class="tag t-violet" style="font-size:.6rem">18个月路径</span>
+                <i class="fa-solid fa-chevron-down rpt-chevron open ml-auto"></i>
+              </div>
+              <div class="rpt-sec-body open">
+                <div class="text-xs font-bold mb-3" style="color:var(--slate-400);text-transform:uppercase;letter-spacing:.06em"><i class="fa-solid fa-chart-line mr-1 cv"></i>关键能力差距与提升路径</div>
+                <!-- 能力差距条 -->
+                <div class="mb-4">
+                  <div class="cap-gap-row">
+                    <div class="cap-gap-label text-xs font-bold">技术广度</div>
+                    <div class="cap-gap-track">
+                      <div class="cap-gap-bars">
+                        <div class="cap-gap-cur" style="width:72%;background:linear-gradient(90deg,#d97706,#fbbf24)"><span style="font-size:.6rem;font-weight:700;color:#fff">当前 72%</span></div>
+                        <div class="cap-gap-std" style="left:0;width:90%;background:transparent;border-right:2px dashed rgba(79,70,229,.4)"></div>
+                      </div>
+                      <div class="cap-gap-label2"><span style="color:var(--amber)">当前：推荐算法专家</span><span style="color:var(--indigo)">目标：了解搜索、广告、NLP</span></div>
+                    </div>
+                    <div class="cap-gap-badge" style="background:#fffbeb;border:1px solid #fde68a;color:#92400e">参与跨系统</div>
+                  </div>
+                  <div class="cap-gap-row">
+                    <div class="cap-gap-label text-xs font-bold">架构能力</div>
+                    <div class="cap-gap-track">
+                      <div class="cap-gap-bars">
+                        <div class="cap-gap-cur" style="width:65%;background:linear-gradient(90deg,#7c3aed,#a78bfa)"><span style="font-size:.6rem;font-weight:700;color:#fff">当前 65%</span></div>
+                        <div class="cap-gap-std" style="left:0;width:88%;background:transparent;border-right:2px dashed rgba(79,70,229,.4)"></div>
+                      </div>
+                      <div class="cap-gap-label2"><span style="color:var(--violet)">当前：模块级方案设计</span><span style="color:var(--indigo)">目标：系统级架构设计</span></div>
+                    </div>
+                    <div class="cap-gap-badge" style="background:var(--violet-light);border:1px solid #d8b4fe;color:var(--violet)">学方法论</div>
+                  </div>
+                  <div class="cap-gap-row">
+                    <div class="cap-gap-label text-xs font-bold">带人能力</div>
+                    <div class="cap-gap-track">
+                      <div class="cap-gap-bars">
+                        <div class="cap-gap-cur" style="width:48%;background:linear-gradient(90deg,#e11d48,#fb7185)"><span style="font-size:.6rem;font-weight:700;color:#fff">当前 48%</span></div>
+                        <div class="cap-gap-std" style="left:0;width:85%;background:transparent;border-right:2px dashed rgba(79,70,229,.4)"></div>
+                      </div>
+                      <div class="cap-gap-label2"><span style="color:var(--rose)">当前：带实习生经验不足</span><span style="color:var(--indigo)">目标：带2-3人小团队</span></div>
+                    </div>
+                    <div class="cap-gap-badge" style="background:var(--rose-light);border:1px solid #fda4af;color:var(--rose)">先2.3再扩</div>
+                  </div>
+                  <div class="cap-gap-row" style="margin-bottom:0">
+                    <div class="cap-gap-label text-xs font-bold">业务影响</div>
+                    <div class="cap-gap-track">
+                      <div class="cap-gap-bars">
+                        <div class="cap-gap-cur" style="width:80%;background:linear-gradient(90deg,#059669,#34d399)"><span style="font-size:.6rem;font-weight:700;color:#fff">当前 80%</span></div>
+                        <div class="cap-gap-std" style="left:0;width:92%;background:transparent;border-right:2px dashed rgba(79,70,229,.4)"></div>
+                      </div>
+                      <div class="cap-gap-label2"><span style="color:var(--emerald)">当前：理解业务，提建议</span><span style="color:var(--indigo)">目标：技术驱动业务决策</span></div>
+                    </div>
+                    <div class="cap-gap-badge" style="background:var(--emerald-light);border:1px solid #6ee7b7;color:var(--emerald)">最大优势</div>
+                  </div>
+                </div>
+
+                <!-- 18月时间线 -->
+                <div class="text-xs font-bold mb-2" style="color:var(--slate-400);text-transform:uppercase;letter-spacing:.06em"><i class="fa-solid fa-timeline mr-1 cv"></i>18个月发展路径</div>
+                <div class="phase-timeline">
+                  <div class="pt-card">
+                    <div class="ptc-hdr" style="background:linear-gradient(90deg,#fffbeb,#fef9c3);border-bottom:1px solid #fde68a;color:#92400e">
+                      <i class="fa-solid fa-flag-checkered mr-1"></i>阶段一 · 0-6个月
+                    </div>
+                    <div class="ptc-body">
+                      <div class="font-bold ca mb-2">冲刺2.3级</div>
+                      <ul>
+                        <li style="color:var(--slate-600)">完成总监说的3件事</li>
+                        <li style="color:var(--slate-600)">晋升2.3级</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="pt-card">
+                    <div class="ptc-hdr" style="background:linear-gradient(90deg,#e0f2fe,#f0f9ff);border-bottom:1px solid #bae6fd;color:#0369a1">
+                      <i class="fa-solid fa-expand mr-1"></i>阶段二 · 6-12个月
+                    </div>
+                    <div class="ptc-body">
+                      <div class="font-bold cs mb-2">扩展技术广度</div>
+                      <ul>
+                        <li style="color:var(--slate-600)">了解搜索、广告算法</li>
+                        <li style="color:var(--slate-600)">参与跨系统架构设计</li>
+                        <li style="color:var(--slate-600)">开始带2-3人小团队</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="pt-card">
+                    <div class="ptc-hdr" style="background:linear-gradient(90deg,var(--violet-light),#fdf4ff);border-bottom:1px solid #d8b4fe;color:var(--violet)">
+                      <i class="fa-solid fa-rocket mr-1"></i>阶段三 · 12-18个月
+                    </div>
+                    <div class="ptc-body">
+                      <div class="font-bold cv mb-2">建立业务影响力</div>
+                      <ul>
+                        <li style="color:var(--slate-600)">主导业务级技术方案</li>
+                        <li style="color:var(--slate-600)">部门级技术分享</li>
+                        <li style="color:var(--slate-600)">培养2.3级同学</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-2 rounded-xl text-xs text-center font-bold cv mt-1" style="background:var(--violet-light);border:1px solid #d8b4fe">
+                  <i class="fa-solid fa-building-columns mr-1"></i>18个月后可申请晋升3.1级架构师
+                </div>
+              </div>
+            </div>
+
+            <!-- ⑤ 隐藏优势 -->
+            <div class="rpt-section">
+              <div class="rpt-sec-hdr" onclick="toggleSection(this)">
+                <div class="rpt-sec-icon" style="background:linear-gradient(135deg,#7c3aed,#c084fc)"><i class="fa-solid fa-gem"></i></div>
+                <span class="rpt-sec-label">五、隐藏优势 · 系统发现</span>
+                <span class="tag t-violet" style="font-size:.6rem"><i class="fa-solid fa-sparkles mr-1"></i>行为数据分析</span>
+                <i class="fa-solid fa-chevron-down rpt-chevron open ml-auto"></i>
+              </div>
+              <div class="rpt-sec-body open">
+                <div class="hidden-adv">
+                  <div class="ha-hdr cv"><i class="fa-solid fa-gem"></i>你的"技术-业务转化率"是团队最高的</div>
+                  <div class="ha-metric-row">
+                    <div class="ha-metric">
+                      <div class="ha-metric-v cv">92%</div>
+                      <div class="ha-metric-l">方案被采纳率</div>
+                      <div style="font-size:.6rem;margin-top:.2rem;color:var(--slate-400)">团队均值 65%</div>
+                    </div>
+                    <div class="ha-metric">
+                      <div class="ha-metric-v cg">3个</div>
+                      <div class="ha-metric-l">业务建议被采纳</div>
+                      <div style="font-size:.6rem;margin-top:.2rem;color:var(--slate-400)">智能答疑项目</div>
+                    </div>
+                    <div class="ha-metric">
+                      <div class="ha-metric-v ca">#1</div>
+                      <div class="ha-metric-l">产品经理满意度</div>
+                      <div style="font-size:.6rem;margin-top:.2rem;color:var(--slate-400)">团队内排名</div>
+                    </div>
+                  </div>
+                  <div class="text-xs" style="color:var(--slate-600);line-height:1.9">
+                    <strong class="cv">具体表现：</strong>你的方案不只讲技术实现，还讲业务影响和投入产出比。<br>
+                    这是很多技术强的同学缺少的能力——他们只关注技术实现，缺乏业务视角。<br><br>
+                    <strong class="cv">这是架构师的核心能力！</strong><br>
+                    你天然具备这个优势，要在未来的发展中放大它。<br><br>
+                    <strong class="ci">建议：</strong>在晋升答辩和未来发展中，重点突出这个差异化优势。
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ⑥ 给你的话 B -->
+            <div class="rpt-section">
+              <div class="rpt-sec-hdr" onclick="toggleSection(this)">
+                <div class="rpt-sec-icon" style="background:linear-gradient(135deg,#e11d48,#fb7185)"><i class="fa-solid fa-heart"></i></div>
+                <span class="rpt-sec-label">六、给你的话</span>
+                <i class="fa-solid fa-chevron-down rpt-chevron open ml-auto"></i>
+              </div>
+              <div class="rpt-sec-body open">
+                <div class="closing-card">
+                  <div class="closing-name"><i class="fa-solid fa-user-tie mr-2 ca"></i>李同学，</div>
+                  <div class="closing-body">
+                    你的状态很好，这是团队公认的。<br>
+                    过去3.5年，你已经在推荐算法领域建立了深厚的技术积累，<span class="closing-highlight">个人技术能力已经超过2.3级标准</span>。
+                  </div>
+                  <div class="closing-step">
+                    从2.2到2.3，核心是从<span class="closing-highlight">「个人贡献」到「带动他人」</span>的转变。<br>
+                    技术能力已经够用了，关键是提升软实力：<span class="closing-highlight">带人、推广、跨团队影响</span>。
+                  </div>
+                  <div class="closing-body">
+                    按照上面的3个月计划，一步步来，2.3级是水到渠成的事。<br><br>
+                    如果对未来有更高追求，18个月后可以向架构师发展。<br>
+                    你已经具备了核心潜质（尤其是<span class="closing-highlight">业务敏感度</span>），只需要逐步扩展技术广度和带人能力。<br><br>
+                    有任何疑问随时找上级聊聊，也欢迎随时找我复盘进展～
+                  </div>
+                  <div class="closing-footer"><i class="fa-solid fa-fire ca"></i><span class="closing-cta font-bold text-base">加油！</span></div>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /report-wrap B -->
         </div>
+
       </section>
 
       <div class="gdiv"></div>
@@ -3181,7 +3056,6 @@ Week 5-6：补齐文档短板
             <div class="stat-card">
               <div class="stat-v cg">100%</div>
               <div class="stat-l">数据脱敏</div>
-              <div class="stat-s" style="color:var(--slate-400)">隐私保护</div>
             </div>
           </div>
 
@@ -3196,31 +3070,29 @@ Week 5-6：补齐文档短板
                 <div>
                   <div style="font-size:.68rem;font-weight:700;margin-bottom:.75rem" class="cr"><i class="fa-solid fa-signal-bars-slash mr-1"></i>系统多维度风险信号（提前3周预警）</div>
                   <div class="flex gap-2 items-center mb-3 flex-wrap">
-                    <div class="sbox">
-                      <div class="sbox-v cg">95</div>
-                      <div class="sbox-l">Q1</div>
+                    <div class="p-2 rounded-lg text-center" style="background:var(--slate-50);border:1px solid var(--slate-200)">
+                      <div class="font-bold cg">95</div>
+                      <div style="font-size:.58rem;color:var(--slate-400)">Q1</div>
                     </div>
                     <i class="fa-solid fa-arrow-right text-xs" style="color:var(--slate-300)"></i>
-                    <div class="sbox">
-                      <div class="sbox-v ca">88</div>
-                      <div class="sbox-l">Q2</div>
+                    <div class="p-2 rounded-lg text-center" style="background:#fffbeb;border:1px solid #fde68a">
+                      <div class="font-bold ca">88</div>
+                      <div style="font-size:.58rem;color:var(--slate-400)">Q2</div>
                     </div>
                     <i class="fa-solid fa-arrow-right text-xs" style="color:var(--slate-300)"></i>
-                    <div class="sbox">
-                      <div class="sbox-v cr">82</div>
-                      <div class="sbox-l">当前</div>
+                    <div class="p-2 rounded-lg text-center" style="background:var(--rose-light);border:1px solid #fda4af">
+                      <div class="font-bold cr">82</div>
+                      <div style="font-size:.58rem;color:var(--slate-400)">当前</div>
                     </div>
                     <span class="text-xs font-bold cr">连续下滑↓</span>
                   </div>
                   <div class="sig-row"><i class="fa-brands fa-linkedin cr text-xs"></i><span class="text-xs" style="color:var(--slate-600)">脉脉活跃度增加<strong class="cr">400%</strong>，简历更新</span></div>
                   <div class="sig-row"><i class="fa-solid fa-code-branch cr text-xs"></i><span class="text-xs" style="color:var(--slate-600)">代码提交：3-4次/天 → 1-2次/天</span></div>
                   <div class="sig-row"><i class="fa-solid fa-clipboard-list cr text-xs"></i><span class="text-xs" style="color:var(--slate-600)">Q1主动认领3个任务 → Q2仅1个</span></div>
-                  <div class="sig-row"><i class="fa-solid fa-book cr text-xs"></i><span class="text-xs" style="color:var(--slate-600)">技术文章阅读下降60%</span></div>
                   <div class="sig-row"><i class="fa-solid fa-calendar-minus cr text-xs"></i><span class="text-xs" style="color:var(--slate-600)">频繁请半天假（面试信号）</span></div>
-
                   <div class="mt-3 p-2 rounded-xl text-xs" style="background:#fff1f2;border:1px solid #fecdd3">
                     <div class="font-bold cr mb-1"><i class="fa-solid fa-brain mr-1"></i>深度归因：高潜员工的成长焦虑</div>
-                    <div style="color:var(--slate-600)">1年内1.1→1.3（最快记录），一直是"最优秀的新人"<br>现在迷茫：晋升2.1难度陡增，同期同学开始分化<br>外部：猎头已联系，初创公司offer，title高期权多</div>
+                    <div style="color:var(--slate-600)">1年内1.1→1.3最快记录；晋升2.1难度陡增，迷茫；外部猎头已联系，初创公司offer，title高期权多</div>
                   </div>
                 </div>
                 <div>
@@ -3228,21 +3100,21 @@ Week 5-6：补齐文档短板
                   <div class="wplan" style="border-left:2px solid #fecdd3;padding-left:1rem">
                     <div class="wp-item">
                       <div class="wp-row">
-                        <div class="wp-dot" style="background:#e11d48;margin-left:-1.12rem"></div><span class="wp-lbl cr">Step 1：诊断诉求（总监亲谈）</span>
+                        <div class="wp-dot" style="background:#e11d48;margin-left:-1.12rem"></div><span class="wp-lbl cr">Step 1：诊断诉求</span>
                       </div>
-                      <div class="wp-text">不问"要不要留"，问"未来3年想成为什么样的人"<br>判断：要钱？要title？要技术深度？要管理机会？</div>
+                      <div class="wp-text">不问"要不要留"，问"未来3年想成为什么样的人"</div>
                     </div>
                     <div class="wp-item">
                       <div class="wp-row">
                         <div class="wp-dot" style="background:#d97706;margin-left:-1.12rem"></div><span class="wp-lbl ca">Step 2：针对性方案</span>
                       </div>
-                      <div class="wp-text">发展迷茫 → 安排与专家1对1 + 小项目owner体验<br>offer诱惑 → 坦诚沟通初创风险 + 内部新机会</div>
+                      <div class="wp-text">发展迷茫→安排专家1对1+小项目owner · offer诱惑→坦诚沟通风险+内部机会</div>
                     </div>
                     <div class="wp-item" style="margin-bottom:0">
                       <div class="wp-row">
-                        <div class="wp-dot" style="background:#059669;margin-left:-1.12rem"></div><span class="wp-lbl cg">Step 3：建立alumni联系</span>
+                        <div class="wp-dot" style="background:#059669;margin-left:-1.12rem"></div><span class="wp-lbl cg">Step 3：好聚好散</span>
                       </div>
-                      <div class="wp-text">即使最终离开，好聚好散，未来可能回流或合作<br><strong class="cg">如果干预及时：60%概率可挽回</strong></div>
+                      <div class="wp-text">即使最终离开，建立alumni联系<br><strong class="cg">如果干预及时：60%概率可挽回</strong></div>
                     </div>
                   </div>
                 </div>
@@ -3290,12 +3162,6 @@ Week 5-6：补齐文档短板
                           <td class="font-bold cr">-16 ⚠️</td>
                         </tr>
                         <tr>
-                          <td>责任心</td>
-                          <td class="font-bold ca">95</td>
-                          <td class="font-bold ci">80</td>
-                          <td class="font-bold cr">-15 ⚠️</td>
-                        </tr>
-                        <tr>
                           <td>综合</td>
                           <td class="font-bold ca">90</td>
                           <td class="font-bold ci">74</td>
@@ -3305,42 +3171,29 @@ Week 5-6：补齐文档短板
                     </table>
                   </div>
                   <div class="p-2 rounded-xl text-xs" style="background:#fff1f2;border:1px solid #fecdd3">
-                    <div class="font-bold cr mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i>校招新人常见认知偏差</div>
-                    <div style="color:var(--slate-600)">校招均值差距8分，吴**差距<strong class="cr">16分</strong>是均值2倍<br>习惯了被表扬，不习惯被挑战 → 晋升失败离职率40%</div>
+                    <div class="font-bold cr mb-1">校招新人常见认知偏差</div>
+                    <div style="color:var(--slate-600)">校招均值差距8分，吴**差距<strong class="cr">16分</strong>是均值2倍。晋升失败→离职率40%</div>
                   </div>
                 </div>
                 <div>
-                  <div style="font-size:.68rem;font-weight:700;margin-bottom:.75rem" class="cr"><i class="fa-solid fa-timeline mr-1"></i>9周干预计划（精确到周）</div>
                   <div class="wplan" style="border-left:2px solid #fecdd3;padding-left:1rem">
                     <div class="wp-item">
                       <div class="wp-row">
                         <div class="wp-dot" style="background:#e11d48;margin-left:-1.12rem"></div><span class="wp-lbl cr">Week 1：打破认知</span>
                       </div>
-                      <div class="wp-text">展示匿名同事反馈，让他自己看见差距（不是批评）</div>
+                      <div class="wp-text">展示匿名同事反馈，让他自己看见差距</div>
                     </div>
                     <div class="wp-item">
                       <div class="wp-row">
-                        <div class="wp-dot" style="background:#d97706;margin-left:-1.12rem"></div><span class="wp-lbl ca">Week 2-3：小步验证</span>
+                        <div class="wp-dot" style="background:#d97706;margin-left:-1.12rem"></div><span class="wp-lbl ca">Week 2-4：小步验证</span>
                       </div>
-                      <div class="wp-text">协作完成小任务 + 影子导师 + 每天15分钟站会</div>
-                    </div>
-                    <div class="wp-item">
-                      <div class="wp-row">
-                        <div class="wp-dot" style="background:#0284c7;margin-left:-1.12rem"></div><span class="wp-lbl cs">Week 4：复盘</span>
-                      </div>
-                      <div class="wp-text">让吴**自己说出协作困难，引导自我发现</div>
-                    </div>
-                    <div class="wp-item">
-                      <div class="wp-row">
-                        <div class="wp-dot" style="background:#7c3aed;margin-left:-1.12rem"></div><span class="wp-lbl cv">Week 5-8：建立新习惯</span>
-                      </div>
-                      <div class="wp-text">每周review 3人代码 · 每双周分享1个技术点</div>
+                      <div class="wp-text">协作完成小任务+影子导师+每天15分钟站会</div>
                     </div>
                     <div class="wp-item" style="margin-bottom:0">
                       <div class="wp-row">
-                        <div class="wp-dot" style="background:#059669;margin-left:-1.12rem"></div><span class="wp-lbl cg">Week 9：复评</span>
+                        <div class="wp-dot" style="background:#059669;margin-left:-1.12rem"></div><span class="wp-lbl cg">Week 5-9：建立新习惯</span>
                       </div>
-                      <div class="wp-text">目标差距缩至8分内 → 具备进入1.3晋升评审的冲刺基础</div>
+                      <div class="wp-text">每周review 3人代码 · 目标差距缩至8分内 → 具备进入1.3晋升评审的冲刺基础</div>
                     </div>
                   </div>
                 </div>
@@ -3348,7 +3201,6 @@ Week 5-6：补齐文档短板
             </div>
           </div>
 
-          <!-- Case 3 & 4 -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="an-card fi">
               <div class="an-hdr ah-amber">
@@ -3357,30 +3209,24 @@ Week 5-6：补齐文档短板
               </div>
               <div class="an-body">
                 <div class="flex gap-2 mb-3">
-                  <div class="sbox">
-                    <div class="sbox-v cg">82</div>
-                    <div class="sbox-l">测试岗</div>
+                  <div class="p-2 rounded-lg text-center" style="background:var(--emerald-light);border:1px solid #6ee7b7">
+                    <div class="font-bold cg">82</div>
+                    <div style="font-size:.58rem;color:var(--slate-400)">测试岗</div>
                   </div>
                   <i class="fa-solid fa-arrow-right text-xs self-center" style="color:var(--slate-300)"></i>
-                  <div class="sbox">
-                    <div class="sbox-v cr">62</div>
-                    <div class="sbox-l">开发岗</div>
+                  <div class="p-2 rounded-lg text-center" style="background:var(--rose-light);border:1px solid #fda4af">
+                    <div class="font-bold cr">62</div>
+                    <div style="font-size:.58rem;color:var(--slate-400)">开发岗</div>
                   </div>
                   <span class="text-xs font-bold cr self-center">-20分转岗损耗</span>
                 </div>
                 <div class="p-2 rounded-xl text-xs mb-3" style="background:#fff1f2;border:1px solid #fecdd3">
-                  <div class="font-bold cr mb-1"><i class="fa-solid fa-arrows-rotate mr-1"></i>归因：不是态度问题，是转岗适应失败</div>
-                  <div style="color:var(--slate-600)">测试思维90分（系统性强）但开发能力58分<br>直接淘汰是双输，人岗匹配比"坚持"更重要</div>
+                  <div class="font-bold cr mb-1">不是态度问题，是转岗适应失败</div>
+                  <div style="color:var(--slate-600)">测试思维90分，开发能力58分。直接淘汰是双输，人岗匹配比"坚持"更重要</div>
                 </div>
-                <div class="space-y-2 text-xs">
-                  <div class="p-2 rounded-xl" style="background:var(--emerald-light);border:1px solid #6ee7b7">
-                    <div class="font-bold cg mb-1">方案A：回退测试岗 ✅推荐</div>
-                    <div style="color:var(--slate-600)">保留薪资职级 · 提供测试专家路径 · 接受度70%</div>
-                  </div>
-                  <div class="p-2 rounded-xl" style="background:#fffbeb;border:1px solid #fde68a">
-                    <div class="font-bold ca mb-1">方案B：延长适应期</div>
-                    <div style="color:var(--slate-600)">再3个月+专属mentor，但失败成本更大</div>
-                  </div>
+                <div class="p-2 rounded-xl text-xs" style="background:var(--emerald-light);border:1px solid #6ee7b7">
+                  <div class="font-bold cg mb-1">方案A（推荐）：回退测试岗</div>
+                  <div style="color:var(--slate-600)">保留薪资职级 · 提供测试专家路径 · 接受度70%</div>
                 </div>
               </div>
             </div>
@@ -3391,13 +3237,10 @@ Week 5-6：补齐文档短板
               </div>
               <div class="an-body">
                 <div class="p-2 rounded-xl text-xs mb-3" style="background:#eff6ff;border:1px solid #bfdbfe">
-                  <div class="font-bold ci mb-1"><i class="fa-solid fa-people-group mr-1"></i>群体性异常 · 新人融入期管理缺失</div>
-                  <div style="color:var(--slate-600)">4人中3人同时活跃度下降 · 1对1每月0.5次（健康标准2次）<br>不干预 → 3个月内<strong class="cr">2人离职</strong></div>
+                  <div class="font-bold ci mb-1">新人融入期管理缺失</div>
+                  <div style="color:var(--slate-600)">4人中3人同时活跃度下降 · 1对1每月0.5次（健康标准2次）<br>不干预→3个月内<strong class="cr">2人离职</strong></div>
                 </div>
-                <div class="sig-row"><i class="fa-solid fa-code cs text-xs"></i><span class="text-xs" style="color:var(--slate-600)">代码提交从均匀变成集中下班前</span></div>
-                <div class="sig-row"><i class="fa-solid fa-book-open cs text-xs"></i><span class="text-xs" style="color:var(--slate-600)">内部技术文档阅读下降50%</span></div>
-                <div class="sig-row"><i class="fa-solid fa-calendar cs text-xs"></i><span class="text-xs" style="color:var(--slate-600)">请假增加，集中周五下午</span></div>
-                <div class="mt-2 act-row">
+                <div class="act-row">
                   <div class="act-num">1</div>
                   <div>
                     <div class="act-title">负责人逐个关怀谈话</div>
@@ -3415,7 +3258,6 @@ Week 5-6：补齐文档短板
                   <div class="act-num">3</div>
                   <div>
                     <div class="act-title">优化Onboarding流程</div>
-                    <div class="act-sub">第1周熟悉→1月配合mentor→2月独立→3月评估</div>
                   </div>
                 </div>
                 <div class="mt-1 p-1.5 rounded-xl text-xs" style="background:var(--emerald-light);border:1px solid #6ee7b7;color:var(--emerald)"><strong>本周干预 → 提前处理协作风险，提升团队稳定性</strong></div>
@@ -3458,15 +3300,13 @@ Week 5-6：补齐文档短板
             <div class="flex items-center gap-3 flex-wrap">
               <span class="auth-ok"><i class="fa-solid fa-circle-check"></i>验证通过</span>
               <span class="tag t-amber">可查看项目相关能力标签</span>
-              <span class="ml-auto io-prompt">"AI课程推荐算法优化项目，5人团队，3个月周期，帮我配置"</span>
+              <span class="ml-auto io-prompt">"AI课程推荐算法优化项目，5人团队，3个月周期"</span>
             </div>
           </div>
         </div>
 
         <div class="card fi">
-          <!-- Project Brief -->
           <div class="inner-card mb-4">
-            <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--slate-400);margin-bottom:.8rem"><i class="fa-solid fa-clipboard-list mr-1 ci"></i>项目需求解析</div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
               <div class="p-2 rounded-xl" style="background:var(--indigo-ultra);border:1px solid #c7d2fe">
                 <div class="font-bold ci mb-1">核心技术栈</div>
@@ -3487,11 +3327,10 @@ Week 5-6：补齐文档短板
             </div>
           </div>
 
-          <!-- Plan A -->
           <div class="proj-plan fi">
             <div class="pp-hdr pph-a">
               <div class="flex items-center gap-3">
-                <div style="position:relative;width:60px;height:60px;flex-shrink:0">
+                <div style="position:relative;width:55px;height:55px;flex-shrink:0">
                   <canvas id="matchA"></canvas>
                   <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><span class="font-bold cg text-sm">92%</span></div>
                 </div>
@@ -3517,13 +3356,13 @@ Week 5-6：补齐文档短板
                     <tr>
                       <td class="font-semibold">技术负责人</td>
                       <td><span class="tag t-violet">张*(2.1)</span></td>
-                      <td class="text-xs" style="color:var(--slate-500)">推荐算法Top 3 · 主导3个推荐类项目全部按期 · 技术影响力强</td>
+                      <td class="text-xs" style="color:var(--slate-500)">推荐算法Top 3 · 主导3个推荐类项目全部按期</td>
                       <td><span class="tag t-emerald">低</span></td>
                     </tr>
                     <tr>
                       <td class="font-semibold">核心开发1</td>
                       <td><span class="tag t-indigo">王*(1.3)</span></td>
-                      <td class="text-xs" style="color:var(--slate-500)">TF使用2年 · 代码质量97分 · 与张*协作过2次(91分)</td>
+                      <td class="text-xs" style="color:var(--slate-500)">TF使用2年 · 代码质量97分 · 与张*协作评分91分</td>
                       <td><span class="tag t-emerald">低</span></td>
                     </tr>
                     <tr>
@@ -3533,15 +3372,9 @@ Week 5-6：补齐文档短板
                       <td><span class="tag t-amber">中</span></td>
                     </tr>
                     <tr>
-                      <td class="font-semibold">核心开发3</td>
-                      <td><span class="tag t-emerald">刘*(1.2)</span></td>
-                      <td class="text-xs" style="color:var(--slate-500)">数据处理强 · 熟悉推荐pipeline · 跨团队沟通经验</td>
-                      <td><span class="tag t-amber">中</span></td>
-                    </tr>
-                    <tr>
                       <td class="font-semibold">测试</td>
                       <td><span class="tag t-slate">孙*(测试)</span></td>
-                      <td class="text-xs" style="color:var(--slate-500)">推荐系统测试经验 · 协作评分91分 · 熟悉A/B方案设计</td>
+                      <td class="text-xs" style="color:var(--slate-500)">推荐系统测试经验 · 协作评分91分</td>
                       <td><span class="tag t-emerald">低</span></td>
                     </tr>
                   </tbody>
@@ -3549,90 +3382,83 @@ Week 5-6：补齐文档短板
               </div>
               <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3 text-xs">
                 <div class="p-2 rounded-xl" style="background:var(--emerald-light);border:1px solid #6ee7b7">
-                  <div class="font-bold cg mb-1"><i class="fa-solid fa-chart-pie mr-1"></i>协作基础判断</div>
+                  <div class="font-bold cg mb-1">协作基础判断</div>
                   <div style="color:var(--slate-600)">张*和王*有历史协作记录，配合反馈较好<br>系统提示：协作基础较稳，可重点关注需求变更风险</div>
                 </div>
                 <div class="p-2 rounded-xl" style="background:var(--indigo-ultra);border:1px solid #c7d2fe">
-                  <div class="font-bold ci mb-1"><i class="fa-solid fa-puzzle-piece mr-1"></i>技能覆盖度</div>
-                  <div style="color:var(--slate-600)">推荐算法 · TF/PyTorch · 数据处理<br>A/B测试 · 跨团队沟通 → 全部覆盖</div>
+                  <div class="font-bold ci mb-1">技能覆盖度</div>
+                  <div style="color:var(--slate-600)">推荐算法 · TF · 数据处理 · A/B测试 → 全覆盖</div>
                 </div>
                 <div class="p-2 rounded-xl" style="background:#fffbeb;border:1px solid #fde68a">
-                  <div class="font-bold ca mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i>风险提示</div>
-                  <div style="color:var(--slate-600)">张*同时被另一项目需要，建议本周协调<br>李*需要2周交接，建议3周后启动</div>
+                  <div class="font-bold ca mb-1">风险提示</div>
+                  <div style="color:var(--slate-600)">张*同时被另一项目需要，建议本周协调</div>
                 </div>
               </div>
             </div>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 fi">
-            <!-- Plan B -->
             <div class="proj-plan">
               <div class="pp-hdr pph-b">
                 <div class="flex items-center gap-3">
-                  <div style="position:relative;width:50px;height:50px;flex-shrink:0">
-                    <canvas id="matchB"></canvas>
-                    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><span class="font-bold ca" style="font-size:.82rem">85%</span></div>
+                  <div style="position:relative;width:48px;height:48px;flex-shrink:0"><canvas id="matchB"></canvas>
+                    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><span class="font-bold ca" style="font-size:.8rem">85%</span></div>
                   </div>
                   <div>
                     <div class="font-bold ca">方案B · 性价比优先</div>
-                    <div class="text-xs" style="color:var(--slate-500)">成本低25% · 培养新人 · 延期风险35%</div>
+                    <div class="text-xs" style="color:var(--slate-500)">成本低25% · 延期风险35%</div>
                   </div>
                 </div>
               </div>
               <div class="pp-body text-xs" style="color:var(--slate-600)">
                 <div class="mb-2">技术负责人：李*(2.2) · 核心开发：赵*(1.2)+钱*(1.1)+周*(1.1)</div>
                 <div class="space-y-1 mb-2">
-                  <div class="flex items-center gap-1.5 text-emerald-600"><i class="fa-solid fa-circle-check cg text-xs"></i>成本比方案A低25% · 2名新人获得历练</div>
+                  <div class="flex items-center gap-1.5 cg"><i class="fa-solid fa-circle-check cg text-xs"></i>成本比方案A低25% · 2名新人获得历练</div>
                   <div class="flex items-center gap-1.5 cr"><i class="fa-solid fa-triangle-exclamation cr text-xs"></i>项目延期概率35% · 需更多管理成本</div>
-                  <div class="flex items-center gap-1.5 cr"><i class="fa-solid fa-triangle-exclamation cr text-xs"></i>质量风险：新人代码需额外review</div>
                 </div>
                 <div class="p-1.5 rounded-xl" style="background:#fffbeb;border:1px solid #fde68a;color:#92400e"><strong>系统明确告诉你"成本 vs 风险"的trade-off</strong></div>
               </div>
             </div>
-            <!-- Plan C -->
             <div class="proj-plan">
               <div class="pp-hdr pph-c">
                 <div class="flex items-center gap-3">
-                  <div style="position:relative;width:50px;height:50px;flex-shrink:0">
-                    <canvas id="matchC"></canvas>
-                    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><span class="font-bold cs" style="font-size:.82rem">78%</span></div>
+                  <div style="position:relative;width:48px;height:48px;flex-shrink:0"><canvas id="matchC"></canvas>
+                    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><span class="font-bold cs" style="font-size:.8rem">78%</span></div>
                   </div>
                   <div>
                     <div class="font-bold cs">方案C · 快速启动</div>
-                    <div class="text-xs" style="color:var(--slate-500)">外聘专家2周到位 · 成本+40% · 融合4-6周</div>
+                    <div class="text-xs" style="color:var(--slate-500)">外聘专家 · 成本+40%</div>
                   </div>
                 </div>
               </div>
               <div class="pp-body text-xs" style="color:var(--slate-600)">
-                <div class="mb-2">外聘2.3-3.1级专家 + 内部借调2.1级 + 王*/李*/孙*</div>
+                <div class="mb-2">外聘2.3-3.1级专家 + 内部借调2.1级 + 内部人员</div>
                 <div class="space-y-1 mb-2">
                   <div class="flex items-center gap-1.5 cg"><i class="fa-solid fa-circle-check cg text-xs"></i>启动快 · 带来业界最佳实践</div>
-                  <div class="flex items-center gap-1.5 cr"><i class="fa-solid fa-triangle-exclamation cr text-xs"></i>成本+40% · 文化融入需时间</div>
-                  <div class="flex items-center gap-1.5 cr"><i class="fa-solid fa-triangle-exclamation cr text-xs"></i>知识沉淀风险，专家经验难传递</div>
+                  <div class="flex items-center gap-1.5 cr"><i class="fa-solid fa-triangle-exclamation cr text-xs"></i>成本+40% · 知识沉淀风险</div>
                 </div>
                 <div class="p-1.5 rounded-xl" style="background:#e0f2fe;border:1px solid #bae6fd;color:#0369a1"><strong>系统帮你算清"时间 vs 成本 vs 质量"三方平衡</strong></div>
               </div>
             </div>
           </div>
 
-          <!-- Traditional vs Talent-Pilot -->
           <div class="dark-card mt-4 fi">
             <div class="flex items-center gap-2 mb-3" style="color:#c7d2fe"><i class="fa-solid fa-rocket ca"></i><span class="font-bold text-sm" style="font-family:'Noto Serif SC',serif">从"找熟人"到"找对人" · 决策方式的质变</span></div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
               <div>
                 <div style="color:#94a3b8;margin-bottom:.5rem">传统方式：</div>
                 <div class="space-y-1" style="color:#cbd5e1">
-                  <div>1. 项目经理群里问："谁有空做推荐算法项目？"</div>
-                  <div>2. 响应的都是"熟人"（合作过的、关系好的）</div>
-                  <div>3. 招进来发现：技能不匹配、协作困难、项目延期</div>
+                  <div>1. 问群"谁有空做推荐算法项目？"</div>
+                  <div>2. 响应的都是"熟人"</div>
+                  <div>3. 招进来发现技能不匹配，项目延期</div>
                   <div style="color:#94a3b8">→ 下次还是凭感觉，永远不改进</div>
                 </div>
               </div>
               <div>
                 <div style="color:#94a3b8;margin-bottom:.5rem">Talent-Pilot：</div>
                 <div class="space-y-1" style="color:#fff">
-                  <div>1. 系统分析86人技能标签+协作数据+当前负载</div>
-                  <div>2. 给出3套方案，每套有匹配度、风险和协作依据</div>
+                  <div>1. 系统分析86人技能标签+协作数据</div>
+                  <div>2. 给出3套方案，每套有匹配度、风险</div>
                   <div>3. 项目经理基于数据决策，而非直觉</div>
                   <div class="cg font-semibold">→ 从“找熟人”变成“找对人”，让组队依据更透明</div>
                 </div>
@@ -3655,52 +3481,31 @@ Week 5-6：补齐文档短板
         </div>
 
         <div class="perm-grid fi">
-          <!-- DENY -->
           <div class="perm-deny">
             <div class="perm-hdr ph-deny"><i class="fa-solid fa-ban"></i>场景A · 1.2级员工询问团队情况</div>
             <div class="perm-body">
-              <div class="flex gap-2 flex-wrap mb-3">
-                <span class="tag t-sky">工号：200001</span>
-                <span class="tag t-sky">陈**</span>
-                <span class="tag t-sky">1.2级 · 一线员工</span>
-              </div>
-              <div class="p-2.5 rounded-xl mb-3" style="background:var(--slate-50);font-size:.82rem;color:var(--indigo);font-style:italic;border:1px solid #e0e7ff">
-                "我想看看我们团队的晋升准备度"
-              </div>
+              <div class="flex gap-2 flex-wrap mb-3"><span class="tag t-sky">工号：200001</span><span class="tag t-sky">陈**</span><span class="tag t-sky">1.2级 · 一线员工</span></div>
+              <div class="p-2.5 rounded-xl mb-3" style="background:var(--slate-50);font-size:.82rem;color:var(--indigo);font-style:italic;border:1px solid #e0e7ff">"我想看看我们团队的晋升准备度"</div>
               <div style="background:var(--rose-light);border:1px solid #fda4af;border-radius:12px;padding:1.1rem">
-                <div class="flex items-center gap-2 mb-2">
-                  <i class="fa-solid fa-ban cr"></i>
-                  <span class="font-bold cr text-sm">权限校验：❌ 请求被拒绝</span>
-                </div>
-                <p class="text-xs" style="color:#9f1239;line-height:1.88;margin-bottom:.75rem">
-                  抱歉陈同学，根据<strong>信息权限对等原则</strong>，作为一线员工，你只能查看<strong>自己的晋升准备度数据</strong>，无法查看团队整体情况。<br>这是为了保护每位伙伴的隐私，确保360评估的匿名性。
-                </p>
+                <div class="flex items-center gap-2 mb-2"><i class="fa-solid fa-ban cr"></i><span class="font-bold cr text-sm">权限校验：❌ 请求被拒绝</span></div>
+                <p class="text-xs" style="color:#9f1239;line-height:1.88;margin-bottom:.75rem">抱歉陈同学，根据<strong>信息权限对等原则</strong>，作为一线员工，你只能查看<strong>自己的晋升准备度数据</strong>，无法查看团队整体情况。</p>
                 <div class="text-xs font-semibold mb-2" style="color:#0369a1">你可以查看：</div>
                 <div class="space-y-1.5">
-                  <div class="flex items-center gap-2 p-1.5 rounded-xl text-xs cursor-pointer" style="background:#eef2ff;border:1px solid #c7d2fe;transition:all .2s" onmouseover="this.style.background='#e0e7ff'" onmouseout="this.style.background='#eef2ff'"><i class="fa-solid fa-chart-line ci text-xs"></i><span class="ci font-medium">个人晋升准备度诊断</span></div>
-                  <div class="flex items-center gap-2 p-1.5 rounded-xl text-xs cursor-pointer" style="background:#e0f2fe;border:1px solid #bae6fd;transition:all .2s" onmouseover="this.style.background='#bae6fd'" onmouseout="this.style.background='#e0f2fe'"><i class="fa-solid fa-chart-radar cs text-xs"></i><span class="cs font-medium">我的能力雷达图</span></div>
-                  <div class="flex items-center gap-2 p-1.5 rounded-xl text-xs cursor-pointer" style="background:var(--emerald-light);border:1px solid #6ee7b7;transition:all .2s" onmouseover="this.style.background='#a7f3d0'" onmouseout="this.style.background='var(--emerald-light)'"><i class="fa-solid fa-comment cg text-xs"></i><span class="cg font-medium">直线上级反馈</span></div>
-                  <div class="flex items-center gap-2 p-1.5 rounded-xl text-xs cursor-pointer" style="background:#fffbeb;border:1px solid #fde68a;transition:all .2s" onmouseover="this.style.background='#fef08a'" onmouseout="this.style.background='#fffbeb'"><i class="fa-solid fa-bullseye ca text-xs"></i><span class="ca font-medium">个人成长建议</span></div>
+                  <div class="flex items-center gap-2 p-1.5 rounded-xl text-xs" style="background:#eef2ff;border:1px solid #c7d2fe"><i class="fa-solid fa-chart-line ci text-xs"></i><span class="ci font-medium">个人晋升准备度诊断</span></div>
+                  <div class="flex items-center gap-2 p-1.5 rounded-xl text-xs" style="background:#e0f2fe;border:1px solid #bae6fd"><i class="fa-solid fa-chart-radar cs text-xs"></i><span class="cs font-medium">我的能力雷达图</span></div>
+                  <div class="flex items-center gap-2 p-1.5 rounded-xl text-xs" style="background:var(--emerald-light);border:1px solid #6ee7b7"><i class="fa-solid fa-comment cg text-xs"></i><span class="cg font-medium">直线上级反馈</span></div>
+                  <div class="flex items-center gap-2 p-1.5 rounded-xl text-xs" style="background:#fffbeb;border:1px solid #fde68a"><i class="fa-solid fa-bullseye ca text-xs"></i><span class="ca font-medium">个人成长建议</span></div>
                 </div>
               </div>
             </div>
           </div>
-          <!-- ALLOW -->
           <div class="perm-allow">
             <div class="perm-hdr ph-allow"><i class="fa-solid fa-circle-check"></i>场景B · 团队负责人询问同一问题</div>
             <div class="perm-body">
-              <div class="flex gap-2 flex-wrap mb-3">
-                <span class="tag t-indigo">工号：289545</span>
-                <span class="tag t-emerald">业务管理者</span>
-                <span class="tag t-emerald">团队负责人</span>
-              </div>
-              <div class="p-2.5 rounded-xl mb-3" style="background:var(--slate-50);font-size:.82rem;color:var(--indigo);font-style:italic;border:1px solid #e0e7ff">
-                "帮我看看智能教学产品部的晋升准备度"
-              </div>
+              <div class="flex gap-2 flex-wrap mb-3"><span class="tag t-indigo">工号：289545</span><span class="tag t-emerald">业务管理者</span><span class="tag t-emerald">团队负责人</span></div>
+              <div class="p-2.5 rounded-xl mb-3" style="background:var(--slate-50);font-size:.82rem;color:var(--indigo);font-style:italic;border:1px solid #e0e7ff">"帮我看看智能教学产品部的晋升准备度"</div>
               <div style="background:var(--emerald-light);border:1px solid #6ee7b7;border-radius:12px;padding:1.1rem">
-                <div class="flex items-center gap-2 mb-2">
-                  <span class="auth-ok" style="font-size:.66rem"><i class="fa-solid fa-circle-check"></i>权限通过 · 展示完整报告</span>
-                </div>
+                <div class="flex items-center gap-2 mb-2"><span class="auth-ok" style="font-size:.66rem"><i class="fa-solid fa-circle-check"></i>权限通过 · 展示完整报告</span></div>
                 <div class="grid grid-cols-2 gap-2 text-xs mt-1">
                   <div class="p-2 rounded-xl" style="background:#fff;border:1px solid #a7f3d0">
                     <div class="font-bold cg mb-1">团队概况</div>
@@ -3712,7 +3517,7 @@ Week 5-6：补齐文档短板
                   </div>
                   <div class="p-2 rounded-xl" style="background:#fff;border:1px solid #a7f3d0">
                     <div class="font-bold cg mb-1">关键人才</div>
-                    <div style="color:var(--slate-600)">张*(1.3→2.1跨级)<br>李*(2.2→2.3)王*(1.2→1.3)</div>
+                    <div style="color:var(--slate-600)">张*(1.3→2.1跨级)<br>孙*流失概率65%</div>
                   </div>
                   <div class="p-2 rounded-xl" style="background:#fffbeb;border:1px solid #fde68a">
                     <div class="font-bold ca mb-1">⚠️ 风险预警</div>
@@ -3787,13 +3592,13 @@ Week 5-6：补齐文档短板
               <tr>
                 <td><span class="tag t-emerald">场景二A</span> <span class="text-xs font-medium">1.2→1.3</span></td>
                 <td><span class="text-xs flex items-center gap-1.5"><i class="fa-solid fa-user cg text-xs"></i>一线员工</span></td>
-                <td class="text-xs" style="color:var(--slate-500)">差距不在技术 · 主动性认知差15分 · 6周精确计划</td>
+                <td class="text-xs" style="color:var(--slate-500)">11月工作回顾 · 能力拆解 · 上级反馈 · 6周行动计划</td>
                 <td><span class="tag t-emerald" style="font-size:.6rem">仅自评+上级反馈</span></td>
               </tr>
               <tr>
                 <td><span class="tag t-amber">场景二B</span> <span class="text-xs font-medium">2.2→2.3</span></td>
                 <td><span class="text-xs flex items-center gap-1.5"><i class="fa-solid fa-user-tie ca text-xs"></i>骨干员工</span></td>
-                <td class="text-xs" style="color:var(--slate-500)">硬技能达标 · 软实力是瓶颈 · 18月双路径 · 隐藏优势92%</td>
+                <td class="text-xs" style="color:var(--slate-500)">3.5年成果盘点 · 双路径规划 · 隐藏优势92% · 18月路径</td>
                 <td><span class="tag t-emerald" style="font-size:.6rem">仅个人视角</span></td>
               </tr>
               <tr>
@@ -3845,23 +3650,23 @@ Week 5-6：补齐文档短板
         <div class="mt-4 p-3 text-center rounded-xl fi" style="background:#fff;border:1px solid var(--slate-200)">
           <div class="text-xs" style="color:var(--slate-400)">
             <i class="fa-solid fa-circle-info mr-1 ci"></i>
-            v3.0 超详实版 · 5个场景 · 所有演示数据均为模拟生成，<strong style="color:var(--slate-600)">真实场景严格基于实际行为数据</strong>
+            v6 超详实版 · 5个场景 · 所有演示数据均为模拟生成，<strong style="color:var(--slate-600)">真实场景严格基于实际行为数据</strong>
           </div>
         </div>
         <div class="h-16"></div>
       </section>
 
-    </div>
+    </div><!-- /z1 -->
 
     <script>
-      // Fade in
+      /* ── Fade in ── */
       const io = new IntersectionObserver(es => es.forEach(e => {
         if (e.isIntersecting) e.target.classList.add('vis')
       }), {
         threshold: .07
       });
       document.querySelectorAll('.fi').forEach(el => io.observe(el));
-      // Nav active
+      /* ── Nav active ── */
       const secs = document.querySelectorAll('section[id]');
       const nbs = document.querySelectorAll('.nb');
       window.addEventListener('scroll', () => {
@@ -3871,10 +3676,10 @@ Week 5-6：补齐文档短板
         });
         nbs.forEach(n => {
           n.classList.remove('active');
-          if (n.getAttribute('href') === '#' + cur) n.classList.add('active')
+          if (n.getAttribute('href') === '#' + cur) n.classList.add('active');
         });
       });
-      // Progress bar animate
+      /* ── Progress bar animate ── */
       const pbio = new IntersectionObserver(es => {
         es.forEach(e => {
           if (e.isIntersecting) {
@@ -3888,8 +3693,8 @@ Week 5-6：补齐文档短板
       }, {
         threshold: .5
       });
-      document.querySelectorAll('.pbar,.lvl-fill').forEach(b => pbio.observe(b));
-      // Layer toggle
+      document.querySelectorAll('.pbar,.lvl-fill,.cap-gap-cur').forEach(b => pbio.observe(b));
+      /* ── Layer toggle ── */
       function showLayer(id, sceneId, evt) {
         const scene = document.getElementById(sceneId);
         scene.querySelectorAll('.scene-panel').forEach(p => p.classList.remove('active'));
@@ -3897,299 +3702,18 @@ Week 5-6：补齐文档短板
         scene.querySelectorAll('.stab').forEach(t => t.classList.remove('on'));
         evt.target.classList.add('on');
       }
-      // Charts
+      /* ── Section accordion ── */
+      function toggleSection(hdr) {
+        const body = hdr.nextElementSibling;
+        const chevron = hdr.querySelector('.rpt-chevron');
+        const isOpen = body.classList.contains('open');
+        body.classList.toggle('open', !isOpen);
+        chevron.classList.toggle('open', !isOpen);
+      }
+      /* ── Charts ── */
       window.addEventListener('load', () => {
-        // Cap Bar
-        const cc = document.getElementById('capBar');
-        if (cc) new Chart(cc, {
-          type: 'bar',
-          data: {
-            labels: ['技术能力', '协作能力', '业务理解', '成长潜力', '代码质量', '文档能力'],
-            datasets: [{
-                label: '团队得分',
-                data: [82, 71, 85, 78, 84, 68],
-                backgroundColor: 'rgba(79,70,229,.75)',
-                borderRadius: 5,
-                borderSkipped: false
-              },
-              {
-                label: '组织均值',
-                data: [79, 76, 74, 77, 80, 72],
-                backgroundColor: 'rgba(2,132,199,.45)',
-                borderRadius: 5,
-                borderSkipped: false
-              }
-            ]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: {
-                position: 'bottom',
-                labels: {
-                  color: '#6b7280',
-                  font: {
-                    size: 9
-                  },
-                  boxWidth: 10,
-                  padding: 7
-                }
-              },
-              tooltip: {
-                callbacks: {
-                  label: c => ` ${c.dataset.label}: ${c.parsed.y}分`
-                }
-              }
-            },
-            scales: {
-              x: {
-                ticks: {
-                  color: '#9ca3af',
-                  font: {
-                    size: 9
-                  }
-                },
-                grid: {
-                  display: false
-                }
-              },
-              y: {
-                min: 60,
-                max: 90,
-                ticks: {
-                  color: '#9ca3af',
-                  font: {
-                    size: 9
-                  }
-                },
-                grid: {
-                  color: 'rgba(99,102,241,.06)'
-                }
-              }
-            }
-          }
-        });
-        // Ring 1.2
-        const r12 = document.getElementById('ring12');
-        if (r12) new Chart(r12, {
-          type: 'doughnut',
-          data: {
-            datasets: [{
-              data: [76, 24],
-              backgroundColor: ['rgba(5,150,105,.85)', 'rgba(241,245,249,.9)'],
-              borderWidth: 0,
-              borderRadius: 5,
-              spacing: 2
-            }]
-          },
-          options: {
-            cutout: '76%',
-            plugins: {
-              legend: {
-                display: false
-              },
-              tooltip: {
-                enabled: false
-              }
-            },
-            animation: {
-              duration: 1500,
-              easing: 'easeInOutQuart'
-            }
-          }
-        });
-        // Radar 1.2
-        const rr12 = document.getElementById('radar12');
-        if (rr12) new Chart(rr12, {
-          type: 'radar',
-          data: {
-            labels: ['技术能力', '协作能力', '业务理解', '成长潜力', '代码质量', '文档能力'],
-            datasets: [{
-                label: '陈**',
-                data: [82, 71, 78, 75, 85, 68],
-                borderColor: 'rgba(79,70,229,.9)',
-                backgroundColor: 'rgba(79,70,229,.1)',
-                pointBackgroundColor: '#4f46e5',
-                pointRadius: 4,
-                borderWidth: 2
-              },
-              {
-                label: '1.3标准',
-                data: [80, 75, 78, 78, 82, 72],
-                borderColor: 'rgba(217,119,6,.7)',
-                backgroundColor: 'rgba(217,119,6,.06)',
-                pointBackgroundColor: '#d97706',
-                pointRadius: 3,
-                borderWidth: 1.5,
-                borderDash: [4, 4]
-              }
-            ]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: {
-                position: 'bottom',
-                labels: {
-                  color: '#6b7280',
-                  font: {
-                    size: 8
-                  },
-                  boxWidth: 9,
-                  padding: 5
-                }
-              }
-            },
-            scales: {
-              r: {
-                min: 60,
-                max: 90,
-                ticks: {
-                  display: false
-                },
-                grid: {
-                  color: 'rgba(99,102,241,.07)'
-                },
-                angleLines: {
-                  color: 'rgba(99,102,241,.07)'
-                },
-                pointLabels: {
-                  color: '#6b7280',
-                  font: {
-                    size: 8
-                  }
-                }
-              }
-            }
-          }
-        });
-        // Rings 2.2
-        const r22a = document.getElementById('ring22a');
-        if (r22a) new Chart(r22a, {
-          type: 'doughnut',
-          data: {
-            datasets: [{
-              data: [84, 16],
-              backgroundColor: ['rgba(217,119,6,.85)', 'rgba(241,245,249,.9)'],
-              borderWidth: 0,
-              borderRadius: 5,
-              spacing: 2
-            }]
-          },
-          options: {
-            cutout: '75%',
-            plugins: {
-              legend: {
-                display: false
-              },
-              tooltip: {
-                enabled: false
-              }
-            },
-            animation: {
-              duration: 1500,
-              easing: 'easeInOutQuart'
-            }
-          }
-        });
-        const r22b = document.getElementById('ring22b');
-        if (r22b) new Chart(r22b, {
-          type: 'doughnut',
-          data: {
-            datasets: [{
-              data: [71, 29],
-              backgroundColor: ['rgba(2,132,199,.75)', 'rgba(241,245,249,.9)'],
-              borderWidth: 0,
-              borderRadius: 5,
-              spacing: 2
-            }]
-          },
-          options: {
-            cutout: '72%',
-            plugins: {
-              legend: {
-                display: false
-              },
-              tooltip: {
-                enabled: false
-              }
-            },
-            animation: {
-              duration: 1500,
-              easing: 'easeInOutQuart'
-            }
-          }
-        });
-        // Radar 2.2
-        const rr22 = document.getElementById('radar22');
-        if (rr22) new Chart(rr22, {
-          type: 'radar',
-          data: {
-            labels: ['技术能力', '协作能力', '业务理解', '技术影响力', '人才培养'],
-            datasets: [{
-                label: '李**',
-                data: [89, 86, 88, 78, 72],
-                borderColor: 'rgba(217,119,6,.9)',
-                backgroundColor: 'rgba(217,119,6,.1)',
-                pointBackgroundColor: '#d97706',
-                pointRadius: 4,
-                borderWidth: 2
-              },
-              {
-                label: '2.3标准',
-                data: [85, 85, 85, 80, 78],
-                borderColor: 'rgba(79,70,229,.6)',
-                backgroundColor: 'rgba(79,70,229,.05)',
-                pointBackgroundColor: '#4f46e5',
-                pointRadius: 3,
-                borderWidth: 1.5,
-                borderDash: [4, 4]
-              }
-            ]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: {
-                position: 'bottom',
-                labels: {
-                  color: '#6b7280',
-                  font: {
-                    size: 8
-                  },
-                  boxWidth: 9,
-                  padding: 5
-                }
-              }
-            },
-            scales: {
-              r: {
-                min: 65,
-                max: 95,
-                ticks: {
-                  display: false
-                },
-                grid: {
-                  color: 'rgba(99,102,241,.07)'
-                },
-                angleLines: {
-                  color: 'rgba(99,102,241,.07)'
-                },
-                pointLabels: {
-                  color: '#6b7280',
-                  font: {
-                    size: 8
-                  }
-                }
-              }
-            }
-          }
-        });
-        // Match Rings
-        function mkMatch(id, pct, color) {
+        /* 通用 doughnut 工厂 */
+        function mkRing(id, pct, color, gap) {
           const el = document.getElementById(id);
           if (!el) return;
           new Chart(el, {
@@ -4199,12 +3723,12 @@ Week 5-6：补齐文档短板
                 data: [pct, 100 - pct],
                 backgroundColor: [color, 'rgba(241,245,249,.9)'],
                 borderWidth: 0,
-                borderRadius: 3,
-                spacing: 1
+                borderRadius: 4,
+                spacing: gap || 2
               }]
             },
             options: {
-              cutout: '72%',
+              cutout: '74%',
               plugins: {
                 legend: {
                   display: false
@@ -4214,15 +3738,21 @@ Week 5-6：补齐文档短板
                 }
               },
               animation: {
-                duration: 1500,
+                duration: 1400,
                 easing: 'easeInOutQuart'
               }
             }
           });
         }
-        mkMatch('matchA', 92, 'rgba(5,150,105,.85)');
-        mkMatch('matchB', 85, 'rgba(217,119,6,.85)');
-        mkMatch('matchC', 78, 'rgba(2,132,199,.75)');
+        /* 员工A 环 */
+        mkRing('ring12A', 76, 'rgba(5,150,105,.85)');
+        /* 员工B 环 */
+        mkRing('ring22A', 84, 'rgba(217,119,6,.85)');
+        mkRing('ring31A', 71, 'rgba(2,132,199,.75)');
+        /* 项目匹配环 */
+        mkRing('matchA', 92, 'rgba(5,150,105,.85)');
+        mkRing('matchB', 85, 'rgba(217,119,6,.85)');
+        mkRing('matchC', 78, 'rgba(2,132,199,.75)');
       });
     </script>
   </body>
