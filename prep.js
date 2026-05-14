@@ -1,22 +1,71 @@
 const navLinks = [...document.querySelectorAll(".site-header nav a")];
 const productUrl = "yach://yach.zhiyinlou.com/session/p2p?sessionid=830388266714619904";
-const sections = navLinks
-  .map((link) => document.querySelector(link.getAttribute("href")))
-  .filter(Boolean);
-
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      navLinks.forEach((link) => {
-        link.classList.toggle("active", link.getAttribute("href") === `#${entry.target.id}`);
-      });
-    });
-  },
-  { rootMargin: "-40% 0px -54% 0px" }
+const sections = [...document.querySelectorAll("main .page")];
+let currentIndex = Math.max(
+  0,
+  sections.findIndex((section) => `#${section.id}` === window.location.hash)
 );
 
-sections.forEach((section) => observer.observe(section));
+function showPage(index, shouldPushHash = true) {
+  currentIndex = Math.min(Math.max(index, 0), sections.length - 1);
+  sections.forEach((section, sectionIndex) => {
+    section.classList.toggle("active-page", sectionIndex === currentIndex);
+  });
+  navLinks.forEach((link) => {
+    link.classList.toggle("active", link.getAttribute("href") === `#${sections[currentIndex].id}`);
+  });
+  if (shouldPushHash) {
+    history.replaceState(null, "", `#${sections[currentIndex].id}`);
+  }
+}
+
+function goNext() {
+  if (currentIndex < sections.length - 1) showPage(currentIndex + 1);
+}
+
+navLinks.forEach((link) => {
+  link.addEventListener("click", (event) => {
+    const target = document.querySelector(link.getAttribute("href"));
+    if (!target) return;
+    event.preventDefault();
+    showPage(sections.indexOf(target));
+  });
+});
+
+document.querySelectorAll('a[href^="#"]').forEach((link) => {
+  if (navLinks.includes(link)) return;
+  link.addEventListener("click", (event) => {
+    const target = document.querySelector(link.getAttribute("href"));
+    if (!target) return;
+    event.preventDefault();
+    showPage(sections.indexOf(target));
+  });
+});
+
+sections.forEach((section) => {
+  section.addEventListener("click", (event) => {
+    if (event.target.closest("a, button, input, textarea, select, [role='button']")) return;
+    goNext();
+  });
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") {
+    event.preventDefault();
+    goNext();
+  }
+  if (event.key === "ArrowLeft" || event.key === "PageUp") {
+    event.preventDefault();
+    showPage(currentIndex - 1);
+  }
+});
+
+window.addEventListener("hashchange", () => {
+  const nextIndex = sections.findIndex((section) => `#${section.id}` === window.location.hash);
+  if (nextIndex >= 0) showPage(nextIndex, false);
+});
+
+showPage(currentIndex, Boolean(window.location.hash));
 
 const timerText = document.querySelector("#timerText");
 const startTimer = document.querySelector("#startTimer");
