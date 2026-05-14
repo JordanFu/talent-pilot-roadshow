@@ -1364,6 +1364,7 @@
       }
 
       .diag-pre {
+        display: none;
         margin: 0;
         padding: 1.35rem 1.45rem 1.55rem;
         max-height: 760px;
@@ -1377,6 +1378,226 @@
         background:
           linear-gradient(#fff, #fff) padding-box,
           linear-gradient(180deg, rgba(79, 70, 229, .08), rgba(2, 132, 199, .05)) border-box;
+      }
+
+      .growth-report {
+        padding: 1.25rem;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      }
+
+      .report-hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(280px, .9fr);
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .profile-card,
+      .report-card,
+      .coach-note {
+        border: 1px solid var(--slate-200);
+        background: rgba(255, 255, 255, .92);
+        border-radius: 16px;
+        padding: 1rem;
+        box-shadow: 0 10px 26px rgba(15, 23, 42, .045);
+      }
+
+      .profile-card {
+        display: grid;
+        grid-template-columns: 72px 1fr;
+        gap: 1rem;
+        align-items: center;
+        background:
+          radial-gradient(circle at 90% 0%, rgba(52, 211, 153, .18), transparent 32%),
+          linear-gradient(135deg, #f8fafc, #ffffff);
+      }
+
+      .avatar {
+        width: 72px;
+        height: 72px;
+        border-radius: 18px;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        font-size: 1.6rem;
+        font-weight: 900;
+        background: linear-gradient(135deg, #059669, #34d399);
+      }
+
+      .profile-card.amber .avatar {
+        background: linear-gradient(135deg, #d97706, #fbbf24);
+      }
+
+      .profile-name {
+        font-size: 1.25rem;
+        font-weight: 900;
+        color: var(--slate-900);
+      }
+
+      .profile-meta {
+        margin-top: .35rem;
+        color: var(--slate-500);
+        line-height: 1.65;
+        font-size: .9rem;
+      }
+
+      .level-bridge {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: .75rem;
+        height: 100%;
+      }
+
+      .level-box {
+        border-radius: 14px;
+        padding: .9rem;
+        background: var(--slate-50);
+        border: 1px solid var(--slate-200);
+      }
+
+      .level-box strong {
+        display: block;
+        font-size: 1.35rem;
+        color: var(--slate-900);
+        font-family: 'Noto Serif SC', serif;
+      }
+
+      .level-box span {
+        color: var(--slate-500);
+        font-size: .85rem;
+      }
+
+      .bridge-arrow {
+        color: var(--emerald);
+        font-weight: 900;
+      }
+
+      .report-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .report-card h4,
+      .coach-note h4 {
+        margin: 0 0 .75rem;
+        color: var(--slate-900);
+        font-size: 1rem;
+        font-weight: 900;
+      }
+
+      .report-card ul,
+      .coach-note ul {
+        margin: 0;
+        padding-left: 1.05rem;
+        color: var(--slate-600);
+        line-height: 1.72;
+      }
+
+      .report-card li + li,
+      .coach-note li + li {
+        margin-top: .35rem;
+      }
+
+      .compare-card {
+        grid-column: span 2;
+      }
+
+      .compare-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: .75rem;
+      }
+
+      .compare-row div {
+        border-radius: 12px;
+        padding: .85rem;
+        background: #f8fafc;
+        border: 1px solid var(--slate-200);
+      }
+
+      .compare-row b {
+        display: block;
+        color: var(--slate-900);
+        margin-bottom: .45rem;
+      }
+
+      .aha-line {
+        margin-top: .75rem;
+        padding: .85rem 1rem;
+        border-radius: 14px;
+        background: #ecfdf5;
+        border: 1px solid #a7f3d0;
+        color: #047857;
+        font-weight: 900;
+      }
+
+      .action-timeline {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: .75rem;
+      }
+
+      .action-step {
+        border-radius: 14px;
+        padding: .9rem;
+        background: #ffffff;
+        border: 1px solid var(--slate-200);
+      }
+
+      .action-step span {
+        display: inline-flex;
+        margin-bottom: .45rem;
+        color: var(--indigo);
+        font-size: .78rem;
+        font-weight: 900;
+      }
+
+      .action-step b {
+        display: block;
+        color: var(--slate-900);
+        margin-bottom: .35rem;
+      }
+
+      .action-step p {
+        margin: 0;
+        color: var(--slate-600);
+        line-height: 1.6;
+        font-size: .86rem;
+      }
+
+      .coach-note {
+        margin-top: 1rem;
+        background: linear-gradient(135deg, #0f172a, #1e1b4b);
+        color: #fff;
+      }
+
+      .coach-note h4 {
+        color: #fff;
+      }
+
+      .coach-note p {
+        margin: 0;
+        color: #cbd5e1;
+        line-height: 1.85;
+      }
+
+      @media(max-width:900px) {
+        .report-hero,
+        .report-grid,
+        .action-timeline {
+          grid-template-columns: 1fr;
+        }
+
+        .compare-card {
+          grid-column: auto;
+        }
+
+        .compare-row {
+          grid-template-columns: 1fr;
+        }
       }
 
       @media(max-width:900px) {
@@ -2025,6 +2246,80 @@
               </div>
               <span class="tag t-emerald">一线员工视角</span>
             </div>
+            <div class="growth-report">
+              <div class="report-hero">
+                <div class="profile-card">
+                  <div class="avatar">陈</div>
+                  <div>
+                    <div class="profile-name">陈**｜1.2级算法工程师</div>
+                    <div class="profile-meta">工号 200001 · 入职 11 个月 · 智能教学产品部-推荐算法组<br>请求：看看晋升准备度 / 个人诊断 / 1.3级</div>
+                  </div>
+                </div>
+                <div class="profile-card">
+                  <div class="level-bridge">
+                    <div class="level-box"><strong>1.2</strong><span>成长级<br>执行者</span></div>
+                    <div class="bridge-arrow">→</div>
+                    <div class="level-box"><strong>1.3</strong><span>熟练级<br>独立贡献者</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="report-grid">
+                <div class="report-card">
+                  <h4>工作证据</h4>
+                  <ul>
+                    <li>AI课程推荐模型优化：负责特征工程模块，3个核心特征独立完成。</li>
+                    <li>推荐系统性能调优：协助诊断2个性能瓶颈。</li>
+                    <li>连续4个 sprint 按时交付，代码质量稳定。</li>
+                  </ul>
+                </div>
+                <div class="report-card">
+                  <h4>优势区</h4>
+                  <ul>
+                    <li>代码能力扎实，逻辑清晰，Bug率低。</li>
+                    <li>学习能力强，Transformer 架构 2 周掌握。</li>
+                    <li>责任心强，任务交付稳定。</li>
+                  </ul>
+                </div>
+                <div class="report-card">
+                  <h4>晋升突破点</h4>
+                  <ul>
+                    <li>主动性：从等安排到主动 owner 小优化。</li>
+                    <li>技术表达：文档要让测试和产品也能看懂。</li>
+                    <li>跨团队协作：主动承担对接人角色。</li>
+                  </ul>
+                </div>
+                <div class="report-card compare-card">
+                  <h4>职级差异拆解</h4>
+                  <div class="compare-row">
+                    <div><b>1.2级：把任务做好</b><ul><li>能独立完成分配任务</li><li>代码质量达标</li><li>学习能力良好</li><li>按时交付</li></ul></div>
+                    <div><b>1.3级：主动推动问题解决</b><ul><li>主动发现并解决问题</li><li>独立 owner 小模块</li><li>方案能被理解和复用</li><li>能跨团队有效协作</li></ul></div>
+                  </div>
+                  <div class="aha-line">核心判断：不是技术考试，而是职业成熟度跃迁。</div>
+                </div>
+                <div class="report-card">
+                  <h4>上级期待</h4>
+                  <ul>
+                    <li>主动 owner 一个小项目，哪怕是优化类。</li>
+                    <li>写一篇让非技术同事也能看懂的技术文档。</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="report-card">
+                <h4>6周行动计划</h4>
+                <div class="action-timeline">
+                  <div class="action-step"><span>Week 1-2</span><b>提升主动性</b><p>主动发现1个可优化点，写1页方案，找上级讨论争取 owner。</p></div>
+                  <div class="action-step"><span>Week 3-4</span><b>提升协作能见度</b><p>参与搜索算法组特征对接，主动承担对接人，做10分钟分享。</p></div>
+                  <div class="action-step"><span>Week 5-6</span><b>补齐文档短板</b><p>重写一个功能文档，让测试和产品同学试读到“看懂”。</p></div>
+                </div>
+              </div>
+
+              <div class="coach-note">
+                <h4>给陈同学的话</h4>
+                <p>你的技术底子很好，过去11个月也证明了你的能力。从1.2到1.3，不只是“完成任务”，而是“主动发现问题、让别人理解、推动事情发生”。按照6周计划一步步来，1.3级是水到渠成的事。</p>
+              </div>
+            </div>
             <pre class="diag-pre">🔐 身份验证通过
 用户：陈**（工号：200001）
 角色：一线员工
@@ -2208,6 +2503,81 @@ Week 5-6：补齐文档短板
                 <div class="diag-sub">从 2.3 准备度延展到 3.1 架构师长期发展路径</div>
               </div>
               <span class="tag t-amber">骨干员工视角</span>
+            </div>
+            <div class="growth-report">
+              <div class="report-hero">
+                <div class="profile-card amber">
+                  <div class="avatar">李</div>
+                  <div>
+                    <div class="profile-name">李**｜2.2级高级算法工程师</div>
+                    <div class="profile-meta">工号 200002 · 入职 3.5 年 · 智能教学产品部-推荐算法组<br>请求：晋升2.3准备度 / 架构师路径 / 发展规划</div>
+                  </div>
+                </div>
+                <div class="profile-card amber">
+                  <div class="level-bridge">
+                    <div class="level-box"><strong>2.2</strong><span>资深级<br>个人技术强</span></div>
+                    <div class="bridge-arrow" style="color:var(--amber)">→</div>
+                    <div class="level-box"><strong>2.3</strong><span>专家级<br>带动他人</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="report-grid">
+                <div class="report-card">
+                  <h4>核心贡献</h4>
+                  <ul>
+                    <li>AI课程推荐系统核心模块持续2年 owner，稳定性好。</li>
+                    <li>智能答疑算法项目从0到1主导，方案被产品采纳。</li>
+                    <li>推荐系统性能调优专项，主导瓶颈诊断与优化。</li>
+                  </ul>
+                </div>
+                <div class="report-card">
+                  <h4>优势区</h4>
+                  <ul>
+                    <li>技术深度强，推荐算法领域团队 Top 2。</li>
+                    <li>业务敏感度高，能站在产品角度思考。</li>
+                    <li>项目交付稳定，负责模块质量高。</li>
+                  </ul>
+                </div>
+                <div class="report-card">
+                  <h4>晋升突破点</h4>
+                  <ul>
+                    <li>人才培养：从自己做得好，到让新人能独立做。</li>
+                    <li>技术推广：把好方案沉淀成团队可复用标准。</li>
+                    <li>跨团队影响：让搜索、广告、数据中台也知道你。</li>
+                  </ul>
+                </div>
+                <div class="report-card compare-card">
+                  <h4>2.3 与 3.1 的能力台阶</h4>
+                  <div class="compare-row">
+                    <div><b>2.3级：扩大技术影响力</b><ul><li>能带人</li><li>能推广方案</li><li>能跨团队影响</li></ul></div>
+                    <div><b>3.1级：系统级架构师</b><ul><li>跨领域技术广度</li><li>系统级架构设计</li><li>带小团队并推动业务</li></ul></div>
+                  </div>
+                  <div class="aha-line" style="background:#fffbeb;border-color:#fde68a;color:#92400e">核心判断：技术能力已经够，下一步关键是“带人、推广、跨团队影响”。</div>
+                </div>
+                <div class="report-card">
+                  <h4>隐藏优势</h4>
+                  <ul>
+                    <li>系统发现你的“技术-业务转化率”很突出。</li>
+                    <li>方案不仅讲实现，也讲业务影响和投入产出。</li>
+                    <li>这是未来架构师路径的关键潜质。</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="report-card">
+                <h4>18个月发展路径</h4>
+                <div class="action-timeline">
+                  <div class="action-step"><span>0-6个月</span><b>冲刺2.3级</b><p>培养1名1.3级同学，做1次跨团队分享，写1篇团队标准方案。</p></div>
+                  <div class="action-step"><span>6-12个月</span><b>扩展技术广度</b><p>主动了解搜索、广告算法，参与跨系统架构设计，开始带2-3人。</p></div>
+                  <div class="action-step"><span>12-18个月</span><b>建立业务影响力</b><p>主导业务级技术方案，做部门级分享，培养1名2.1级到2.3级。</p></div>
+                </div>
+              </div>
+
+              <div class="coach-note">
+                <h4>给李同学的话</h4>
+                <p>你的状态很好，个人技术能力已经超过2.3级标准。从2.2到2.3，核心是从“个人贡献”到“带动他人”的转变。如果未来有更高追求，18个月后可以向架构师发展。</p>
+              </div>
             </div>
             <pre class="diag-pre">🔐 身份验证通过
 用户：李**（工号：200002）
