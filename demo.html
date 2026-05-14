@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Talent-Pilot | 现场实机演示引导台</title>
+    <link rel="stylesheet" href="./demo.css" />
+  </head>
+  <body>
+    <header class="demo-nav">
+      <a class="brand" href="./prep.html" aria-label="Talent-Pilot 路演页">
+        <span>TP</span>
+        <strong>Talent-Pilot</strong>
+      </a>
+      <nav aria-label="演示场景">
+        <a href="#scene-1">人才盘点</a>
+        <a href="#scene-2">晋升诊断</a>
+        <a href="#scene-3">异常分析</a>
+        <a href="#scene-4">智能组队</a>
+      </nav>
+      <a class="open-product" href="yach://yach.zhiyinlou.com/session/p2p?sessionid=830388266714619904">打开实机</a>
+    </header>
+
+    <main>
+      <section class="demo-hero">
+        <div>
+          <p class="badge">Live Showcase · Mock Data Guide</p>
+          <h1>四个角色，验证一个组织决策智能体</h1>
+          <p>
+            这里不是替代实机产品的页面，而是现场演示引导台。每个场景都给出身份、请求、讲解重点与一键实机入口，
+            帮助评委在有限时间里看懂 Talent-Pilot 如何从组织数据中生成决策证据链。
+          </p>
+          <div class="hero-actions">
+            <a href="yach://yach.zhiyinlou.com/session/p2p?sessionid=830388266714619904">进入 OpenClaw 实机演示</a>
+            <button class="copy-product" type="button">复制实机链接</button>
+            <button id="copyAll" type="button">复制全部场景输入</button>
+          </div>
+        </div>
+        <aside class="demo-map" aria-label="四个演示场景">
+          <article><span>00</span><strong>必说声明</strong><p>模拟数据与真实权限边界</p></article>
+          <article><span>01</span><strong>业务管理者</strong><p>看智能教学产品部准备度</p></article>
+          <article><span>02</span><strong>组织负责人</strong><p>看组织部人才盘点</p></article>
+          <article><span>03</span><strong>权限对比</strong><p>同一问题不同角色响应</p></article>
+        </aside>
+      </section>
+
+      <section class="notice">
+        <strong>现场先声明</strong>
+        <p>老师，接下来我将进行演示效果展示。为了强化呈现效果，以下数据为模拟生成，旨在展示系统在实际拥有数据时的洞察能力。真实场景中，系统严格基于实际行为数据进行分析，不会呈现未获取的数据维度。</p>
+      </section>
+
+      <section class="script-board" id="script">
+        <div>
+          <span>Roadshow Script</span>
+          <h2>现场演示按“权限可信 → 组织盘点 → 个人诊断 → 异常治理 → 扩展组队”推进</h2>
+        </div>
+        <div class="script-steps">
+          <article><b>1</b><strong>团队人才盘点</strong><p>业务管理者看智能教学产品部晋升准备度，快速展示准备度分布、关键人才和风险预警。</p></article>
+          <article><b>2</b><strong>组织部盘点</strong><p>战略层 / HR 看组织健康度、人才密度、九宫格、异常案例和行动建议。</p></article>
+          <article><b>3</b><strong>个人晋升诊断</strong><p>个人视角只看本人准备度、能力雷达、成长建议，不展示团队 360。</p></article>
+          <article><b>4</b><strong>异常人才识别</strong><p>HR 专家看脱敏异常案例、归因分析和干预建议。</p></article>
+          <article><b>5</b><strong>权限对比</strong><p>同一个“看团队准备度”的问题，员工被拒绝，管理者通过。</p></article>
+        </div>
+        <p class="bridge-copy">这条动线要让评委看到：Talent-Pilot 不是把一堆数据摆出来，而是把不同角色的决策任务组织成可验证、可追溯、可复核的判断过程。</p>
+      </section>
+
+      <section class="scenario compact" id="scene-0">
+        <div class="scenario-head">
+          <span>Script Scene 01</span>
+          <h2>业务管理者：智能教学产品部晋升准备度</h2>
+          <p>这是脚本里的第一段实机演示，适合用来快速建立“身份验证通过后，系统能生成团队人才盘点报告”的产品信任。</p>
+        </div>
+        <div class="scenario-grid">
+          <pre data-copy="scene-0">【身份验证】
+工号：289545
+部门：组织发展
+职位：组织发展部部长
+
+【请求】
+帮我看看智能教学产品部的晋升准备度</pre>
+          <div class="answer-panel">
+            <h3>讲解重点</h3>
+            <ul>
+              <li>先展示身份验证通过与“可查看团队数据”的权限范围。</li>
+              <li>输出智能教学产品部准备度分布、Top 高潜、评价偏差与状态异常。</li>
+              <li>Aha：团队盘点结果一键生成，管理者从找数据转向看风险与行动建议。</li>
+            </ul>
+            <div class="output-preview">
+              <span>脚本输出模块</span>
+              <b>团队概况 / 准备度分布 / 关键人才 / 风险预警 / 行动建议</b>
+            </div>
+            <div class="scenario-actions">
+              <button type="button" data-copy-target="scene-0">复制输入</button>
+              <a href="yach://yach.zhiyinlou.com/session/p2p?sessionid=830388266714619904">进入实机</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="scenario" id="scene-1">
+        <div class="scenario-head">
+          <span>Scene 01</span>
+          <h2>组织部部长：人才盘点与异常治理</h2>
+          <p>证明 Talent-Pilot 能从组织负责人视角生成团队健康度、人才密度、九宫格、异常案例和行动建议。</p>
+        </div>
+        <div class="scenario-grid">
+          <pre data-copy="scene-1">【身份验证】
+工号：100001
+部门：组织部
+职位：组织部部长
+
+【请求】
+请为我展示组织部的人才盘点情况，我需要了解：
+1. 团队整体健康度和人才密度
+2. 九宫格人才落位分布
+3. 有哪些需要关注的异常人才案例
+4. 针对盘点结果的行动建议</pre>
+          <div class="answer-panel">
+            <h3>讲解重点</h3>
+            <ul>
+              <li>先验证身份和权限，组织负责人可看团队聚合盘点。</li>
+              <li>重点展示低调高贡献、高曝光证据不足、评价分歧三类异常。</li>
+              <li>Aha：人才盘点不是平均扫一遍，而是把管理注意力集中到争议地带。</li>
+            </ul>
+            <div class="output-preview">
+              <span>输出模块</span>
+              <b>健康度 / 人才密度 / 九宫格 / 异常案例 / 行动建议</b>
+            </div>
+            <div class="scenario-actions">
+              <button type="button" data-copy-target="scene-1">复制输入</button>
+              <a href="yach://yach.zhiyinlou.com/session/p2p?sessionid=830388266714619904">进入实机</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="scenario" id="scene-2">
+        <div class="scenario-head">
+          <span>Scene 02</span>
+          <h2>HRBP：资深 HRBP 个人晋升诊断</h2>
+          <p>证明同一套数据底座面对个人角色时，会生成成长视角的晋升准备度，同时保护 360 与他人信息。</p>
+        </div>
+        <div class="scenario-grid">
+          <pre data-copy="scene-2">【身份验证】
+工号：180001
+部门：组织部
+职位：HRBP
+
+【请求】
+请为我生成个人晋升诊断报告，目标岗位是资深HRBP。我想了解：
+1. 我当前的晋升准备度评分
+2. 在组织中的百分位定位
+3. 能力雷达图与目标岗位的差距
+4. 晋升概率预测
+5. 需要重点提升的能力维度</pre>
+          <div class="answer-panel">
+            <h3>讲解重点</h3>
+            <ul>
+              <li>目标岗位不是外部职级，用内部岗位能力要求和 1.1-7.3 职级口径解释。</li>
+              <li>展示个人准备度、百分位、能力差距和补证据建议。</li>
+              <li>Aha：员工看到的不是裁判结果，而是离目标岗位还差哪些可补充证据。</li>
+            </ul>
+            <div class="output-preview">
+              <span>输出模块</span>
+              <b>准备度 / 百分位 / 雷达图 / 晋升概率 / 能力提升建议</b>
+            </div>
+            <div class="scenario-actions">
+              <button type="button" data-copy-target="scene-2">复制输入</button>
+              <a href="yach://yach.zhiyinlou.com/session/p2p?sessionid=830388266714619904">进入实机</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="scenario compact" id="scene-personal">
+        <div class="scenario-head">
+          <span>Script Scene 03</span>
+          <h2>一线员工：个人晋升准备度诊断</h2>
+          <p>这个脚本场景用于强调个人权限边界：员工只看本人数据、直线上级反馈与成长建议，不看团队 360 或他人明细。</p>
+        </div>
+        <div class="scenario-grid">
+          <pre data-copy="scene-personal">【身份验证】
+工号：200001
+部门：智能教学产品部
+职位：算法工程师
+
+【请求】
+我想看看自己晋升2.3的准备度</pre>
+          <div class="answer-panel">
+            <h3>讲解重点</h3>
+            <ul>
+              <li>输出当前 2.2 → 目标 2.3 的档内晋升准备度。</li>
+              <li>展示能力雷达、团队百分位、自评 vs 上级反馈差异。</li>
+              <li>Aha：个人端不是“判你行不行”，而是把目标差距翻译成可行动成长路径。</li>
+            </ul>
+            <div class="output-preview">
+              <span>脚本输出模块</span>
+              <b>综合评估 / 能力雷达 / 上级反馈 / 自评对比 / 成长建议</b>
+            </div>
+            <div class="scenario-actions">
+              <button type="button" data-copy-target="scene-personal">复制输入</button>
+              <a href="yach://yach.zhiyinlou.com/session/p2p?sessionid=830388266714619904">进入实机</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="scenario compact" id="scene-abnormal">
+        <div class="scenario-head">
+          <span>Script Scene 04</span>
+          <h2>HR 专家：智能教学产品部异常人才识别</h2>
+          <p>这个脚本场景用于展示 HR 专家如何基于脱敏数据识别自评过高、他评分歧和活跃度下降等异常。</p>
+        </div>
+        <div class="scenario-grid">
+          <pre data-copy="scene-abnormal">【身份验证】
+工号：300001
+部门：人力资源部
+职位：HRBP
+
+【请求】
+帮我识别智能教学产品部中的异常人才</pre>
+          <div class="answer-panel">
+            <h3>讲解重点</h3>
+            <ul>
+              <li>强调仅 HR 专家 / 战略层可查看脱敏异常案例。</li>
+              <li>展示自评过高、他评分歧、流失风险三类异常归因。</li>
+              <li>Aha：HRBP 不是被数据淹没，而是直接看到要优先介入的案例。</li>
+            </ul>
+            <div class="output-preview">
+              <span>脚本输出模块</span>
+              <b>异常案例 / 偏差分析 / 可能原因 / 风险等级 / 干预建议</b>
+            </div>
+            <div class="scenario-actions">
+              <button type="button" data-copy-target="scene-abnormal">复制输入</button>
+              <a href="yach://yach.zhiyinlou.com/session/p2p?sessionid=830388266714619904">进入实机</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="scenario" id="scene-3">
+        <div class="scenario-head">
+          <span>Scene 03</span>
+          <h2>HRBP 对接人：算法工程部异常分析</h2>
+          <p>证明 Talent-Pilot 可以帮助 HRBP 从半年度盘点中识别异常类型、影响范围、可能原因和治理动作。</p>
+        </div>
+        <div class="scenario-grid">
+          <pre data-copy="scene-3">【身份验证】
+工号：380001
+部门：人力资源部
+职位：HRBP（算法工程部对接人）
+
+【请求】
+请帮我分析一下AI技术中台算法工程部半年度人才盘点中的异常情况。</pre>
+          <div class="answer-panel">
+            <h3>讲解重点</h3>
+            <ul>
+              <li>HRBP 有对接组织的脱敏统计权限，但仍不能查看无授权原文。</li>
+              <li>重点看自评高于他评、低可见贡献、主管推荐与证据链不一致。</li>
+              <li>Aha：HRBP 更快知道哪里值得介入、为什么介入、怎么介入。</li>
+            </ul>
+            <div class="output-preview">
+              <span>输出模块</span>
+              <b>异常总览 / 脱敏案例 / 组织洞察 / 治理建议</b>
+            </div>
+            <div class="scenario-actions">
+              <button type="button" data-copy-target="scene-3">复制输入</button>
+              <a href="yach://yach.zhiyinlou.com/session/p2p?sessionid=830388266714619904">进入实机</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="scenario" id="scene-4">
+        <div class="scenario-head">
+          <span>Scene 04</span>
+          <h2>高级项目经理：微前端架构升级智能组队</h2>
+          <p>证明 Talent-Pilot 不只是 HR 场景，也能服务业务项目资源调配，从“找熟人”走向“找对人”。</p>
+        </div>
+        <div class="scenario-grid">
+          <pre data-copy="scene-4">【身份验证】
+工号：400001
+部门：项目管理中心
+职位：高级项目经理
+
+【项目需求】
+项目类型：微前端架构升级项目
+项目复杂度：高
+所需角色：前端技术专家 × 2、后端接口工程师 × 1、产品经理 × 1
+项目周期：3个月
+
+【请求】
+请基于以上需求为我推荐最优团队配置，并说明：
+1. 推荐人员及匹配度评分
+2. 团队协作风格互补性分析
+3. 历史项目协作关联度
+4. 潜在风险预警</pre>
+          <div class="answer-panel">
+            <h3>讲解重点</h3>
+            <ul>
+              <li>系统先解析项目需求，再匹配能力标签、项目经历、协作网络和可用性。</li>
+              <li>重点不是谁最强，而是这几个人放在一起能否形成互补团队。</li>
+              <li>Aha：项目组队从熟人网络，升级为基于组织能力证据与协作关系的配置建议。</li>
+            </ul>
+            <div class="output-preview">
+              <span>输出模块</span>
+              <b>推荐人员 / 互补性 / 历史协作 / 风险预警</b>
+            </div>
+            <div class="scenario-actions">
+              <button type="button" data-copy-target="scene-4">复制输入</button>
+              <a href="yach://yach.zhiyinlou.com/session/p2p?sessionid=830388266714619904">进入实机</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="permission-compare" id="permission">
+        <div>
+          <span>Permission Appendix</span>
+          <h2>同一问题，不同角色，系统必须给出不同回答</h2>
+          <p>这是答辩时最值得主动展示的可信边界：权限拒绝不是失败，而是 Talent-Pilot 可以进入组织真实流程的前提。</p>
+        </div>
+        <div class="compare-grid">
+          <article>
+            <b>一线员工</b>
+            <p>“我想看看我们团队的晋升准备度”</p>
+            <strong>系统拒绝：您只能查看自己的晋升准备度数据。</strong>
+          </article>
+          <article>
+            <b>团队管理者</b>
+            <p>“帮我看看智能教学产品部的晋升准备度”</p>
+            <strong>系统通过：展示完整团队人才盘点报告。</strong>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="./demo.js"></script>
+  </body>
+</html>

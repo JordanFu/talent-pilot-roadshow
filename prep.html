@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Talent-Pilot | OpenClaw 决赛路演</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%233157ff'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-size='20' font-family='Arial' font-weight='700' fill='white'%3ETP%3C/text%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="./prep.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#intro" aria-label="Talent-Pilot">
+        <span class="brand-mark">TAL</span>
+        <span>
+          <strong>Talent-Pilot</strong>
+          <small>组织治理与人才决策领航智能体</small>
+        </span>
+      </a>
+      <nav aria-label="路演结构">
+        <a href="#intro">产品与团队</a>
+        <a href="#why">为什么做</a>
+        <a href="#product">产品是什么</a>
+        <a href="#demo">做到什么</a>
+        <a href="#future">复盘与未来</a>
+      </nav>
+      <a class="header-action" href="./final-demo.html">
+        进入实机
+      </a>
+    </header>
+
+    <main>
+      <section class="page hero-page" id="intro">
+        <div class="page-index">01 / Product & Team</div>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <h1>打破管理黑盒<br />成为组织的超级大脑</h1>
+            <p>
+              Talent-Pilot 是基于 OpenClaw Multi-Agent 架构构建的组织治理与人才决策领航智能体。通过海量碎片化行为数据，构建防偏见的效能证据链，实现从“博弈型管理”到“事实型决策”的根本性转变。
+            </p>
+            <div class="hero-actions">
+              <a href="#why">进入路演</a>
+              <a href="./final-demo.html">打开实机产品</a>
+            </div>
+          </div>
+          <aside class="team-panel" aria-label="团队成员">
+            <div class="panel-title">
+              <span>Team</span>
+              <strong>跨职能小队</strong>
+            </div>
+            <div class="member-list">
+              <article>
+                <i>付</i>
+                <div><b>付兴东</b><span>负责人 / 产品</span><em>产品策略与业务场景设计</em></div>
+              </article>
+              <article>
+                <i>王</i>
+                <div><b>王坤</b><span>数字效能工程师</span><em>数字化效能建设与系统集成开发</em></div>
+              </article>
+              <article>
+                <i>苏</i>
+                <div><b>苏东亮</b><span>数字效能工程师</span><em>数据管道构建与 RAG 知识底座</em></div>
+              </article>
+              <article>
+                <i>周</i>
+                <div><b>周翔宇</b><span>组织发展专家</span><em>组织人才发展与评估体系建设</em></div>
+              </article>
+              <article>
+                <i>包</i>
+                <div><b>包亦然</b><span>组织发展专家</span><em>产品定位及价值边界设计</em></div>
+              </article>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="page" id="why">
+        <div class="page-index">02 / Why</div>
+        <div class="section-head">
+          <h2>每个角色都在做人才判断，但都缺少事实全貌</h2>
+          <p>人才决策不是某一个部门的工作，而是组织里不同角色共同参与的资源配置。问题在于，大家都在判断人，但判断所依赖的事实并不完整。</p>
+        </div>
+        <div class="role-grid">
+          <article><span>战略决策层</span><b>需要组织仪表盘</b><p>而不是更多感性汇报。</p></article>
+          <article><span>业务管理者</span><b>需要管理导航仪</b><p>把精力从找数据转向判断潜力。</p></article>
+          <article><span>HR 专家</span><b>需要成为组织问题诊断者</b><p>不只是流程操作者。</p></article>
+          <article><span>一线伙伴</span><b>需要更公允的成长环境</b><p>让真实贡献被看见。</p></article>
+          <article><span>项目经理</span><b>需要从“找熟人”到“找对人”</b><p>让项目配置更匹配。</p></article>
+        </div>
+        <div class="insight-band">
+          <strong>共同缺口</strong>
+          <p>他们面对的问题不同，但都缺少一套可复用、可追问的组织事实。</p>
+        </div>
+        <div class="organism-grid">
+          <article><span>算力</span><b>人才密度 + 协作亲密度</b></article>
+          <article><span>算法</span><b>管理机制 + 评审标准 + 复盘纠错</b></article>
+          <article><span>算量</span><b>周报、OKR、项目、协作、述职和反馈</b></article>
+        </div>
+        <p class="closing-line">Talent-Pilot 要做的，就是让这些真实行为数据进入组织判断，减少管理决策里的盲区和幻觉。</p>
+      </section>
+
+      <section class="page" id="product">
+        <div class="page-index">03 / Product Logic</div>
+        <div class="section-head">
+          <h2>从一句提名理由，到一条可追问的证据链</h2>
+          <p>Talent-Pilot 不替评委做决定，而是把人才判断背后的事实、偏差和追问点整理出来，让评审从“凭印象讨论”变成“基于证据判断”。</p>
+        </div>
+        <div class="story-grid">
+          <article class="quote-card">
+            <span>过去，我们常听到这样的提名理由</span>
+            <blockquote>“这位伙伴最近重点项目表现突出，主管反馈很好，述职材料也比较完整，我建议推进晋升。”</blockquote>
+            <ul>
+              <li>“表现突出”有没有长期证据？</li>
+              <li>是个人核心贡献，还是团队共同成果？</li>
+              <li>有没有跨团队影响？</li>
+              <li>会不会受近期高光影响？</li>
+              <li>对标目标职级，还缺什么？</li>
+            </ul>
+          </article>
+          <article class="evidence-card">
+            <span>Talent-Pilot 会把它拆成证据链</span>
+            <div>
+              <b>目标标准</b>
+              <p>目标职级：2.3；重点要求：独立负责模块、跨团队协作、结果可复用。</p>
+            </div>
+            <div>
+              <b>行为证据</b>
+              <p>过去 6 个月参与 3 个关键项目；2 个项目产出被其他团队复用；周报多次记录主动拆解问题、推动跨部门协作。</p>
+            </div>
+            <div>
+              <b>偏差提醒</b>
+              <p>近期重点项目贡献突出，但历史技术影响力证据不足；主管评价较高，仍需补充跨团队协作反馈。</p>
+            </div>
+            <div>
+              <b>建议追问</b>
+              <p>哪些成果由本人主导？方法是否沉淀为可复用能力？是否具备下一档要求的独立牵引能力？</p>
+            </div>
+          </article>
+        </div>
+        <div class="logic-chain" aria-label="产品逻辑链">
+          <span>读标准</span>
+          <span>找事实</span>
+          <span>理证据</span>
+          <span>看偏差</span>
+          <span>给底稿</span>
+        </div>
+        <p class="closing-line">Talent-Pilot 的本质，是把人才判断从一句感受，变成一条可追问、可复核、可校准的证据链。</p>
+      </section>
+
+      <section class="page" id="demo">
+        <div class="page-index">04 / Showcase</div>
+        <div class="section-head with-action">
+          <div>
+            <h2>我们已经跑通 5 个可演示场景</h2>
+            <p>Talent-Pilot 已经围绕不同角色、不同权限、不同决策任务，完成从组织盘点、个人诊断、异常识别、项目组队到权限校验的演示闭环。</p>
+          </div>
+          <a class="product-link" href="./final-demo.html">
+            进入 Talent-Pilot 实机演示
+          </a>
+        </div>
+        <div class="showcase-grid">
+          <article>
+            <span>场景 1</span>
+            <h3>组织仪表盘 + 团队盘点</h3>
+            <p>事业部 GM 看组织全局，团队负责人看作战沙盘。</p>
+            <b>同一套数据，不同权限，看到不同层级的组织答案。</b>
+          </article>
+          <article>
+            <span>场景 2</span>
+            <h3>个人晋升诊断</h3>
+            <p>员工查看晋升准备度、能力差距、上级反馈和成长路径。</p>
+            <b>个人发展也可以有导航，而不是只等评审结果。</b>
+          </article>
+          <article>
+            <span>场景 3</span>
+            <h3>异常人才识别</h3>
+            <p>HRBP 提前识别高潜流失、评价分歧、技能不匹配和新人风险。</p>
+            <b>一些人才风险，不是等离职申请出现才看见。</b>
+          </article>
+          <article>
+            <span>场景 4</span>
+            <h3>项目团队配置</h3>
+            <p>基于项目周期、技术栈、角色需求和协作复杂度推荐团队。</p>
+            <b>项目用人不只看谁有空，更要看谁真正匹配。</b>
+          </article>
+          <article>
+            <span>场景 5</span>
+            <h3>权限控制对比</h3>
+            <p>同一句请求，不同角色得到不同响应，严格保护信息边界。</p>
+            <b>好的人才智能体，必须既聪明，也守边界。</b>
+          </article>
+        </div>
+        <p class="demo-note">演示数据为模拟生成，用于展示系统在真实数据接入后的洞察方式；真实场景严格基于授权数据和权限边界输出。</p>
+      </section>
+
+      <section class="page future-page" id="future">
+        <div class="page-index">05 / Reflection</div>
+        <div class="section-head">
+          <h2>好的人才智能，首先需要好的组织数据</h2>
+          <p>这次 Talent-Pilot Demo 和 AI 晋升预测探索让我们更清楚地看到：模型能力很重要，但真正决定上限的，是组织是否拥有持续、完整、可复用的数据基座。</p>
+        </div>
+        <div class="review-grid">
+          <article>
+            <span>01</span>
+            <h3>优秀预测，前提是优秀数据</h3>
+            <p>AI 可以捕捉到一些有效信号，但如果输入数据不完整、不连续、不统一，预测结果就很难稳定可靠。</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Demo 能展示价值，真实落地依赖系统打通</h3>
+            <p>要进入真实业务流程，必须持续打通周报、OKR、绩效、协作、项目、述职等系统。</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>过去的探索，都指向同一个结论</h3>
+            <p>从高绩效行为预测、校招培养分析，到今天的 Talent-Pilot，核心阻碍不是 AI 不会分析，而是组织数据还没有被持续沉淀、统一治理和复用。</p>
+          </article>
+        </div>
+        <div class="future-layout">
+          <article>
+            <h3>我们对未来的判断</h3>
+            <p>未来组织不应该是一堆分散 Agent 让管理者逐个关注。更理想的方向是：组织里的多个 Agent 能力，逐步收敛为一个核心组织智能体。</p>
+            <p>它不是制造更多信息，而是帮助管理者整合信息、理解全貌、识别重点、提升决策质量。</p>
+          </article>
+          <article>
+            <h3>组织智能生命体的连接</h3>
+            <dl>
+              <div><dt>算力</dt><dd>人才密度和协作亲密度</dd></div>
+              <div><dt>算法</dt><dd>组织机制、评审标准和复盘纠错</dd></div>
+              <div><dt>算量</dt><dd>组织每天产生的真实行为数据</dd></div>
+            </dl>
+          </article>
+        </div>
+        <div class="try-band">
+          <h3>我们正在继续尝试</h3>
+          <p>我们正在积极尝试 AI 评审在真实组织场景中的落地。目前它的有效性还比较有限，但这个尝试本身很重要：它推动我们去打通更多系统，让组织里沉睡的数据真正被利用起来。</p>
+          <p>我们希望未来不只是少数人掌握信息，而是让组织中的关键事实能够被更好地沉淀、共享和复用。当所有人都能更高效地获取和使用信息，人才决策才有机会从经验驱动，逐步走向事实驱动。</p>
+        </div>
+        <p class="final-line">Talent-Pilot 不只是一个人才决策 Demo。它提醒我们：未来组织智能的竞争，不只在模型能力，更在数据基座、机制沉淀和组织自我校准能力。</p>
+      </section>
+    </main>
+
+    <script src="./prep.js"></script>
+  </body>
+</html>
