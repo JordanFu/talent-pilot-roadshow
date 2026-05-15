@@ -733,6 +733,278 @@
         box-shadow: 0 10px 36px rgba(79, 70, 229, .45);
       }
 
+      /* ── Presentation Viewport Fit ── */
+      @media (min-width: 901px) and (max-height: 820px) {
+        :root {
+          --fs-xs: 11px;
+          --fs-sm: 13px;
+          --fs-base: 14px;
+          --fs-md: 16px;
+          --fs-lg: 19px;
+          --fs-xl: 22px;
+          --fs-2xl: 26px;
+          --fs-hero: clamp(28px, 3.4vw, 44px);
+        }
+
+        .top-bar {
+          padding: 11px clamp(18px, 4vw, 56px);
+        }
+
+        .logo-icon {
+          width: 28px;
+          height: 28px;
+          border-radius: 8px;
+          font-size: 13px;
+        }
+
+        .bottom-nav {
+          bottom: 12px;
+          gap: 9px;
+          padding: 7px 14px;
+        }
+
+        .nav-btn {
+          width: 30px;
+          height: 30px;
+          font-size: 11px;
+        }
+
+        .slide-inner {
+          padding: 56px clamp(18px, 4vw, 56px) 64px;
+        }
+
+        .slide-num-badge {
+          margin-bottom: 8px;
+        }
+
+        .slide-title {
+          margin-bottom: 9px;
+          line-height: 1.16;
+        }
+
+        .slide-subtitle {
+          margin-bottom: 18px;
+          line-height: 1.48;
+          max-width: 760px;
+        }
+
+        .glass-card,
+        .scene-card,
+        .insight-card {
+          border-radius: 12px;
+          padding: 14px 16px;
+        }
+
+        .closing-quote {
+          padding: 12px 16px;
+          border-radius: 0 10px 10px 0;
+          line-height: 1.55;
+        }
+
+        .tag {
+          padding: 4px 10px;
+        }
+
+        .team-member {
+          gap: 11px;
+          padding: 10px 13px;
+          border-radius: 11px;
+        }
+
+        .avatar {
+          width: 34px;
+          height: 34px;
+          font-size: 14px;
+        }
+
+        .member-role,
+        .member-desc {
+          margin-top: 0;
+        }
+
+        .role-card {
+          padding: 12px 14px;
+          border-radius: 11px;
+        }
+
+        .role-desc {
+          line-height: 1.45;
+        }
+
+        .step-node {
+          min-width: 76px;
+          padding: 11px 12px;
+          border-radius: 11px;
+        }
+
+        .step-icon {
+          margin-bottom: 5px;
+          font-size: 17px !important;
+        }
+
+        .step-arrow {
+          margin: 0 3px;
+          font-size: 11px;
+        }
+
+        .scene-num {
+          margin-bottom: 5px;
+        }
+
+        .scene-title {
+          margin-bottom: 5px;
+        }
+
+        .scene-desc {
+          margin-bottom: 6px;
+          line-height: 1.45;
+        }
+
+        .skill-pill {
+          min-width: 118px;
+          padding: 11px 13px;
+          border-radius: 11px;
+        }
+
+        .skill-pill .sp-icon {
+          margin-bottom: 5px;
+          font-size: 17px;
+        }
+
+        .skill-pill .sp-name {
+          margin-bottom: 2px;
+        }
+
+        .skill-pill .sp-desc {
+          line-height: 1.35;
+        }
+
+        .insight-title {
+          margin-bottom: 5px;
+        }
+
+        .insight-text {
+          line-height: 1.48;
+        }
+
+        .ois-row {
+          gap: 12px;
+          padding: 11px 14px;
+        }
+
+        .dark-banner {
+          padding: 16px 18px;
+          border-radius: 12px;
+        }
+
+        .dark-banner .db-title {
+          margin-bottom: 7px;
+        }
+
+        .dark-banner .db-text {
+          line-height: 1.5;
+        }
+      }
+
+      @media (min-width: 901px) and (max-height: 740px) {
+        :root {
+          --fs-xs: 10px;
+          --fs-sm: 12px;
+          --fs-base: 13px;
+          --fs-md: 15px;
+          --fs-lg: 17px;
+          --fs-xl: 20px;
+          --fs-2xl: 23px;
+          --fs-hero: clamp(25px, 3vw, 38px);
+        }
+
+        .top-bar {
+          padding-top: 8px;
+          padding-bottom: 8px;
+        }
+
+        .logo-mark {
+          gap: 7px;
+        }
+
+        .logo-icon {
+          width: 24px;
+          height: 24px;
+          font-size: 11px;
+        }
+
+        .bottom-nav {
+          bottom: 8px;
+          padding: 5px 12px;
+        }
+
+        .nav-btn {
+          width: 26px;
+          height: 26px;
+        }
+
+        .nav-dot {
+          width: 6px;
+          height: 6px;
+        }
+
+        .nav-dot.active {
+          width: 18px;
+        }
+
+        .slide-inner {
+          padding-top: 44px;
+          padding-bottom: 48px;
+        }
+
+        .slide-subtitle {
+          margin-bottom: 12px;
+        }
+
+        .team-member {
+          padding: 8px 10px;
+        }
+
+        .avatar {
+          width: 30px;
+          height: 30px;
+        }
+
+        .role-card,
+        .glass-card,
+        .scene-card,
+        .insight-card {
+          padding: 10px 12px;
+        }
+
+        .skill-pill {
+          padding: 9px 10px;
+        }
+
+        .closing-quote {
+          padding: 10px 14px;
+        }
+
+        .dark-banner {
+          padding: 13px 15px;
+        }
+      }
+
+      @media (min-width: 901px) and (max-width: 1100px) {
+        .slide-inner {
+          padding-left: 28px;
+          padding-right: 28px;
+        }
+
+        .team-member {
+          padding: 9px 11px;
+        }
+
+        .scene-card {
+          padding: 11px 12px;
+        }
+      }
+
       /* ── Responsive ── */
       @media (max-width: 900px) {
         :root {
